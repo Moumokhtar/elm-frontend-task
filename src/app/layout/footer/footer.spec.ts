@@ -39,7 +39,7 @@ describe('Footer', () => {
       .queryAll(By.css('[data-testid^="footer-col-"] h2'))
       .map((el) => el.nativeElement.textContent.trim());
 
-    expect(headings).toEqual(['ملخص', 'روابط مهمة', 'الاتصال والدعم', 'تابعنا على']);
+    expect(headings).toEqual(['ملخص', 'روابط مهمة', 'الاتصال والدعم', 'تابعنا على', 'أدوات الاتاحة والوصول']);
   });
 
   it('renders all top-grid links as anchors with placeholder targets', () => {
@@ -48,7 +48,29 @@ describe('Footer', () => {
     topLinks.forEach((link) => {
       expect(link.nativeElement.tagName.toLowerCase()).toBe('a');
       expect(link.nativeElement.getAttribute('href')).toBe('#');
-      expect(link.nativeElement.textContent.trim().length).toBeGreaterThan(0);
+      const text = link.nativeElement.textContent.trim();
+      const ariaLabel = link.nativeElement.getAttribute('aria-label');
+      expect(text.length > 0 || Boolean(ariaLabel)).toBe(true);
+    });
+  });
+
+  it('renders three social icon links with aria-labels', () => {
+    const socialLinks = fixture.debugElement.queryAll(By.css('[data-testid^="footer-social-"][href]'));
+    expect(socialLinks).toHaveLength(3);
+    socialLinks.forEach((link) => {
+      expect(link.nativeElement.tagName.toLowerCase()).toBe('a');
+      expect(link.nativeElement.getAttribute('href')).toBe('#');
+      expect(link.nativeElement.getAttribute('aria-label')).toBeTruthy();
+    });
+  });
+
+  it('renders three accessibility tool buttons with aria-labels', () => {
+    const buttons = fixture.debugElement.queryAll(By.css('[data-testid^="footer-a11y-"]'));
+    expect(buttons).toHaveLength(3);
+    buttons.forEach((button) => {
+      expect(button.nativeElement.tagName.toLowerCase()).toBe('button');
+      expect(button.nativeElement.getAttribute('aria-label')).toBeTruthy();
+      expect(button.nativeElement.getAttribute('type')).toBe('button');
     });
   });
 });
