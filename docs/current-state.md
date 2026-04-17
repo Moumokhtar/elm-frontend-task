@@ -1,11 +1,12 @@
 # Current State
 
-_Updated: 2026-04-17 after M0 complete._
+_Updated: 2026-04-17 after M1 complete._
 
 ## Status
 
 - **M0 — Project Bootstrap:** ✅ complete. PRD [#1](https://github.com/Moumokhtar/elm-frontend-task/issues/1) and all six slice issues closed.
-- **Next up:** M1 — Shared Layout: Navbar. Start from `main`, no active branch. See `ELM_TASK_PLAN.md` §MILESTONE 1.
+- **M1 — Shared Layout: Navbar:** ✅ complete. PRD [#8](https://github.com/Moumokhtar/elm-frontend-task/issues/8) and all five slice issues (#9–#13) closed. Navbar lives at `src/app/layout/navbar/navbar.ts` with desktop + mobile variants, PrimeNG dropdowns (items 4–7), inline mobile accordion, and routerLink on items 1/2/3 (`/`, `/service`, `/form`).
+- **Next up:** M2 — per `ELM_TASK_PLAN.md`.
 
 ## Conventions the next agent must follow
 
@@ -70,8 +71,8 @@ import { HomePage } from '@features/home/home-page';
 
 | Item | When |
 |---|---|
-| PrimeNG primary/brand color | M1 |
 | Per-component RTL overrides | M1+ as needed |
+| `routerLinkActive` styling on navbar | M7 |
 | GitHub Pages deploy | M9 |
 
 ## Verify before starting
@@ -80,8 +81,8 @@ import { HomePage } from '@features/home/home-page';
 cd elm-frontend-task
 npm install
 npm run lint       # expect: all pass
-npm test           # expect: 11/11 passing
-npm run build      # expect: success, ~416kB initial
+npm test           # expect: 35/35 passing
+npm run build      # expect: success, ~858kB initial (154kB transfer)
 ```
 
 If any of these fail on a fresh clone, stop and investigate — don't paper over it.
