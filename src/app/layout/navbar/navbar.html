@@ -1,0 +1,51 @@
+<nav
+  class="app-navbar sticky-top bg-white border-bottom"
+  data-testid="navbar"
+  aria-label="التنقل الرئيسي"
+>
+  <div
+    class="app-navbar__row d-none d-lg-flex align-items-center justify-content-between w-100"
+    data-testid="navbar-desktop"
+  >
+    <!-- Logo + menu group (main-start in RTL = right visually). Logo first so it sits flush-right. -->
+    <div class="d-flex align-items-center gap-3">
+      <a class="app-navbar__logo-link d-inline-flex align-items-center" href="/" aria-label="علم — الصفحة الرئيسية" data-testid="navbar-logo-desktop">
+        <img src="/images/logo-desktop.svg" alt="علم" class="app-navbar__logo d-block" width="119" height="48" />
+      </a>
+
+      <ul class="d-flex align-items-center list-unstyled m-0" data-testid="navbar-menu">
+        @for (item of menuItems; track item.label; let i = $index) {
+          <li>
+            <button
+              type="button"
+              class="app-navbar__item d-inline-flex align-items-center gap-1 border-0"
+              [attr.data-testid]="'menu-item-' + (i + 1)"
+              [attr.aria-haspopup]="'menu'"
+              [attr.aria-expanded]="'false'"
+            >
+              <span>{{ item.label }}</span>
+              <i class="bi bi-chevron-down app-navbar__chevron" aria-hidden="true"></i>
+            </button>
+          </li>
+        }
+      </ul>
+    </div>
+
+    <!-- Actions (main-end in RTL = left visually) -->
+    <div class="d-flex align-items-center">
+      @for (action of actions; track action.testId) {
+        <button
+          type="button"
+          class="app-navbar__item d-inline-flex align-items-center gap-1 border-0"
+          [attr.data-testid]="action.testId"
+        >
+          <i class="{{ action.iconClass }} app-navbar__action-icon" aria-hidden="true"></i>
+          <span>{{ action.label }}</span>
+        </button>
+      }
+    </div>
+  </div>
+
+  <!-- Mobile placeholder (slice 4 wires the real mobile template here) -->
+  <div class="app-navbar__row d-lg-none" data-testid="navbar-mobile"></div>
+</nav>
