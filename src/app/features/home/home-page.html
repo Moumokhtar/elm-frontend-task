@@ -23,3 +23,23 @@
     />
   </div>
 </section>
+
+<!--
+  VISUAL QA ONLY — M3 Breadcrumb (remove for M4 real composition):
+  Temporary strip to verify separators, RTL, and links against Figma. Not final home structure.
+-->
+<section
+  class="elm-page-strip bg-white"
+  data-testid="home-visual-qa-breadcrumb"
+  aria-label="معاينة مؤقتة لمسار التنقل"
+>
+  <div class="elm-page-strip__inner">
+    <app-breadcrumb
+      [items]="[
+        { label: 'الرئيسية', route: '/' },
+        { label: 'خدمة', route: '/service' },
+        { label: 'معاينة' },
+      ]"
+    />
+  </div>
+</section>

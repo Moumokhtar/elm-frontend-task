@@ -8,6 +8,10 @@ Default behavior:
 - treat this as repository-specific guidance for Cursor sessions
 - do not switch to milestone/staging branch flow unless the user explicitly asks
 
+Slice sync (GitHub issues):
+
+- When a vertical-slice issue is **done** (acceptance criteria met, `npm run lint` and `npm test` clean): **commit on `main`** with `Closes #<issue-number>` in the commit **body**, then **`git push origin main`** so the issue auto-closes and the board matches the repo. Do not leave verified slices only in the working tree.
+
 Scope reminder:
 
 - frontend-only mock app

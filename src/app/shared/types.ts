@@ -13,5 +13,6 @@ export interface TagItem {
 
 export interface BreadcrumbItem {
   label: string;
-  route?: string | unknown[];
+  /** Present for every segment except the last (current page). */
+  route?: string | readonly (string | number)[];
 }
