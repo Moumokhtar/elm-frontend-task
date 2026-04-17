@@ -28,9 +28,8 @@ describe('Footer', () => {
     expect(footer.nativeElement.getAttribute('aria-label')).toBeTruthy();
   });
 
-  it('renders top grid, middle row, and bottom bar scaffold sections', () => {
+  it('renders top grid and bottom bar sections', () => {
     expect(fixture.debugElement.query(By.css('[data-testid="footer-top-grid"]'))).not.toBeNull();
-    expect(fixture.debugElement.query(By.css('[data-testid="footer-middle-row"]'))).not.toBeNull();
     expect(fixture.debugElement.query(By.css('[data-testid="footer-bottom-bar"]'))).not.toBeNull();
   });
 
@@ -72,5 +71,32 @@ describe('Footer', () => {
       expect(button.nativeElement.getAttribute('aria-label')).toBeTruthy();
       expect(button.nativeElement.getAttribute('type')).toBe('button');
     });
+  });
+
+  it('renders bottom links as placeholder anchors in expected order', () => {
+    const links = fixture.debugElement.queryAll(By.css('[data-testid="footer-bottom-links"] a'));
+    expect(links).toHaveLength(3);
+    expect(links.map((el) => el.nativeElement.textContent.trim())).toEqual([
+      'خريطة الموقع',
+      'RSS',
+      'تطبيق الجوال',
+    ]);
+    links.forEach((el) => {
+      expect(el.nativeElement.getAttribute('href')).toBe('#');
+    });
+  });
+
+  it('renders legal copy and branding inside bottom bar layout', () => {
+    const logos = fixture.debugElement.queryAll(By.css('[data-testid="footer-branding"] img'));
+    const copyright = fixture.debugElement.query(By.css('[data-testid="footer-copyright"]'));
+    const meta = fixture.debugElement.query(By.css('[data-testid="footer-meta"]'));
+
+    expect(logos).toHaveLength(2);
+    expect(logos[0].nativeElement.getAttribute('src')).toContain('footer-elm-logo-white.svg');
+    expect(logos[1].nativeElement.getAttribute('src')).toContain('footer-dga-logo-white.png');
+    expect(logos[0].nativeElement.getAttribute('alt')).toBeTruthy();
+    expect(logos[1].nativeElement.getAttribute('alt')).toBeTruthy();
+    expect(copyright.nativeElement.textContent.trim()).toContain('جميع الحقوق محفوظة');
+    expect(meta.nativeElement.textContent).toContain('تاريخ آخر تعديل');
   });
 });
