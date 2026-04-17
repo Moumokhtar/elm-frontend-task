@@ -36,24 +36,9 @@ Shipped. See [PRD #1](https://github.com/Moumokhtar/elm-frontend-task/issues/1) 
 
 ---
 
-## MILESTONE 1 — Shared Layout: Navbar
+## MILESTONE 1 — Shared Layout: Navbar ✅ Complete
 
-**Goal:**
-Pixel-perfect responsive navbar matching the Figma header across desktop and mobile.
-
-**Scope:**
-Standalone `NavbarComponent`. Desktop: Logo on right, 7 nav items with dropdown chevrons (tبويب 1–7), search icon button, language toggle button (English + icon), login button (تسجيل الدخول + icon). Mobile: Logo + hamburger menu toggle, collapsed nav. Bootstrap navbar classes for responsive collapse. Keyboard navigation and ARIA roles on all nav elements.
-
-**Done when:**
-
-- [ ] Logo renders on the right (RTL)
-- [ ] All 7 nav items render with dropdown chevron icons
-- [ ] Search icon is a focusable button with `aria-label`
-- [ ] Language toggle renders with globe icon
-- [ ] Login button renders with user icon
-- [ ] Mobile: hamburger toggles nav collapse
-- [ ] Tab key navigates through all nav items
-- [ ] `NavbarComponent` used in the shared layout wrapper
+Shipped. See [PRD #8](https://github.com/Moumokhtar/elm-frontend-task/issues/8) and slices #9–#13.
 
 ---
 
