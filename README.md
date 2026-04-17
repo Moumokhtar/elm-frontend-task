@@ -41,3 +41,11 @@ src/app/
 Path aliases: `@core/*`, `@shared/*`, `@layout/*`, `@features/*`.
 
 See `ELM_TASK_PLAN.md` for the full milestone plan.
+
+## Start-Building Workflow (Local)
+
+For this repository, the project-local start-building contract is documented in:
+
+- `docs/start-building.local.md`
+
+Use this local workflow when starting implementation sessions. It is main-only, keeps strict approval gates, and is tailored for this frontend-only mock app.
