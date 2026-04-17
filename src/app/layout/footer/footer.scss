@@ -1,3 +1,14 @@
 .app-footer {
   background-color: var(--color-sa-flag, #074d31);
 }
+
+.app-footer__group-title {
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.5rem;
+}
+
+.app-footer__group-link {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
