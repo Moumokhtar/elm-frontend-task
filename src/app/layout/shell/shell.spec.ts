@@ -39,4 +39,11 @@ describe('Shell', () => {
     const main = fixture.debugElement.query(By.css('[data-testid="shell-main"]'));
     expect(main.query(By.css('router-outlet'))).not.toBeNull();
   });
+
+  it('uses column flex layout on host so main can grow and footer stays at bottom', () => {
+    const host = fixture.nativeElement as HTMLElement;
+    const styles = window.getComputedStyle(host);
+    expect(styles.display).toBe('flex');
+    expect(styles.flexDirection).toBe('column');
+  });
 });

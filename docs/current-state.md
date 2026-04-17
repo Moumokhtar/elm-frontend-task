@@ -82,7 +82,7 @@ import { HomePage } from '@features/home/home-page';
 cd elm-frontend-task
 npm install
 npm run lint       # expect: all pass
-npm test           # expect: 45/45 passing
+npm test           # expect: 46/46 passing
 npm run build      # expect: success, ~858kB initial (154kB transfer)
 ```
 
