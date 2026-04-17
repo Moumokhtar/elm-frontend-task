@@ -56,6 +56,102 @@
     </div>
   </div>
 
-  <!-- Mobile placeholder (slice 4 wires the real mobile template here) -->
-  <div class="app-navbar__row d-lg-none" data-testid="navbar-mobile"></div>
+  <!-- Mobile -->
+  <div
+    class="app-navbar__row d-flex d-lg-none align-items-center w-100 px-3"
+    data-testid="navbar-mobile"
+  >
+    <!-- Right side slot (RTL first child = right): hamburger flush to viewport edge. -->
+    <div class="app-navbar__mobile-side d-flex align-items-center justify-content-start">
+      <button
+        type="button"
+        class="app-navbar__hamburger d-inline-flex align-items-center justify-content-center border-0"
+        data-testid="navbar-hamburger"
+        aria-label="القائمة"
+        aria-controls="mobile-menu-panel"
+        [attr.aria-expanded]="mobileMenuOpen() ? 'true' : 'false'"
+        (click)="toggleMobileMenu()"
+      >
+        <i class="pi pi-bars" aria-hidden="true"></i>
+      </button>
+    </div>
+
+    <!-- Center slot: logo centered in viewport. Shrinks only if viewport is narrower than logo. -->
+    <div class="d-flex align-items-center justify-content-center flex-shrink-1 min-w-0">
+      <a
+        class="app-navbar__logo-link d-inline-flex align-items-center"
+        href="/"
+        aria-label="علم — الصفحة الرئيسية"
+        data-testid="navbar-logo-mobile"
+      >
+        <img
+          src="/images/logo-mobile.svg"
+          alt="علم"
+          class="app-navbar__logo-mobile d-block"
+          width="137"
+          height="54"
+        />
+      </a>
+    </div>
+
+    <!-- Left side slot (spacer): equal flex weight to the right slot so the logo stays centered. -->
+    <div class="app-navbar__mobile-side" aria-hidden="true"></div>
+  </div>
+
+  @if (mobileMenuOpen()) {
+    <div
+      id="mobile-menu-panel"
+      class="app-navbar__mobile-panel d-lg-none w-100 bg-white border-top py-1"
+      data-testid="mobile-menu-panel"
+    >
+      <ul class="list-unstyled m-0 p-0">
+        @for (item of menuItems; track item.label; let i = $index) {
+          <li class="app-navbar__mobile-row">
+            <button
+              type="button"
+              class="app-navbar__mobile-item d-flex align-items-center justify-content-between w-100 border-0 p-3"
+              [attr.data-testid]="'mobile-menu-item-' + (i + 1)"
+              [attr.aria-expanded]="mobileExpandedIndex() === i ? 'true' : 'false'"
+              (click)="toggleMobileSubmenu(i)"
+            >
+              <span>{{ item.label }}</span>
+              <i
+                class="bi bi-chevron-down app-navbar__chevron"
+                [class.app-navbar__chevron--open]="mobileExpandedIndex() === i"
+                aria-hidden="true"
+              ></i>
+            </button>
+
+            @if (mobileExpandedIndex() === i) {
+              <ul
+                class="list-unstyled m-0 p-0 app-navbar__mobile-submenu"
+                [attr.data-testid]="'mobile-submenu-' + (i + 1)"
+              >
+                @for (sub of submenuItems; track sub.label) {
+                  <li>
+                    <a class="app-navbar__mobile-subitem d-block py-3 pe-3 ps-4" href="#">{{ sub.label }}</a>
+                  </li>
+                }
+              </ul>
+            }
+          </li>
+        }
+      </ul>
+
+      <ul class="list-unstyled m-0 p-0 app-navbar__mobile-actions mt-1">
+        @for (action of actions; track action.testId) {
+          <li class="app-navbar__mobile-row">
+            <button
+              type="button"
+              class="app-navbar__mobile-item d-flex align-items-center w-100 border-0 gap-2 p-3"
+              [attr.data-testid]="'mobile-' + action.testId"
+            >
+              <i class="{{ action.iconClass }} app-navbar__action-icon" aria-hidden="true"></i>
+              <span>{{ action.label }}</span>
+            </button>
+          </li>
+        }
+      </ul>
+    </div>
+  }
 </nav>

@@ -70,3 +70,103 @@
   height: 48px;
   width: auto;
 }
+
+@media (max-width: 991.98px) {
+  .app-navbar {
+    border-bottom: 0 !important;
+  }
+}
+
+// Logo intrinsic size per Figma (137.34 × 54.14); width scales from the height to
+// preserve the Figma aspect ratio, but caps at the viewport-width in very narrow cases.
+.app-navbar__logo-mobile {
+  width: auto;
+  height: 54.14px;
+  max-width: 100%;
+  flex: 0 0 auto;
+}
+
+// Equal-weight side slots (flex: 1 1 0) push the center column to true viewport center
+// regardless of hamburger size. min-width:0 lets children shrink past their intrinsic width.
+.app-navbar__mobile-side {
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.app-navbar__hamburger {
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  padding: 0;
+  background-color: transparent;
+  color: var(--color-icon-default);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+
+  i {
+    font-size: 24px;
+    line-height: 1;
+  }
+
+  &:hover {
+    background-color: #f3f4f6;
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--color-text-default);
+    outline-offset: 2px;
+  }
+}
+
+.app-navbar__mobile-row {
+  border-bottom: 1px solid var(--color-neutral-300);
+
+  &:last-child {
+    border-bottom: 0;
+  }
+}
+
+.app-navbar__mobile-item {
+  background-color: transparent;
+  color: var(--color-text-default);
+  font: inherit;
+  font-weight: 500;
+  line-height: 24px;
+  cursor: pointer;
+  text-align: start;
+
+  &:hover {
+    background-color: #f3f4f6;
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--color-text-default);
+    outline-offset: -2px;
+  }
+}
+
+.app-navbar__chevron--open {
+  transform: rotate(180deg);
+}
+
+.app-navbar__mobile-submenu {
+  background-color: #f9fafb;
+
+  li + li {
+    border-top: 1px solid var(--color-neutral-300);
+  }
+}
+
+.app-navbar__mobile-subitem {
+  color: var(--color-text-default);
+  text-decoration: none;
+
+  &:hover {
+    background-color: #f3f4f6;
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--color-text-default);
+    outline-offset: -2px;
+  }
+}

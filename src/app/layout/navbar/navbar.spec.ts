@@ -1,7 +1,12 @@
+import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+import { provideRouter, Router } from '@angular/router';
 
 import { Navbar } from './navbar';
+
+@Component({ standalone: true, template: '' })
+class NoopPage {}
 
 describe('Navbar', () => {
   let component: Navbar;
@@ -10,6 +15,7 @@ describe('Navbar', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [Navbar],
+      providers: [provideRouter([{ path: '**', component: NoopPage }])],
     }).compileComponents();
 
     fixture = TestBed.createComponent(Navbar);
@@ -69,7 +75,7 @@ describe('Navbar', () => {
     expect(logo.nativeElement.getAttribute('src')).toContain('logo-desktop.svg');
   });
 
-  it('wraps desktop in d-none d-lg-flex and mobile placeholder in d-lg-none', () => {
+  it('wraps desktop in d-none d-lg-flex and mobile row in d-lg-none', () => {
     const desktop = fixture.debugElement.query(By.css('[data-testid="navbar-desktop"]'));
     const mobile = fixture.debugElement.query(By.css('[data-testid="navbar-mobile"]'));
     expect(desktop.nativeElement.classList.contains('d-none')).toBe(true);
@@ -146,5 +152,113 @@ describe('Navbar', () => {
 
     expect(firstTrigger.getAttribute('aria-expanded')).toBe('false');
     expect(document.activeElement).toBe(firstTrigger);
+  });
+
+  describe('mobile', () => {
+    function getHamburger(): HTMLButtonElement {
+      return fixture.debugElement.query(By.css('[data-testid="navbar-hamburger"]'))
+        .nativeElement as HTMLButtonElement;
+    }
+
+    function panel() {
+      return fixture.debugElement.query(By.css('[data-testid="mobile-menu-panel"]'));
+    }
+
+    it('renders the mobile logo with non-empty alt', () => {
+      const logo = fixture.debugElement.query(By.css('[data-testid="navbar-logo-mobile"] img'));
+      expect(logo).not.toBeNull();
+      expect(logo.nativeElement.getAttribute('alt')).toBeTruthy();
+      expect(logo.nativeElement.getAttribute('src')).toContain('logo-mobile.svg');
+    });
+
+    it('renders a hamburger button with a non-empty aria-label and pi-bars icon', () => {
+      const hamburger = getHamburger();
+      expect(hamburger.getAttribute('aria-label')).toBeTruthy();
+      expect(hamburger.getAttribute('aria-expanded')).toBe('false');
+      expect(hamburger.querySelector('.pi-bars')).not.toBeNull();
+    });
+
+    it('toggles the mobile menu panel on hamburger click', () => {
+      expect(panel()).toBeNull();
+
+      getHamburger().click();
+      fixture.detectChanges();
+      expect(panel()).not.toBeNull();
+      expect(getHamburger().getAttribute('aria-expanded')).toBe('true');
+
+      getHamburger().click();
+      fixture.detectChanges();
+      expect(panel()).toBeNull();
+      expect(getHamburger().getAttribute('aria-expanded')).toBe('false');
+    });
+
+    it('renders all 7 menu items and 3 actions inside the panel when open', () => {
+      getHamburger().click();
+      fixture.detectChanges();
+
+      const items = fixture.debugElement.queryAll(
+        By.css('[data-testid^="mobile-menu-item-"]'),
+      );
+      expect(items).toHaveLength(7);
+
+      expect(
+        fixture.debugElement.query(By.css('[data-testid="mobile-action-login"]')),
+      ).not.toBeNull();
+      expect(
+        fixture.debugElement.query(By.css('[data-testid="mobile-action-language"]')),
+      ).not.toBeNull();
+      expect(
+        fixture.debugElement.query(By.css('[data-testid="mobile-action-search"]')),
+      ).not.toBeNull();
+    });
+
+    it('keeps only one inline submenu expanded at a time', () => {
+      getHamburger().click();
+      fixture.detectChanges();
+
+      const first = fixture.debugElement.query(By.css('[data-testid="mobile-menu-item-1"]'))
+        .nativeElement as HTMLButtonElement;
+      const second = fixture.debugElement.query(By.css('[data-testid="mobile-menu-item-2"]'))
+        .nativeElement as HTMLButtonElement;
+
+      first.click();
+      fixture.detectChanges();
+      expect(first.getAttribute('aria-expanded')).toBe('true');
+      expect(
+        fixture.debugElement.query(By.css('[data-testid="mobile-submenu-1"]')),
+      ).not.toBeNull();
+
+      second.click();
+      fixture.detectChanges();
+      expect(first.getAttribute('aria-expanded')).toBe('false');
+      expect(second.getAttribute('aria-expanded')).toBe('true');
+      expect(
+        fixture.debugElement.query(By.css('[data-testid="mobile-submenu-1"]')),
+      ).toBeNull();
+      expect(
+        fixture.debugElement.query(By.css('[data-testid="mobile-submenu-2"]')),
+      ).not.toBeNull();
+    });
+
+    it('closes the panel on Escape', () => {
+      getHamburger().click();
+      fixture.detectChanges();
+      expect(panel()).not.toBeNull();
+
+      document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape' }));
+      fixture.detectChanges();
+      expect(panel()).toBeNull();
+    });
+
+    it('closes the panel on router navigation', async () => {
+      getHamburger().click();
+      fixture.detectChanges();
+      expect(panel()).not.toBeNull();
+
+      const router = TestBed.inject(Router);
+      await router.navigateByUrl('/anywhere');
+      fixture.detectChanges();
+      expect(panel()).toBeNull();
+    });
   });
 });
