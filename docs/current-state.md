@@ -1,12 +1,13 @@
 # Current State
 
-_Updated: 2026-04-17 after M1 complete._
+_Updated: 2026-04-17 after M2 complete._
 
 ## Status
 
 - **M0 — Project Bootstrap:** ✅ complete. PRD [#1](https://github.com/Moumokhtar/elm-frontend-task/issues/1) and all six slice issues closed.
 - **M1 — Shared Layout: Navbar:** ✅ complete. PRD [#8](https://github.com/Moumokhtar/elm-frontend-task/issues/8) and all five slice issues (#9–#13) closed. Navbar lives at `src/app/layout/navbar/navbar.ts` with desktop + mobile variants, PrimeNG dropdowns (items 4–7), inline mobile accordion, and routerLink on items 1/2/3 (`/`, `/service`, `/form`).
-- **Next up:** M2 — per `ELM_TASK_PLAN.md`.
+- **M2 — Shared Layout: Footer:** ✅ complete. PRD [#14](https://github.com/Moumokhtar/elm-frontend-task/issues/14) and slice issues #15–#19 closed. Footer lives at `src/app/layout/footer/footer.ts`, mounted from `shell.html`, with four link columns, social + accessibility icon rows, bottom legal/links, and local assets under `public/images/footer-*`.
+- **Next up:** M3 — per `ELM_TASK_PLAN.md`.
 
 ## Conventions the next agent must follow
 
@@ -81,7 +82,7 @@ import { HomePage } from '@features/home/home-page';
 cd elm-frontend-task
 npm install
 npm run lint       # expect: all pass
-npm test           # expect: 35/35 passing
+npm test           # expect: 45/45 passing
 npm run build      # expect: success, ~858kB initial (154kB transfer)
 ```
 

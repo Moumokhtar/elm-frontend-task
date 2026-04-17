@@ -52,12 +52,12 @@ Standalone `FooterComponent`. Four-column link grid (ملخص, روابط مهم
 
 **Done when:**
 
-- [ ] Four columns render with correct headings and links
-- [ ] Social icons render and are keyboard-focusable with ARIA labels
-- [ ] Accessibility tool icons render as focusable buttons
-- [ ] Bottom bar renders with copyright + links
-- [ ] Footer stacks correctly on mobile
-- [ ] All links are `<a>` tags with meaningful text (no "click here")
+- [x] Four columns render with correct headings and links
+- [x] Social icons render and are keyboard-focusable with ARIA labels
+- [x] Accessibility tool icons render as focusable buttons
+- [x] Bottom bar renders with copyright + links
+- [x] Footer stacks correctly on mobile
+- [x] All links are `<a>` tags with meaningful text (no "click here")
 
 ---
 
