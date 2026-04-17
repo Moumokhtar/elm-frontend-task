@@ -30,6 +30,11 @@ describe('Shell', () => {
     expect(fixture.debugElement.query(By.css('[data-testid="shell-footer"]'))).not.toBeNull();
   });
 
+  it('renders footer component inside the footer slot', () => {
+    const footerSlot = fixture.debugElement.query(By.css('[data-testid="shell-footer"]'));
+    expect(footerSlot.query(By.css('app-footer'))).not.toBeNull();
+  });
+
   it('places router-outlet inside main', () => {
     const main = fixture.debugElement.query(By.css('[data-testid="shell-main"]'));
     expect(main.query(By.css('router-outlet'))).not.toBeNull();
