@@ -32,27 +32,7 @@ Figma: https://www.figma.com/design/wh34oGmGLBesPFMgXM4BLS/Frontend-Task--RTL?no
 
 ## MILESTONE 0 — Project Bootstrap ✅ Complete
 
-**Goal:**
-Scaffold the Angular project with all dependencies configured and a working dev/build pipeline.
-
-**Scope:**
-Angular CLI new project (standalone, routing), Bootstrap 5 installed and imported, PrimeNG installed with theme, global RTL styles applied, `app.routes.ts` with placeholder routes for all 3 pages, base `AppComponent` with `<router-outlet>`.
-
-**Done when:**
-
-- [x] `ng new` project runs with standalone components and routing enabled (Angular 21, Vitest)
-- [x] Bootstrap 5 RTL CSS imported in `angular.json` styles array
-- [x] PrimeNG 21 installed, `provideAnimationsAsync()` and `providePrimeNG()` (Aura preset) in `app.config.ts`
-- [x] `html` tag has `dir="rtl"` and `lang="ar"`; IBM Plex Sans Arabic loaded via Google Fonts
-- [x] Global stylesheet sets `body { direction: rtl; font-family: 'IBM Plex Sans Arabic', ... }`
-- [x] Routes defined for `/` (home), `/service` (detail), `/form` (form page)
-- [x] `ng build` completes with no errors
-- [x] Feature-sliced layout (`core/shared/layout/features`) with `@core/@shared/@layout/@features` path aliases
-- [x] `ShellComponent` with `<header>/<main>/<footer>` slots wraps the router-outlet
-- [x] ESLint (angular-eslint) + Prettier configured; `format` script added
-- [x] 11/11 tests pass (shell slots, routing smoke tests via `RouterTestingHarness`)
-
-Tracked on GitHub: [PRD #1](https://github.com/Moumokhtar/elm-frontend-task/issues/1) — all six child slices (M0-1 through M0-6) closed.
+Shipped. See [PRD #1](https://github.com/Moumokhtar/elm-frontend-task/issues/1) and slices #2–#7.
 
 ---
 
