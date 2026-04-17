@@ -1,0 +1,17 @@
+export type TagSeverity =
+  | 'success'
+  | 'info'
+  | 'warn'
+  | 'danger'
+  | 'secondary'
+  | 'contrast';
+
+export interface TagItem {
+  label: string;
+  severity?: TagSeverity;
+}
+
+export interface BreadcrumbItem {
+  label: string;
+  route?: string | unknown[];
+}

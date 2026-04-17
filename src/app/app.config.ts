@@ -3,8 +3,15 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { provideRouter } from '@angular/router';
 import { providePrimeNG } from 'primeng/config';
 import Aura from '@primeuix/themes/aura';
+import { definePreset, palette } from '@primeuix/themes';
 
 import { routes } from './app.routes';
+
+const ElmPreset = definePreset(Aura, {
+  semantic: {
+    primary: palette('#1b8354'),
+  },
+});
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -13,7 +20,7 @@ export const appConfig: ApplicationConfig = {
     provideAnimationsAsync(),
     providePrimeNG({
       theme: {
-        preset: Aura,
+        preset: ElmPreset,
         options: {
           darkModeSelector: false,
         },
