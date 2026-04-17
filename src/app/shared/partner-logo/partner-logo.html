@@ -1,0 +1,14 @@
+@if (logoSrc()) {
+  <div class="border rounded-3 p-3 d-flex flex-column align-items-center gap-2 bg-white" data-testid="partner-logo">
+    <div class="d-flex align-items-center justify-content-center partner-logo-container" data-testid="partner-logo-img">
+      <img
+        [src]="logoSrc()"
+        [alt]="logoAlt()"
+        class="mw-100 mh-100 w-auto h-auto d-block"
+      />
+    </div>
+    @if (label()) {
+      <span class="small text-secondary text-center" data-testid="partner-logo-label">{{ label() }}</span>
+    }
+  </div>
+}
