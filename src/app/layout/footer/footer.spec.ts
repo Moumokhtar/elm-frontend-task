@@ -77,9 +77,9 @@ describe('Footer', () => {
     const links = fixture.debugElement.queryAll(By.css('[data-testid="footer-bottom-links"] a'));
     expect(links).toHaveLength(3);
     expect(links.map((el) => el.nativeElement.textContent.trim())).toEqual([
-      'خريطة الموقع',
-      'RSS',
       'تطبيق الجوال',
+      'RSS',
+      'خريطة الموقع',
     ]);
     links.forEach((el) => {
       expect(el.nativeElement.getAttribute('href')).toBe('#');

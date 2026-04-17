@@ -42,7 +42,9 @@ Shipped. See [PRD #8](https://github.com/Moumokhtar/elm-frontend-task/issues/8) 
 
 ---
 
-## MILESTONE 2 — Shared Layout: Footer
+## MILESTONE 2 — Shared Layout: Footer ✅ Complete
+
+Shipped. See [PRD #14](https://github.com/Moumokhtar/elm-frontend-task/issues/14) and slices #15–#19.
 
 **Goal:**
 Full footer matching Figma across desktop and mobile.
