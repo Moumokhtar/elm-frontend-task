@@ -1,6 +1,6 @@
 // Design tokens extracted from Figma (file wh34oGmGLBesPFMgXM4BLS).
 // Naming mirrors Figma variable names so future handoffs translate mechanically.
-// M1 scope only — grow this file as later milestones need new tokens.
+// M1+ — extend per milestone as Figma nodes are verified in dev mode.
 
 :root {
   // Spacing scale
@@ -21,4 +21,55 @@
 
   // Backgrounds
   --background-menu: #ffffff;
+  --background-page-muted: #f9fafb;
+
+  // Home page section shell — full frame “Home Page - Desktop AR” 2036:65608 (Services / About / …):
+  // outer strip: px global/spacing-8xl (80px), py spacing-5xl (40px); inner column max 1280px.
+  --layout-page-content-max-width: 1280px;
+  --page-strip-padding-inline: 80px;
+  --page-strip-padding-block: 40px;
+
+  // Section header — verified against Figma “Frontend-Task--RTL”, node 2036-65712 (dev):
+  // https://www.figma.com/design/wh34oGmGLBesPFMgXM4BLS/Frontend-Task--RTL?node-id=2036-65712&m=dev
+  --font-section-header-title-size: 1.875rem; /* 30px */
+  --font-section-header-title-line-height: 2.375rem; /* 38px */
+  --font-section-header-subtitle-size: 1rem; /* 16px */
+  --font-section-header-subtitle-line-height: 1.5rem; /* 24px */
+  --layout-section-header-subtitle-max-width: 720px;
+  --size-section-header-action-height: 40px;
+}
+
+/* Figma-aligned helpers where Bootstrap has no exact utility (px/rem typography, brand text). */
+.elm-text-default {
+  color: var(--color-text-default);
+}
+
+.elm-section-header-title {
+  font-size: var(--font-section-header-title-size);
+  line-height: var(--font-section-header-title-line-height);
+}
+
+.elm-section-header-subtitle {
+  font-size: var(--font-section-header-subtitle-size);
+  line-height: var(--font-section-header-subtitle-line-height);
+  max-width: var(--layout-section-header-subtitle-max-width);
+}
+
+/* M4+ page sections: full-width strip + centered 1280px inner (Bootstrap has no exact 1280 / 80px gutter). */
+.elm-page-strip {
+  box-sizing: border-box;
+  width: 100%;
+  padding-block: var(--page-strip-padding-block);
+  padding-inline: clamp(var(--spacing-xl), 4vw, var(--page-strip-padding-inline));
+}
+
+.elm-page-strip--muted {
+  background-color: var(--background-page-muted);
+}
+
+.elm-page-strip__inner {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: var(--layout-page-content-max-width);
+  margin-inline: auto;
 }

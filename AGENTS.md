@@ -16,3 +16,4 @@ Scope reminder:
 - Figma is the visual source of truth: always match spacing, colors, alignment, sizing, typography, and hierarchy exactly unless the user explicitly approves a deviation
 - icon policy: prefer the closest match from installed icon sets (Bootstrap Icons, PrimeIcons; Brave only if installed), across all features
 - keep icon sizing/spacing consistent with design tokens and Bootstrap utilities first
+- layout: prefer **Bootstrap rows, columns, and the grid** (`row`, `col-*`, `col-md`, `col-md-auto`, etc.) for page and component structure; avoid custom flexbox/CSS layout when utilities or the grid can express the same behavior (reduces RTL bugs and uneven width distribution)

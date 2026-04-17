@@ -1,4 +1,25 @@
-<section class="page-placeholder">
+<section class="page-placeholder mb-4">
   <h1>الصفحة الرئيسية</h1>
   <p lang="en">Home · placeholder</p>
+</section>
+
+<!--
+  VISUAL QA ONLY — M3 SectionHeader (remove for M4 real composition):
+  Temporary strip so humans can compare typography, spacing, and RTL layout to Figma before the
+  Home Page milestone assembles real sections. Do not treat this as final page structure; delete
+  this entire block (or gate behind a dev flag) when M4 ships.
+-->
+<section
+  class="elm-page-strip elm-page-strip--muted"
+  data-testid="home-visual-qa-section-header"
+  aria-label="معاينة مؤقتة لترويسة القسم"
+>
+  <div class="elm-page-strip__inner">
+    <app-section-header
+      title="قسم الخدمات"
+      subtitle="نص تجريبي لمعاينة التنسيق والمسافات مقارنةً بـ Figma. سيُستبدل بمحتوى الصفحة الرئيسية الفعلي في مرحلة M4."
+      actionLabel="عرض الكل"
+      actionRoute="/service"
+    />
+  </div>
 </section>

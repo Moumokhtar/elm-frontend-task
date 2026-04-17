@@ -5,7 +5,14 @@
   min-height: 0;
 }
 
+.app-shell__header {
+  flex-shrink: 0;
+}
+
 .app-shell__main {
   flex: 1 1 auto;
   min-height: 0;
+  /* Scroll long routes inside main so the shell flex chain + footer stay predictable on small viewports. */
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }

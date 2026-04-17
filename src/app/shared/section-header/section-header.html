@@ -1,0 +1,38 @@
+<div class="row align-items-start g-3 g-md-4 w-100 mx-0">
+  <div class="col-12 col-md min-w-0">
+    <div class="d-flex flex-column gap-3 gap-md-4">
+      <h2 class="mb-0 fw-bold elm-text-default elm-section-header-title" data-testid="section-header-title">
+        {{ title() }}
+      </h2>
+      @if (subtitle()) {
+        <p class="mb-0 fw-normal elm-text-default elm-section-header-subtitle" data-testid="section-header-subtitle">
+          {{ subtitle() }}
+        </p>
+      }
+    </div>
+  </div>
+  @if (actionLabel()) {
+    <div class="col-12 col-md-auto d-flex justify-content-end">
+      @if (actionLink(); as link) {
+        <p-button
+          type="button"
+          [label]="actionLabel()"
+          severity="secondary"
+          [outlined]="true"
+          styleClass="section-header__action-button flex-shrink-0"
+          [routerLink]="link"
+          data-testid="section-header-action"
+        />
+      } @else {
+        <p-button
+          type="button"
+          [label]="actionLabel()"
+          severity="secondary"
+          [outlined]="true"
+          styleClass="section-header__action-button flex-shrink-0"
+          data-testid="section-header-action"
+        />
+      }
+    </div>
+  }
+</div>

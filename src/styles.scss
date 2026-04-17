@@ -9,8 +9,9 @@ html {
 
 body {
   margin: 0;
+  /* min-height only: a fixed height:100% chain clips long pages and breaks mobile toolbars. */
   min-height: 100%;
-  height: 100%;
+  min-height: 100dvh;
   display: flex;
   flex-direction: column;
   direction: rtl;
