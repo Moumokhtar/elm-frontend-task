@@ -2,3 +2,22 @@
   display: block;
   width: 100%;
 }
+
+/* Figma home frame 2036:65608 — full-width strip + 1280px inner (visual QA strips until M4). */
+.home-page__strip {
+  box-sizing: border-box;
+  width: 100%;
+  padding-block: var(--page-strip-padding-block);
+  padding-inline: clamp(var(--spacing-xl), 4vw, var(--page-strip-padding-inline));
+}
+
+.home-page__strip--muted {
+  background-color: var(--background-page-muted);
+}
+
+.home-page__strip-inner {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: var(--layout-page-content-max-width);
+  margin-inline: auto;
+}

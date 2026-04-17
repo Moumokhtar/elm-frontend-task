@@ -11,6 +11,53 @@
 
   // Radii
   --radius-sm: 4px;
+  --radius-lg: 16px;
+
+  // Service card — Figma Carousel card `…65719` → instance `…510:11620`:
+  // https://www.figma.com/design/wh34oGmGLBesPFMgXM4BLS/Frontend-Task--RTL?node-id=2036-65719&m=dev
+  --layout-service-card-max-width: 320px;
+  --color-text-display: #1f2a37;
+  --icon-bg-brand-light: #f3fcf6;
+  --size-icon-circle-lg: 48px;
+  --font-service-card-title-size: 1.125rem; /* 18px Text lg/Bold */
+  --font-service-card-title-line-height: 1.75rem; /* 28px */
+  --font-service-card-description-size: 1rem; /* 16px Text md/Regular */
+  --font-service-card-description-line-height: 1.5rem; /* 24px */
+
+  /*
+   * Service card tag chip — Figma `2036-65719` (carousel card tags). Dev mode: copy bg / border / text here.
+   * Shape: small corner radius (not pill); each variant = tint fill + matching border + label color.
+   */
+  --radius-service-card-tag: 4px;
+  --font-service-card-tag-size: 0.75rem; /* 12px — replace with Figma text size if different */
+  --font-service-card-tag-line-height: 1rem; /* 16px */
+  --font-service-card-tag-weight: 500;
+  --padding-service-card-tag-y: 2px;
+  --padding-service-card-tag-x: 8px;
+
+  --color-service-card-tag-success-bg: #ecfdf5;
+  --color-service-card-tag-success-border: #1b8354;
+  --color-service-card-tag-success-text: #16694a;
+
+  --color-service-card-tag-info-bg: #eff6ff;
+  --color-service-card-tag-info-border: #2563eb;
+  --color-service-card-tag-info-text: #1d4ed8;
+
+  --color-service-card-tag-warn-bg: #fffbeb;
+  --color-service-card-tag-warn-border: #d97706;
+  --color-service-card-tag-warn-text: #b45309;
+
+  --color-service-card-tag-danger-bg: #fef2f2;
+  --color-service-card-tag-danger-border: #dc2626;
+  --color-service-card-tag-danger-text: #b91c1c;
+
+  --color-service-card-tag-secondary-bg: #f9fafb;
+  --color-service-card-tag-secondary-border: #9ca3af;
+  --color-service-card-tag-secondary-text: #4b5563;
+
+  --color-service-card-tag-contrast-bg: #f3f4f6;
+  --color-service-card-tag-contrast-border: #374151;
+  --color-service-card-tag-contrast-text: #1f2937;
 
   // Text + icon colors
   --color-text-default: #161616;
@@ -37,39 +84,4 @@
   --font-section-header-subtitle-line-height: 1.5rem; /* 24px */
   --layout-section-header-subtitle-max-width: 720px;
   --size-section-header-action-height: 40px;
-}
-
-/* Figma-aligned helpers where Bootstrap has no exact utility (px/rem typography, brand text). */
-.elm-text-default {
-  color: var(--color-text-default);
-}
-
-.elm-section-header-title {
-  font-size: var(--font-section-header-title-size);
-  line-height: var(--font-section-header-title-line-height);
-}
-
-.elm-section-header-subtitle {
-  font-size: var(--font-section-header-subtitle-size);
-  line-height: var(--font-section-header-subtitle-line-height);
-  max-width: var(--layout-section-header-subtitle-max-width);
-}
-
-/* M4+ page sections: full-width strip + centered 1280px inner (Bootstrap has no exact 1280 / 80px gutter). */
-.elm-page-strip {
-  box-sizing: border-box;
-  width: 100%;
-  padding-block: var(--page-strip-padding-block);
-  padding-inline: clamp(var(--spacing-xl), 4vw, var(--page-strip-padding-inline));
-}
-
-.elm-page-strip--muted {
-  background-color: var(--background-page-muted);
-}
-
-.elm-page-strip__inner {
-  box-sizing: border-box;
-  width: 100%;
-  max-width: var(--layout-page-content-max-width);
-  margin-inline: auto;
 }

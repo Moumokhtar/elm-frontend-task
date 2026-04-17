@@ -1,0 +1,48 @@
+<!--
+  Service carousel card (Figma 2036-65719). Tag chip colors/radius/padding: `_tokens.scss` → `--color-service-card-tag-*` (paste from Figma dev).
+-->
+<div class="card border shadow-none mw-100 service-card__shell bg-white" data-testid="service-card">
+  <div class="card-body d-flex flex-column gap-4 p-3">
+    <div class="service-card__icon d-flex align-items-center justify-content-center rounded-circle flex-shrink-0 align-self-start" aria-hidden="true">
+      <i class="pi pi-check-circle fs-5 lh-1"></i>
+    </div>
+
+    <div class="d-flex flex-column gap-2">
+      <h3 class="card-title mb-0 fw-bold service-card__title" data-testid="service-card-title">{{ title() }}</h3>
+      <p class="card-text mb-0 service-card__description" data-testid="service-card-description">{{ description() }}</p>
+    </div>
+
+    @if (tags().length > 0) {
+      <div class="d-flex flex-wrap gap-2" data-testid="service-card-tags">
+        @for (tag of tags(); track tag.label) {
+          <span class="service-card__tag" [ngClass]="tagVariantClass(tag.severity)" data-testid="service-card-tag">{{ tag.label }}</span>
+        }
+      </div>
+    }
+
+    @if (primaryLabel() || secondaryLabel()) {
+      <div class="d-flex flex-wrap gap-3 justify-content-start">
+        @if (secondaryLabel()) {
+          <p-button
+            type="button"
+            [label]="secondaryLabel()"
+            severity="secondary"
+            [outlined]="true"
+            (onClick)="secondaryClick.emit()"
+            data-testid="service-card-secondary-btn"
+            styleClass="flex-shrink-0"
+          />
+        }
+        @if (primaryLabel()) {
+          <p-button
+            type="button"
+            [label]="primaryLabel()"
+            (onClick)="primaryClick.emit()"
+            data-testid="service-card-primary-btn"
+            styleClass="flex-shrink-0"
+          />
+        }
+      </div>
+    }
+  </div>
+</div>

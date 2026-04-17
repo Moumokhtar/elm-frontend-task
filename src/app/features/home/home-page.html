@@ -10,11 +10,11 @@
   this entire block (or gate behind a dev flag) when M4 ships.
 -->
 <section
-  class="elm-page-strip elm-page-strip--muted"
+  class="home-page__strip home-page__strip--muted"
   data-testid="home-visual-qa-section-header"
   aria-label="معاينة مؤقتة لترويسة القسم"
 >
-  <div class="elm-page-strip__inner">
+  <div class="home-page__strip-inner">
     <app-section-header
       title="قسم الخدمات"
       subtitle="نص تجريبي لمعاينة التنسيق والمسافات مقارنةً بـ Figma. سيُستبدل بمحتوى الصفحة الرئيسية الفعلي في مرحلة M4."
@@ -29,11 +29,11 @@
   Temporary strip to verify separators, RTL, and links against Figma. Not final home structure.
 -->
 <section
-  class="elm-page-strip bg-white"
+  class="home-page__strip bg-white"
   data-testid="home-visual-qa-breadcrumb"
   aria-label="معاينة مؤقتة لمسار التنقل"
 >
-  <div class="elm-page-strip__inner">
+  <div class="home-page__strip-inner">
     <app-breadcrumb
       [items]="[
         { label: 'الرئيسية', route: '/' },
@@ -41,5 +41,33 @@
         { label: 'معاينة' },
       ]"
     />
+  </div>
+</section>
+
+<!--
+  VISUAL QA ONLY — M3 ServiceCard (remove for M4 real composition):
+  Sample card to compare with Figma service carousel item. Not final home structure.
+-->
+<section
+  class="home-page__strip home-page__strip--muted"
+  data-testid="home-visual-qa-service-card"
+  aria-label="معاينة مؤقتة لبطاقة الخدمة"
+>
+  <div class="home-page__strip-inner">
+    <div class="row g-4">
+      <div class="col-12 col-sm-auto">
+        <app-service-card
+          title="عنوان البطاقة"
+          description="نص إضافي لمحتوى البطاقة يظهر هنا بشكل مختصر لمعاينة التنسيق."
+          [tags]="[
+            { label: 'وسم', severity: 'success' },
+            { label: 'وسم', severity: 'info' },
+            { label: 'وسم', severity: 'secondary' },
+          ]"
+          primaryLabel="اجراء"
+          secondaryLabel="اجراء ثانوي"
+        />
+      </div>
+    </div>
   </div>
 </section>

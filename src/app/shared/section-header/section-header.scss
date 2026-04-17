@@ -4,6 +4,20 @@
   width: 100%;
 }
 
+/* Figma section header typography (node 2036-65712); color uses --color-text-default. */
+.section-header__title {
+  color: var(--color-text-default);
+  font-size: var(--font-section-header-title-size);
+  line-height: var(--font-section-header-title-line-height);
+}
+
+.section-header__subtitle {
+  color: var(--color-text-default);
+  font-size: var(--font-section-header-subtitle-size);
+  line-height: var(--font-section-header-subtitle-line-height);
+  max-width: var(--layout-section-header-subtitle-max-width);
+}
+
 /* PrimeNG outline button — token values only (no Bootstrap equivalent for exact Figma control). */
 :host ::ng-deep .section-header__action-button.p-button {
   width: auto;

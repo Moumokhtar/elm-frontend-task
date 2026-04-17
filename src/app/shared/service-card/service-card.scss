@@ -1,0 +1,80 @@
+/* Service card shell + type (Figma ref 2036-65719); layout/spacing via Bootstrap. */
+
+.service-card__shell {
+  width: 100%;
+  max-width: var(--layout-service-card-max-width);
+  border-radius: var(--radius-lg);
+  border-color: var(--color-neutral-300) !important;
+}
+
+/* Circle sets color once; PrimeIcon inherits via currentColor. */
+.service-card__icon {
+  box-sizing: border-box;
+  width: var(--size-icon-circle-lg);
+  height: var(--size-icon-circle-lg);
+  background-color: var(--icon-bg-brand-light);
+  color: #1b8354;
+}
+
+.service-card__title {
+  font-size: var(--font-service-card-title-size);
+  line-height: var(--font-service-card-title-line-height);
+  color: var(--color-text-display);
+}
+
+.service-card__description {
+  font-size: var(--font-service-card-description-size);
+  line-height: var(--font-service-card-description-line-height);
+  color: var(--color-text-display);
+}
+
+/* Tag chip — Figma 2036-65719: tint background + matching border + text; radius from token (not pill). */
+.service-card__tag {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--padding-service-card-tag-y) var(--padding-service-card-tag-x);
+  border-radius: var(--radius-service-card-tag);
+  border-width: 1px;
+  border-style: solid;
+  font-size: var(--font-service-card-tag-size);
+  line-height: var(--font-service-card-tag-line-height);
+  font-weight: var(--font-service-card-tag-weight);
+}
+
+.service-card__tag--success {
+  background-color: var(--color-service-card-tag-success-bg);
+  border-color: var(--color-service-card-tag-success-border);
+  color: var(--color-service-card-tag-success-text);
+}
+
+.service-card__tag--info {
+  background-color: var(--color-service-card-tag-info-bg);
+  border-color: var(--color-service-card-tag-info-border);
+  color: var(--color-service-card-tag-info-text);
+}
+
+.service-card__tag--warn {
+  background-color: var(--color-service-card-tag-warn-bg);
+  border-color: var(--color-service-card-tag-warn-border);
+  color: var(--color-service-card-tag-warn-text);
+}
+
+.service-card__tag--danger {
+  background-color: var(--color-service-card-tag-danger-bg);
+  border-color: var(--color-service-card-tag-danger-border);
+  color: var(--color-service-card-tag-danger-text);
+}
+
+.service-card__tag--secondary {
+  background-color: var(--color-service-card-tag-secondary-bg);
+  border-color: var(--color-service-card-tag-secondary-border);
+  color: var(--color-service-card-tag-secondary-text);
+}
+
+.service-card__tag--contrast {
+  background-color: var(--color-service-card-tag-contrast-bg);
+  border-color: var(--color-service-card-tag-contrast-border);
+  color: var(--color-service-card-tag-contrast-text);
+}
