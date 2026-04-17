@@ -17,11 +17,13 @@
         @for (item of menuItems; track item.label; let i = $index) {
           <li>
             <button
+              #triggerButton
               type="button"
               class="app-navbar__item d-inline-flex align-items-center gap-1 border-0"
               [attr.data-testid]="'menu-item-' + (i + 1)"
               [attr.aria-haspopup]="'menu'"
-              [attr.aria-expanded]="'false'"
+              [attr.aria-expanded]="openMenuIndex() === i ? 'true' : 'false'"
+              (click)="onMenuTriggerClick($event, i, triggerButton)"
             >
               <span>{{ item.label }}</span>
               <i class="bi bi-chevron-down app-navbar__chevron" aria-hidden="true"></i>
@@ -29,6 +31,14 @@
           </li>
         }
       </ul>
+      <p-menu
+        #desktopMenu
+        [popup]="true"
+        [model]="submenuItems"
+        appendTo="body"
+        styleClass="app-navbar__dropdown-menu"
+        (onHide)="onMenuHide()"
+      />
     </div>
 
     <!-- Actions (main-end in RTL = left visually) -->

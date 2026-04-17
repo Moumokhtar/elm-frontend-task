@@ -54,6 +54,14 @@ describe('Navbar', () => {
     });
   });
 
+  it('renders 3 placeholder submenu items for dropdown menus', () => {
+    expect(component.submenuItems.map((item) => item.label)).toEqual([
+      'عنصر فرعي 1',
+      'عنصر فرعي 2',
+      'عنصر فرعي 3',
+    ]);
+  });
+
   it('renders the desktop logo with non-empty alt and width/height', () => {
     const logo = fixture.debugElement.query(By.css('[data-testid="navbar-logo-desktop"] img'));
     expect(logo).not.toBeNull();
@@ -103,5 +111,40 @@ describe('Navbar', () => {
   it('uses Figma spacing token for nav label and chevron', () => {
     const menuItem = fixture.debugElement.query(By.css('[data-testid="menu-item-1"]'));
     expect(menuItem.nativeElement.classList.contains('gap-1')).toBe(true);
+  });
+
+  it('opens dropdown and updates aria-expanded on click', () => {
+    const firstTrigger = fixture.debugElement.query(By.css('[data-testid="menu-item-1"]')).nativeElement as HTMLButtonElement;
+    firstTrigger.click();
+    fixture.detectChanges();
+
+    expect(firstTrigger.getAttribute('aria-expanded')).toBe('true');
+  });
+
+  it('keeps only one dropdown trigger expanded at a time', () => {
+    const firstTrigger = fixture.debugElement.query(By.css('[data-testid="menu-item-1"]')).nativeElement as HTMLButtonElement;
+    const secondTrigger = fixture.debugElement.query(By.css('[data-testid="menu-item-2"]')).nativeElement as HTMLButtonElement;
+
+    firstTrigger.click();
+    fixture.detectChanges();
+    expect(firstTrigger.getAttribute('aria-expanded')).toBe('true');
+
+    secondTrigger.click();
+    fixture.detectChanges();
+    expect(firstTrigger.getAttribute('aria-expanded')).toBe('false');
+    expect(secondTrigger.getAttribute('aria-expanded')).toBe('true');
+  });
+
+  it('closes on Escape and returns focus to the last trigger', () => {
+    const firstTrigger = fixture.debugElement.query(By.css('[data-testid="menu-item-1"]')).nativeElement as HTMLButtonElement;
+    firstTrigger.click();
+    fixture.detectChanges();
+    expect(firstTrigger.getAttribute('aria-expanded')).toBe('true');
+
+    document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape' }));
+    fixture.detectChanges();
+
+    expect(firstTrigger.getAttribute('aria-expanded')).toBe('false');
+    expect(document.activeElement).toBe(firstTrigger);
   });
 });
