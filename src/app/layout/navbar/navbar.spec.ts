@@ -33,9 +33,9 @@ describe('Navbar', () => {
     expect(items).toHaveLength(7);
     const labels = items.map((el) => el.nativeElement.textContent.trim());
     expect(labels).toEqual([
-      'تبويب 1',
-      'تبويب 2',
-      'تبويب 3',
+      'الرئيسية',
+      'الخدمات',
+      'حقول النص',
       'تبويب 4',
       'تبويب 5',
       'تبويب 6',
@@ -52,12 +52,39 @@ describe('Navbar', () => {
     expect(search.nativeElement.textContent.trim()).toBe('البحث');
   });
 
-  it('gives every menu item a dropdown trigger role', () => {
-    const items = fixture.debugElement.queryAll(By.css('[data-testid^="menu-item-"]'));
-    items.forEach((el) => {
+  it('gives non-routed menu items (4–7) a dropdown trigger role', () => {
+    for (const i of [4, 5, 6, 7]) {
+      const el = fixture.debugElement.query(By.css(`[data-testid="menu-item-${i}"]`));
       expect(el.nativeElement.getAttribute('aria-haspopup')).toBe('menu');
       expect(el.nativeElement.getAttribute('aria-expanded')).toBe('false');
-    });
+    }
+  });
+
+  it('routes menu items 1/2/3 to /, /service, /form via routerLink', () => {
+    const expected: [number, string][] = [
+      [1, '/'],
+      [2, '/service'],
+      [3, '/form'],
+    ];
+    for (const [i, path] of expected) {
+      const el = fixture.debugElement.query(By.css(`[data-testid="menu-item-${i}"]`));
+      expect(el.nativeElement.tagName.toLowerCase()).toBe('a');
+      expect(el.nativeElement.getAttribute('href')).toBe(path);
+      expect(el.nativeElement.hasAttribute('aria-haspopup')).toBe(false);
+    }
+  });
+
+  it('does not put routerLink on menu items 4–7 or action buttons', () => {
+    for (const i of [4, 5, 6, 7]) {
+      const el = fixture.debugElement.query(By.css(`[data-testid="menu-item-${i}"]`));
+      expect(el.nativeElement.tagName.toLowerCase()).toBe('button');
+      expect(el.nativeElement.hasAttribute('href')).toBe(false);
+    }
+    for (const id of ['action-login', 'action-language', 'action-search']) {
+      const el = fixture.debugElement.query(By.css(`[data-testid="${id}"]`));
+      expect(el.nativeElement.tagName.toLowerCase()).toBe('button');
+      expect(el.nativeElement.hasAttribute('href')).toBe(false);
+    }
   });
 
   it('renders 3 placeholder submenu items for dropdown menus', () => {
@@ -91,7 +118,7 @@ describe('Navbar', () => {
 
   it('applies sticky navbar and shared interactive item classes', () => {
     const nav = fixture.debugElement.query(By.css('[data-testid="navbar"]'));
-    const menuItem = fixture.debugElement.query(By.css('[data-testid="menu-item-1"]'));
+    const menuItem = fixture.debugElement.query(By.css('[data-testid="menu-item-4"]'));
     const actionItem = fixture.debugElement.query(By.css('[data-testid="action-login"]'));
 
     expect(nav.nativeElement.classList.contains('sticky-top')).toBe(true);
@@ -100,8 +127,8 @@ describe('Navbar', () => {
   });
 
   it('uses bootstrap icon set and expected spacing utilities', () => {
-    const menuItem = fixture.debugElement.query(By.css('[data-testid="menu-item-1"]'));
-    const chevronIcon = fixture.debugElement.query(By.css('[data-testid="menu-item-1"] .app-navbar__chevron'));
+    const menuItem = fixture.debugElement.query(By.css('[data-testid="menu-item-4"]'));
+    const chevronIcon = fixture.debugElement.query(By.css('[data-testid="menu-item-4"] .app-navbar__chevron'));
     const loginIcon = fixture.debugElement.query(By.css('[data-testid="action-login"] .app-navbar__action-icon'));
     const languageIcon = fixture.debugElement.query(By.css('[data-testid="action-language"] .app-navbar__action-icon'));
     const searchIcon = fixture.debugElement.query(By.css('[data-testid="action-search"] .app-navbar__action-icon'));
@@ -115,43 +142,43 @@ describe('Navbar', () => {
   });
 
   it('uses Figma spacing token for nav label and chevron', () => {
-    const menuItem = fixture.debugElement.query(By.css('[data-testid="menu-item-1"]'));
+    const menuItem = fixture.debugElement.query(By.css('[data-testid="menu-item-4"]'));
     expect(menuItem.nativeElement.classList.contains('gap-1')).toBe(true);
   });
 
   it('opens dropdown and updates aria-expanded on click', () => {
-    const firstTrigger = fixture.debugElement.query(By.css('[data-testid="menu-item-1"]')).nativeElement as HTMLButtonElement;
-    firstTrigger.click();
+    const trigger = fixture.debugElement.query(By.css('[data-testid="menu-item-4"]')).nativeElement as HTMLButtonElement;
+    trigger.click();
     fixture.detectChanges();
 
-    expect(firstTrigger.getAttribute('aria-expanded')).toBe('true');
+    expect(trigger.getAttribute('aria-expanded')).toBe('true');
   });
 
   it('keeps only one dropdown trigger expanded at a time', () => {
-    const firstTrigger = fixture.debugElement.query(By.css('[data-testid="menu-item-1"]')).nativeElement as HTMLButtonElement;
-    const secondTrigger = fixture.debugElement.query(By.css('[data-testid="menu-item-2"]')).nativeElement as HTMLButtonElement;
+    const first = fixture.debugElement.query(By.css('[data-testid="menu-item-4"]')).nativeElement as HTMLButtonElement;
+    const second = fixture.debugElement.query(By.css('[data-testid="menu-item-5"]')).nativeElement as HTMLButtonElement;
 
-    firstTrigger.click();
+    first.click();
     fixture.detectChanges();
-    expect(firstTrigger.getAttribute('aria-expanded')).toBe('true');
+    expect(first.getAttribute('aria-expanded')).toBe('true');
 
-    secondTrigger.click();
+    second.click();
     fixture.detectChanges();
-    expect(firstTrigger.getAttribute('aria-expanded')).toBe('false');
-    expect(secondTrigger.getAttribute('aria-expanded')).toBe('true');
+    expect(first.getAttribute('aria-expanded')).toBe('false');
+    expect(second.getAttribute('aria-expanded')).toBe('true');
   });
 
   it('closes on Escape and returns focus to the last trigger', () => {
-    const firstTrigger = fixture.debugElement.query(By.css('[data-testid="menu-item-1"]')).nativeElement as HTMLButtonElement;
-    firstTrigger.click();
+    const trigger = fixture.debugElement.query(By.css('[data-testid="menu-item-4"]')).nativeElement as HTMLButtonElement;
+    trigger.click();
     fixture.detectChanges();
-    expect(firstTrigger.getAttribute('aria-expanded')).toBe('true');
+    expect(trigger.getAttribute('aria-expanded')).toBe('true');
 
     document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape' }));
     fixture.detectChanges();
 
-    expect(firstTrigger.getAttribute('aria-expanded')).toBe('false');
-    expect(document.activeElement).toBe(firstTrigger);
+    expect(trigger.getAttribute('aria-expanded')).toBe('false');
+    expect(document.activeElement).toBe(trigger);
   });
 
   describe('mobile', () => {
@@ -216,16 +243,16 @@ describe('Navbar', () => {
       getHamburger().click();
       fixture.detectChanges();
 
-      const first = fixture.debugElement.query(By.css('[data-testid="mobile-menu-item-1"]'))
+      const first = fixture.debugElement.query(By.css('[data-testid="mobile-menu-item-4"]'))
         .nativeElement as HTMLButtonElement;
-      const second = fixture.debugElement.query(By.css('[data-testid="mobile-menu-item-2"]'))
+      const second = fixture.debugElement.query(By.css('[data-testid="mobile-menu-item-5"]'))
         .nativeElement as HTMLButtonElement;
 
       first.click();
       fixture.detectChanges();
       expect(first.getAttribute('aria-expanded')).toBe('true');
       expect(
-        fixture.debugElement.query(By.css('[data-testid="mobile-submenu-1"]')),
+        fixture.debugElement.query(By.css('[data-testid="mobile-submenu-4"]')),
       ).not.toBeNull();
 
       second.click();
@@ -233,11 +260,27 @@ describe('Navbar', () => {
       expect(first.getAttribute('aria-expanded')).toBe('false');
       expect(second.getAttribute('aria-expanded')).toBe('true');
       expect(
-        fixture.debugElement.query(By.css('[data-testid="mobile-submenu-1"]')),
+        fixture.debugElement.query(By.css('[data-testid="mobile-submenu-4"]')),
       ).toBeNull();
       expect(
-        fixture.debugElement.query(By.css('[data-testid="mobile-submenu-2"]')),
+        fixture.debugElement.query(By.css('[data-testid="mobile-submenu-5"]')),
       ).not.toBeNull();
+    });
+
+    it('routes mobile menu items 1/2/3 via routerLink', () => {
+      getHamburger().click();
+      fixture.detectChanges();
+
+      const expected: [number, string][] = [
+        [1, '/'],
+        [2, '/service'],
+        [3, '/form'],
+      ];
+      for (const [i, path] of expected) {
+        const el = fixture.debugElement.query(By.css(`[data-testid="mobile-menu-item-${i}"]`));
+        expect(el.nativeElement.tagName.toLowerCase()).toBe('a');
+        expect(el.nativeElement.getAttribute('href')).toBe(path);
+      }
     });
 
     it('closes the panel on Escape', () => {

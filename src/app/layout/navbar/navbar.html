@@ -16,18 +16,28 @@
       <ul class="d-flex align-items-center list-unstyled m-0" data-testid="navbar-menu">
         @for (item of menuItems; track item.label; let i = $index) {
           <li>
-            <button
-              #triggerButton
-              type="button"
-              class="app-navbar__item d-inline-flex align-items-center gap-1 border-0"
-              [attr.data-testid]="'menu-item-' + (i + 1)"
-              [attr.aria-haspopup]="'menu'"
-              [attr.aria-expanded]="openMenuIndex() === i ? 'true' : 'false'"
-              (click)="onMenuTriggerClick($event, i, triggerButton)"
-            >
-              <span>{{ item.label }}</span>
-              <i class="bi bi-chevron-down app-navbar__chevron" aria-hidden="true"></i>
-            </button>
+            @if (item.route) {
+              <a
+                [routerLink]="[item.route]"
+                class="app-navbar__item d-inline-flex align-items-center border-0 text-decoration-none"
+                [attr.data-testid]="'menu-item-' + (i + 1)"
+              >
+                <span>{{ item.label }}</span>
+              </a>
+            } @else {
+              <button
+                #triggerButton
+                type="button"
+                class="app-navbar__item d-inline-flex align-items-center gap-1 border-0"
+                [attr.data-testid]="'menu-item-' + (i + 1)"
+                [attr.aria-haspopup]="'menu'"
+                [attr.aria-expanded]="openMenuIndex() === i ? 'true' : 'false'"
+                (click)="onMenuTriggerClick($event, i, triggerButton)"
+              >
+                <span>{{ item.label }}</span>
+                <i class="bi bi-chevron-down app-navbar__chevron" aria-hidden="true"></i>
+              </button>
+            }
           </li>
         }
       </ul>
@@ -107,22 +117,32 @@
       <ul class="list-unstyled m-0 p-0">
         @for (item of menuItems; track item.label; let i = $index) {
           <li class="app-navbar__mobile-row">
-            <button
-              type="button"
-              class="app-navbar__mobile-item d-flex align-items-center justify-content-between w-100 border-0 p-3"
-              [attr.data-testid]="'mobile-menu-item-' + (i + 1)"
-              [attr.aria-expanded]="mobileExpandedIndex() === i ? 'true' : 'false'"
-              (click)="toggleMobileSubmenu(i)"
-            >
-              <span>{{ item.label }}</span>
-              <i
-                class="bi bi-chevron-down app-navbar__chevron"
-                [class.app-navbar__chevron--open]="mobileExpandedIndex() === i"
-                aria-hidden="true"
-              ></i>
-            </button>
+            @if (item.route) {
+              <a
+                [routerLink]="[item.route]"
+                class="app-navbar__mobile-item d-flex align-items-center w-100 border-0 p-3 text-decoration-none"
+                [attr.data-testid]="'mobile-menu-item-' + (i + 1)"
+              >
+                <span>{{ item.label }}</span>
+              </a>
+            } @else {
+              <button
+                type="button"
+                class="app-navbar__mobile-item d-flex align-items-center justify-content-between w-100 border-0 p-3"
+                [attr.data-testid]="'mobile-menu-item-' + (i + 1)"
+                [attr.aria-expanded]="mobileExpandedIndex() === i ? 'true' : 'false'"
+                (click)="toggleMobileSubmenu(i)"
+              >
+                <span>{{ item.label }}</span>
+                <i
+                  class="bi bi-chevron-down app-navbar__chevron"
+                  [class.app-navbar__chevron--open]="mobileExpandedIndex() === i"
+                  aria-hidden="true"
+                ></i>
+              </button>
+            }
 
-            @if (mobileExpandedIndex() === i) {
+            @if (!item.route && mobileExpandedIndex() === i) {
               <ul
                 class="list-unstyled m-0 p-0 app-navbar__mobile-submenu"
                 [attr.data-testid]="'mobile-submenu-' + (i + 1)"

@@ -1,12 +1,13 @@
 import { Component, HostListener, inject, signal, ViewChild } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { NavigationEnd, Router } from '@angular/router';
+import { NavigationEnd, Router, RouterLink } from '@angular/router';
 import { filter } from 'rxjs';
 import { MenuItem } from 'primeng/api';
 import { Menu } from 'primeng/menu';
 
 interface NavItem {
   label: string;
+  route?: string;
 }
 
 interface NavAction {
@@ -17,7 +18,7 @@ interface NavAction {
 
 @Component({
   selector: 'app-navbar',
-  imports: [Menu],
+  imports: [Menu, RouterLink],
   templateUrl: './navbar.html',
   styleUrl: './navbar.scss',
 })
@@ -29,9 +30,9 @@ export class Navbar {
   readonly mobileExpandedIndex = signal<number | null>(null);
 
   readonly menuItems: readonly NavItem[] = [
-    { label: 'تبويب 1' },
-    { label: 'تبويب 2' },
-    { label: 'تبويب 3' },
+    { label: 'الرئيسية', route: '/' },
+    { label: 'الخدمات', route: '/service' },
+    { label: 'حقول النص', route: '/form' },
     { label: 'تبويب 4' },
     { label: 'تبويب 5' },
     { label: 'تبويب 6' },
