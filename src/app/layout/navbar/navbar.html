@@ -121,6 +121,8 @@
       id="mobile-menu-panel"
       class="app-navbar__mobile-panel d-lg-none w-100 bg-white border-top py-1"
       data-testid="mobile-menu-panel"
+      role="region"
+      aria-label="قائمة التنقل للجوال"
     >
       <ul class="list-unstyled m-0 p-0">
         @for (item of menuItems; track item.label; let i = $index) {
@@ -141,7 +143,11 @@
                 type="button"
                 class="app-navbar__mobile-item d-flex align-items-center justify-content-between w-100 border-0 p-3"
                 [attr.data-testid]="'mobile-menu-item-' + (i + 1)"
+                aria-haspopup="true"
                 [attr.aria-expanded]="mobileExpandedIndex() === i ? 'true' : 'false'"
+                [attr.aria-controls]="
+                  mobileExpandedIndex() === i ? 'navbar-mobile-submenu-' + (i + 1) : null
+                "
                 (click)="toggleMobileSubmenu(i)"
               >
                 <span>{{ item.label }}</span>
@@ -156,6 +162,7 @@
             @if (!item.route && mobileExpandedIndex() === i) {
               <ul
                 class="list-unstyled m-0 p-0 app-navbar__mobile-submenu"
+                [attr.id]="'navbar-mobile-submenu-' + (i + 1)"
                 [attr.data-testid]="'mobile-submenu-' + (i + 1)"
               >
                 @for (sub of submenuItems; track sub.label) {

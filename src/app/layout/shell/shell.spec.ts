@@ -30,10 +30,22 @@ describe('Shell', () => {
     expect(fixture.debugElement.query(By.css('[data-testid="shell-footer"]'))).not.toBeNull();
   });
 
-  it('renders footer component inside the footer slot', () => {
-    const footerSlot = fixture.debugElement.query(By.css('[data-testid="shell-footer"]'));
-    expect(footerSlot.query(By.css('app-footer'))).not.toBeNull();
+  it('exposes a skip link targeting main and a focusable main landmark', () => {
+    const skip = fixture.debugElement.query(By.css('[data-testid="shell-skip-link"]'));
+    expect(skip).not.toBeNull();
+    expect(skip.nativeElement.getAttribute('href')).toBe('#main-content');
+
+    const main = fixture.debugElement.query(By.css('[data-testid="shell-main"]'));
+    expect(main.nativeElement.getAttribute('id')).toBe('main-content');
+    expect(main.nativeElement.getAttribute('tabindex')).toBe('-1');
   });
+
+  it('uses a wrapper div for the footer slot so app-footer owns the footer landmark', () => {
+    const slot = fixture.debugElement.query(By.css('[data-testid="shell-footer"]'));
+    expect(slot.nativeElement.tagName.toLowerCase()).toBe('div');
+    expect(slot.query(By.css('app-footer'))).not.toBeNull();
+  });
+
 
   it('places router-outlet inside main', () => {
     const main = fixture.debugElement.query(By.css('[data-testid="shell-main"]'));

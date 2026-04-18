@@ -232,6 +232,20 @@ describe('Navbar', () => {
       expect(getHamburger().getAttribute('aria-expanded')).toBe('false');
     });
 
+    it('exposes the mobile panel as a labelled region and submenu triggers with aria-haspopup', () => {
+      getHamburger().click();
+      fixture.detectChanges();
+
+      const region = panel()!;
+      expect(region.nativeElement.getAttribute('role')).toBe('region');
+      expect(region.nativeElement.getAttribute('aria-label')).toBeTruthy();
+
+      const tab4 = fixture.debugElement.query(By.css('[data-testid="mobile-menu-item-4"]'))
+        .nativeElement as HTMLButtonElement;
+      expect(tab4.getAttribute('aria-haspopup')).toBe('true');
+      expect(tab4.getAttribute('aria-expanded')).toBe('false');
+    });
+
     it('renders all 7 menu items and 3 actions inside the panel when open', () => {
       getHamburger().click();
       fixture.detectChanges();
@@ -264,6 +278,7 @@ describe('Navbar', () => {
       first.click();
       fixture.detectChanges();
       expect(first.getAttribute('aria-expanded')).toBe('true');
+      expect(first.getAttribute('aria-controls')).toBe('navbar-mobile-submenu-4');
       expect(
         fixture.debugElement.query(By.css('[data-testid="mobile-submenu-4"]')),
       ).not.toBeNull();

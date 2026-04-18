@@ -1,11 +1,20 @@
+<a
+  href="#main-content"
+  class="visually-hidden-focusable position-fixed top-0 z-3 m-2 px-3 py-2 bg-white text-body border rounded small text-decoration-none shadow-sm"
+  data-testid="shell-skip-link"
+>
+  تخطي إلى المحتوى الرئيسي
+</a>
+
 <header class="app-shell__header" data-testid="shell-header">
   <app-navbar />
 </header>
 
-<main class="app-shell__main" data-testid="shell-main">
+<main id="main-content" class="app-shell__main" data-testid="shell-main" tabindex="-1">
   <router-outlet />
 </main>
 
-<footer class="app-shell__footer flex-shrink-0" data-testid="shell-footer">
+<!-- Wrapper is not a footer landmark — `app-footer` supplies the single page `<footer>`. -->
+<div class="app-shell__footer flex-shrink-0" data-testid="shell-footer">
   <app-footer />
-</footer>
+</div>

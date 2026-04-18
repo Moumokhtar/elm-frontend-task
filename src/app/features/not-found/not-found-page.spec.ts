@@ -19,8 +19,9 @@ describe('NotFoundPage', () => {
     expect(fixture.componentInstance).toBeTruthy();
   });
 
-  it('renders Arabic not-found copy', () => {
+  it('renders Arabic not-found copy as the page heading', () => {
     const msg = fixture.debugElement.query(By.css('[data-testid="not-found-message"]'));
+    expect(msg.nativeElement.tagName.toLowerCase()).toBe('h1');
     expect(msg.nativeElement.textContent.trim()).toBe('الصفحة غير موجودة');
   });
 
