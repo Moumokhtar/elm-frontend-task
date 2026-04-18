@@ -9,7 +9,12 @@
   >
     <!-- Logo + menu group (main-start in RTL = right visually). Logo first so it sits flush-right. -->
     <div class="d-flex align-items-center gap-3">
-      <a class="app-navbar__logo-link d-inline-flex align-items-center" href="/" aria-label="علم — الصفحة الرئيسية" data-testid="navbar-logo-desktop">
+      <a
+        class="app-navbar__logo-link d-inline-flex align-items-center"
+        routerLink="/"
+        aria-label="علم — الصفحة الرئيسية"
+        data-testid="navbar-logo-desktop"
+      >
         <img src="/images/logo-desktop.svg" alt="علم" class="app-navbar__logo d-block" width="119" height="48" />
       </a>
 
@@ -90,7 +95,7 @@
     <div class="d-flex align-items-center justify-content-center flex-shrink-1 min-w-0">
       <a
         class="app-navbar__logo-link d-inline-flex align-items-center"
-        href="/"
+        routerLink="/"
         aria-label="علم — الصفحة الرئيسية"
         data-testid="navbar-logo-mobile"
       >

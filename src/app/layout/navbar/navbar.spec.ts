@@ -102,6 +102,13 @@ describe('Navbar', () => {
     expect(logo.nativeElement.getAttribute('src')).toContain('logo-desktop.svg');
   });
 
+  it('uses routerLink for desktop and mobile logo anchors', () => {
+    const desktop = fixture.debugElement.query(By.css('[data-testid="navbar-logo-desktop"]'));
+    const mobile = fixture.debugElement.query(By.css('[data-testid="navbar-logo-mobile"]'));
+    expect(desktop.nativeElement.getAttribute('href')).toBe('/');
+    expect(mobile.nativeElement.getAttribute('href')).toBe('/');
+  });
+
   it('wraps desktop in d-none d-lg-flex and mobile row in d-lg-none', () => {
     const desktop = fixture.debugElement.query(By.css('[data-testid="navbar-desktop"]'));
     const mobile = fixture.debugElement.query(By.css('[data-testid="navbar-mobile"]'));
