@@ -1,6 +1,6 @@
 import { Component, HostListener, inject, signal, ViewChild } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { NavigationEnd, Router, RouterLink } from '@angular/router';
+import { NavigationEnd, Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { filter } from 'rxjs';
 import { MenuItem } from 'primeng/api';
 import { Menu } from 'primeng/menu';
@@ -18,7 +18,7 @@ interface NavAction {
 
 @Component({
   selector: 'app-navbar',
-  imports: [Menu, RouterLink],
+  imports: [Menu, RouterLink, RouterLinkActive],
   templateUrl: './navbar.html',
   styleUrl: './navbar.scss',
 })
@@ -145,5 +145,9 @@ export class Navbar {
       currentTarget: triggerButton,
       target: triggerButton,
     } as unknown as MouseEvent);
+  }
+
+  linkActiveOptions(route: string): { exact: boolean } {
+    return { exact: route === '/' };
   }
 }

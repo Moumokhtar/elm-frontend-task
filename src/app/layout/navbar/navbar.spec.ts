@@ -3,6 +3,12 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { provideRouter, Router } from '@angular/router';
 
+import { routes } from '../../app.routes';
+import { FormPage } from '@features/form/form-page';
+import { HomePage } from '@features/home/home-page';
+import { NotFoundPage } from '@features/not-found/not-found-page';
+import { ServiceDetailPage } from '@features/service/service-detail-page';
+
 import { Navbar } from './navbar';
 
 @Component({ standalone: true, template: '' })
@@ -310,5 +316,97 @@ describe('Navbar', () => {
       fixture.detectChanges();
       expect(panel()).toBeNull();
     });
+  });
+});
+
+describe('Navbar active route', () => {
+  let fixture: ComponentFixture<Navbar>;
+  let router: Router;
+
+  beforeEach(async () => {
+    if (typeof globalThis.ResizeObserver === 'undefined') {
+      globalThis.ResizeObserver = class {
+        observe(): void {
+          void 0;
+        }
+        unobserve(): void {
+          void 0;
+        }
+        disconnect(): void {
+          void 0;
+        }
+      } as unknown as typeof ResizeObserver;
+    }
+
+    await TestBed.configureTestingModule({
+      imports: [Navbar, HomePage, ServiceDetailPage, FormPage, NotFoundPage],
+      providers: [provideRouter(routes)],
+    }).compileComponents();
+
+    fixture = TestBed.createComponent(Navbar);
+    router = TestBed.inject(Router);
+    await router.navigateByUrl('/');
+    fixture.detectChanges();
+    await fixture.whenStable();
+  });
+
+  it('marks الرئيسية as current on /', () => {
+    const home = fixture.debugElement.query(By.css('[data-testid="menu-item-1"]'));
+    expect(home.nativeElement.classList.contains('app-navbar__link--active')).toBe(true);
+    expect(home.nativeElement.getAttribute('aria-current')).toBe('page');
+    const services = fixture.debugElement.query(By.css('[data-testid="menu-item-2"]'));
+    expect(services.nativeElement.classList.contains('app-navbar__link--active')).toBe(false);
+  });
+
+  it('marks الخدمات as current on /service', async () => {
+    await router.navigateByUrl('/service');
+    fixture.detectChanges();
+    await fixture.whenStable();
+
+    const services = fixture.debugElement.query(By.css('[data-testid="menu-item-2"]'));
+    expect(services.nativeElement.classList.contains('app-navbar__link--active')).toBe(true);
+    expect(services.nativeElement.getAttribute('aria-current')).toBe('page');
+    expect(
+      fixture.debugElement.query(By.css('[data-testid="menu-item-1"]')).nativeElement.classList.contains(
+        'app-navbar__link--active',
+      ),
+    ).toBe(false);
+  });
+
+  it('does not mark dropdown triggers as route-active on /form', async () => {
+    await router.navigateByUrl('/form');
+    fixture.detectChanges();
+    await fixture.whenStable();
+
+    const tab4 = fixture.debugElement.query(By.css('[data-testid="menu-item-4"]'));
+    expect(tab4.nativeElement.tagName.toLowerCase()).toBe('button');
+    expect(tab4.nativeElement.classList.contains('app-navbar__link--active')).toBe(false);
+  });
+
+  it('marks حقول النص as current on /form (desktop)', async () => {
+    await router.navigateByUrl('/form');
+    fixture.detectChanges();
+    await fixture.whenStable();
+
+    const formLink = fixture.debugElement.query(By.css('[data-testid="menu-item-3"]'));
+    expect(formLink.nativeElement.classList.contains('app-navbar__link--active')).toBe(true);
+    expect(formLink.nativeElement.getAttribute('aria-current')).toBe('page');
+  });
+
+  it('marks mobile routed item when panel is open', async () => {
+    await router.navigateByUrl('/form');
+    fixture.detectChanges();
+    await fixture.whenStable();
+
+    fixture.debugElement.query(By.css('[data-testid="navbar-hamburger"]')).nativeElement.click();
+    fixture.detectChanges();
+    await fixture.whenStable();
+    await new Promise<void>((resolve) => queueMicrotask(() => resolve()));
+    fixture.detectChanges();
+
+    const mobileForm = fixture.debugElement.query(By.css('[data-testid="mobile-menu-item-3"]'));
+    expect(mobileForm).toBeTruthy();
+    expect(mobileForm!.nativeElement.classList.contains('app-navbar__link--active')).toBe(true);
+    expect(mobileForm!.nativeElement.getAttribute('aria-current')).toBe('page');
   });
 });

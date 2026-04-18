@@ -24,6 +24,9 @@
             @if (item.route) {
               <a
                 [routerLink]="[item.route]"
+                routerLinkActive="app-navbar__link--active"
+                [routerLinkActiveOptions]="linkActiveOptions(item.route)"
+                ariaCurrentWhenActive="page"
                 class="app-navbar__item d-inline-flex align-items-center border-0 text-decoration-none"
                 [attr.data-testid]="'menu-item-' + (i + 1)"
               >
@@ -125,6 +128,9 @@
             @if (item.route) {
               <a
                 [routerLink]="[item.route]"
+                routerLinkActive="app-navbar__link--active"
+                [routerLinkActiveOptions]="linkActiveOptions(item.route)"
+                ariaCurrentWhenActive="page"
                 class="app-navbar__mobile-item d-flex align-items-center w-100 border-0 p-3 text-decoration-none"
                 [attr.data-testid]="'mobile-menu-item-' + (i + 1)"
               >

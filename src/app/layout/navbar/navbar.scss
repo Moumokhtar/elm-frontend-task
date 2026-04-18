@@ -26,6 +26,11 @@
   transition: background-color 120ms ease;
   white-space: nowrap;
 
+  &.app-navbar__link--active {
+    background-color: #e5e7eb;
+    font-weight: 600;
+  }
+
   &:hover {
     background-color: #f3f4f6;
   }
@@ -134,6 +139,11 @@
   line-height: 24px;
   cursor: pointer;
   text-align: start;
+
+  &.app-navbar__link--active {
+    background-color: #e5e7eb;
+    font-weight: 600;
+  }
 
   &:hover {
     background-color: #f3f4f6;
