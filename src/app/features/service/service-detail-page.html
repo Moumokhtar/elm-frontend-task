@@ -73,9 +73,9 @@
                 id="service-detail-tab-steps"
                 class="service-detail-page__tab btn btn-link text-decoration-none border-0 shadow-none rounded-2"
                 [class.service-detail-page__tab--active]="activeTab() === 'steps'"
-                [attr.aria-selected]="activeTab() === 'steps'"
+                [attr.aria-selected]="activeTab() === 'steps' ? 'true' : 'false'"
                 [attr.tabindex]="activeTab() === 'steps' ? 0 : -1"
-                aria-controls="service-detail-video-region"
+                aria-controls="service-detail-panel-steps"
                 (click)="selectInfoTab('steps')"
               >
                 الخطوات
@@ -86,7 +86,7 @@
                 id="service-detail-tab-terms"
                 class="service-detail-page__tab btn btn-link text-decoration-none border-0 shadow-none rounded-2"
                 [class.service-detail-page__tab--active]="activeTab() === 'terms'"
-                [attr.aria-selected]="activeTab() === 'terms'"
+                [attr.aria-selected]="activeTab() === 'terms' ? 'true' : 'false'"
                 [attr.tabindex]="activeTab() === 'terms' ? 0 : -1"
                 aria-controls="service-detail-panel-terms"
                 (click)="selectInfoTab('terms')"
@@ -99,7 +99,7 @@
                 id="service-detail-tab-documents"
                 class="service-detail-page__tab btn btn-link text-decoration-none border-0 shadow-none rounded-2"
                 [class.service-detail-page__tab--active]="activeTab() === 'documents'"
-                [attr.aria-selected]="activeTab() === 'documents'"
+                [attr.aria-selected]="activeTab() === 'documents' ? 'true' : 'false'"
                 [attr.tabindex]="activeTab() === 'documents' ? 0 : -1"
                 aria-controls="service-detail-panel-documents"
                 (click)="selectInfoTab('documents')"
@@ -112,7 +112,7 @@
                 id="service-detail-tab-faq"
                 class="service-detail-page__tab btn btn-link text-decoration-none border-0 shadow-none rounded-2"
                 [class.service-detail-page__tab--active]="activeTab() === 'faq'"
-                [attr.aria-selected]="activeTab() === 'faq'"
+                [attr.aria-selected]="activeTab() === 'faq' ? 'true' : 'false'"
                 [attr.tabindex]="activeTab() === 'faq' ? 0 : -1"
                 aria-controls="service-detail-panel-faq"
                 (click)="selectInfoTab('faq')"
@@ -123,40 +123,48 @@
 
             @if (activeTab() === 'steps') {
               <div
-                id="service-detail-video-region"
-                class="service-detail-page__video rounded-4 d-flex align-items-center justify-content-center position-relative overflow-hidden"
-                role="img"
-                aria-label="معاينة فيديو توضيحي للخدمة"
-                data-testid="service-detail-video-placeholder"
-                data-figma-node="2036:31101"
-              >
-                <span
-                  class="service-detail-page__play btn d-inline-flex align-items-center justify-content-center rounded-circle p-0 border-0"
-                  aria-hidden="true"
-                >
-                  <i class="bi bi-play-fill text-white lh-1"></i>
-                </span>
-              </div>
-              <ol
-                class="service-detail-page__steps list-unstyled mb-0 d-flex flex-column gap-3 w-100"
-                data-testid="service-detail-tab-steps"
-                data-figma-node="2036:31103"
+                id="service-detail-panel-steps"
+                role="tabpanel"
+                tabindex="-1"
+                class="d-flex flex-column gap-4 w-100"
                 aria-labelledby="service-detail-tab-steps"
               >
-                @for (line of steps; track $index) {
-                  <li class="d-flex gap-2 align-items-baseline">
-                    <span class="flex-shrink-0 text-muted service-detail-page__step-num" dir="ltr" lang="en"
-                      >{{ $index + 1 }}</span
-                    >
-                    <span class="flex-shrink-0 text-muted service-detail-page__step-sep" aria-hidden="true">-</span>
-                    <span class="mb-0 flex-grow-1 min-w-0">{{ line }}</span>
-                  </li>
-                }
-              </ol>
+                <div
+                  id="service-detail-video-region"
+                  class="service-detail-page__video rounded-4 d-flex align-items-center justify-content-center position-relative overflow-hidden"
+                  role="img"
+                  aria-label="معاينة فيديو توضيحي للخدمة"
+                  data-testid="service-detail-video-placeholder"
+                  data-figma-node="2036:31101"
+                >
+                  <span
+                    class="service-detail-page__play btn d-inline-flex align-items-center justify-content-center rounded-circle p-0 border-0"
+                    aria-hidden="true"
+                  >
+                    <i class="bi bi-play-fill text-white lh-1"></i>
+                  </span>
+                </div>
+                <ol
+                  class="service-detail-page__steps list-unstyled mb-0 d-flex flex-column gap-3 w-100"
+                  data-testid="service-detail-steps-list"
+                  data-figma-node="2036:31103"
+                >
+                  @for (line of steps; track $index) {
+                    <li class="d-flex gap-2 align-items-baseline">
+                      <span class="flex-shrink-0 text-muted service-detail-page__step-num" dir="ltr" lang="en"
+                        >{{ $index + 1 }}</span
+                      >
+                      <span class="flex-shrink-0 text-muted service-detail-page__step-sep" aria-hidden="true">-</span>
+                      <span class="mb-0 flex-grow-1 min-w-0">{{ line }}</span>
+                    </li>
+                  }
+                </ol>
+              </div>
             } @else if (activeTab() === 'terms') {
               <div
                 id="service-detail-panel-terms"
                 role="tabpanel"
+                tabindex="-1"
                 class="w-100"
                 aria-labelledby="service-detail-tab-terms"
               >
@@ -166,6 +174,7 @@
               <div
                 id="service-detail-panel-documents"
                 role="tabpanel"
+                tabindex="-1"
                 class="w-100"
                 aria-labelledby="service-detail-tab-documents"
               >
@@ -175,6 +184,7 @@
               <div
                 id="service-detail-panel-faq"
                 role="tabpanel"
+                tabindex="-1"
                 class="w-100"
                 aria-labelledby="service-detail-tab-faq"
               >
