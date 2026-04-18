@@ -66,6 +66,12 @@
   // Neutrals
   --color-neutral-300: #d2d6db;
 
+  // Feedback / rating bars — Figma `2036:31121` (border-primary top stroke on white rows).
+  // https://www.figma.com/design/wh34oGmGLBesPFMgXM4BLS/Frontend-Task--RTL?node-id=2036-31121&m=dev
+  --color-border-primary: #1b8354;
+  --layout-feedback-bar-min-height: 88px;
+  --padding-feedback-bar-y: 24px;
+
   // Backgrounds
   --background-menu: #ffffff;
   --background-page-muted: #f9fafb;
