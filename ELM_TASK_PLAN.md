@@ -72,23 +72,9 @@ Shipped. See [PRD #38](https://github.com/Moumokhtar/elm-frontend-task/issues/38
 
 ---
 
-## MILESTONE 7 — Routing & Page Shell
+## MILESTONE 7 — Routing & Page Shell ✅ Complete
 
-**Goal:**
-Finalize cross-app routing polish: active nav highlighting, 404, and any remaining shell consistency (form step flow ships in M6).
-
-**Scope:**
-`app.routes.ts` finalized where needed. `RouterLink` on nav items. Active route gets highlighted nav item. Breadcrumb links remain functional. 404 fallback route renders a simple "الصفحة غير موجودة" message.
-
-**Done when:**
-
-- [ ] `/` loads home page
-- [ ] `/service` loads service detail page
-- [ ] `/form` loads form page
-- [ ] Active nav item is visually highlighted
-- [ ] Breadcrumb home link navigates to `/`
-- [ ] Unknown route shows 404 message
-- [ ] Browser back/forward buttons work correctly
+Shipped. See [PRD #44](https://github.com/Moumokhtar/elm-frontend-task/issues/44) and slices [#45](https://github.com/Moumokhtar/elm-frontend-task/issues/45), [#47](https://github.com/Moumokhtar/elm-frontend-task/issues/47), [#46](https://github.com/Moumokhtar/elm-frontend-task/issues/46). Implementation: `app.routes.ts` wildcard 404 → `src/app/features/not-found/not-found-page`, navbar `routerLink` on logos + `routerLinkActive` / `aria-current="page"` on routed items (desktop + mobile; active fill `var(--button-background-primary-default)`), `app.routes.spec` harness + breadcrumb integration.
 
 ---
 

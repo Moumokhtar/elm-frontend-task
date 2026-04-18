@@ -23,20 +23,32 @@
   line-height: 24px;
   cursor: pointer;
   border-radius: var(--radius-sm);
-  transition: background-color 120ms ease;
+  transition: background-color 120ms ease, color 120ms ease, filter 120ms ease;
   white-space: nowrap;
 
   &.app-navbar__link--active {
-    background-color: #e5e7eb;
+    /* Primary CTA fill (`--button-background-primary-default` / Figma primary action). */
+    background-color: var(--button-background-primary-default);
+    color: #fff;
     font-weight: 600;
   }
 
-  &:hover {
+  &.app-navbar__link--active:hover {
+    background-color: var(--button-background-primary-default);
+    filter: brightness(0.96);
+  }
+
+  &:hover:not(.app-navbar__link--active) {
     background-color: #f3f4f6;
   }
 
   &:focus-visible {
     outline: 2px solid var(--color-text-default);
+    outline-offset: 2px;
+  }
+
+  &.app-navbar__link--active:focus-visible {
+    outline: 2px solid rgba(255, 255, 255, 0.9);
     outline-offset: 2px;
   }
 }
@@ -139,18 +151,30 @@
   line-height: 24px;
   cursor: pointer;
   text-align: start;
+  transition: background-color 120ms ease, color 120ms ease, filter 120ms ease;
 
   &.app-navbar__link--active {
-    background-color: #e5e7eb;
+    background-color: var(--button-background-primary-default);
+    color: #fff;
     font-weight: 600;
   }
 
-  &:hover {
+  &.app-navbar__link--active:hover {
+    background-color: var(--button-background-primary-default);
+    filter: brightness(0.96);
+  }
+
+  &:hover:not(.app-navbar__link--active) {
     background-color: #f3f4f6;
   }
 
   &:focus-visible {
     outline: 2px solid var(--color-text-default);
+    outline-offset: -2px;
+  }
+
+  &.app-navbar__link--active:focus-visible {
+    outline: 2px solid rgba(255, 255, 255, 0.9);
     outline-offset: -2px;
   }
 }

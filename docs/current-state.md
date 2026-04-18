@@ -11,7 +11,8 @@ _Updated: 2026-04-18._
 - **M4 — Home Page:** ✅ complete. PRD [#28](https://github.com/Moumokhtar/elm-frontend-task/issues/28) and slices #29–#35. Composition in `src/app/features/home/` (hero, about + stats, services / news / partners carousels, feedback strip, `home-mock.ts`).
 - **M5 — Service Detail Page:** ✅ complete. PRD [#36](https://github.com/Moumokhtar/elm-frontend-task/issues/36) and slice [#37](https://github.com/Moumokhtar/elm-frontend-task/issues/37). Route `/service` → `src/app/features/service/` (`service-detail-page`, `service-detail-mock.ts`): tent + main/sidebar Figma frames, Bootstrap-icon sidebar rows, payment SVG tiles, store CTAs (user PNG icons + LTR copy), related services carousel matching home services chrome (`HOME_SERVICES` length), `FeedbackBlock` with full-bleed brand borders and `u-page-strip-y` on host (home + service sections use `bg-white` wrapper only).
 - **M6 — Form Page:** ✅ complete. PRD [#38](https://github.com/Moumokhtar/elm-frontend-task/issues/38) and slices #39–#43. Route `/form` → `src/app/features/form/` (`form-page`, `form-mock.ts`): RTL stepper + mobile progress, step navigation (رجوع / التالي) with validation on the fields step, placeholders on steps 1 and 3, Figma-aligned text inputs (plain, search icon, text prefix/suffix with merged radii, helper, disabled), `FeedbackBlock` helpfulness row, tokens in `_tokens.scss`.
-- **Next up:** **M7 — Routing & Page Shell** per `ELM_TASK_PLAN.md` (nav active state, 404, polish).
+- **M7 — Routing & Page Shell:** ✅ complete. PRD [#44](https://github.com/Moumokhtar/elm-frontend-task/issues/44) and slices [#45](https://github.com/Moumokhtar/elm-frontend-task/issues/45), [#47](https://github.com/Moumokhtar/elm-frontend-task/issues/47), [#46](https://github.com/Moumokhtar/elm-frontend-task/issues/46). Wildcard 404 at `src/app/features/not-found/not-found-page`, navbar `routerLink` logos + `routerLinkActive` on routed items (primary CTA green + white label), `app.routes.spec` breadcrumb → `/` integration.
+- **Next up:** **M8 — Accessibility Audit** per `ELM_TASK_PLAN.md`.
 
 ## Conventions the next agent must follow
 
@@ -77,7 +78,6 @@ import { HomePage } from '@features/home/home-page';
 | Item | When |
 |---|---|
 | Per-component RTL overrides | M1+ as needed |
-| `routerLinkActive` styling on navbar | M7 |
 | GitHub Pages deploy | M9 |
 
 ## Verify before starting
