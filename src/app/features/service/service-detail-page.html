@@ -1,4 +1,405 @@
-<section class="page-placeholder">
-  <h1>تفاصيل الخدمة</h1>
-  <p lang="en">Service detail · placeholder</p>
+<!-- Figma Background `2036:31011` — https://www.figma.com/design/wh34oGmGLBesPFMgXM4BLS/Frontend-Task--RTL?node-id=2036-31011&m=dev -->
+<div class="position-relative bg-white" data-testid="service-detail-main-surface">
+  <div
+    class="position-absolute top-0 start-0 end-0 z-0 pe-none u-bg-primary-25"
+    style="height: var(--service-detail-tent-height)"
+    aria-hidden="true"
+    data-testid="service-detail-tent"
+    data-figma-node="2036:31011"
+  ></div>
+  <!-- Figma Service frame `2036:31033` — https://www.figma.com/design/wh34oGmGLBesPFMgXM4BLS/Frontend-Task--RTL?node-id=2036-31033&m=dev -->
+  <div class="position-relative z-1 u-page-strip-x u-page-strip-y">
+    <div class="container-xxl">
+      <div
+        class="row service-detail-page__service-row align-items-start"
+        data-testid="service-detail-service-frame"
+        data-figma-node="2036:31033"
+      >
+      <div class="col-12 col-lg-8" data-figma-node="2036:31086">
+        <div class="d-flex flex-column service-detail-page__main-stack">
+          <div class="service-detail-page__description d-flex flex-column gap-3 w-100" data-figma-node="2036:31087">
+            <app-breadcrumb [items]="breadcrumbs" />
+
+            <div
+              class="d-flex flex-column flex-md-row align-items-stretch align-items-md-end justify-content-between gap-3 gap-md-0 w-100"
+            >
+              <h1 class="service-detail-page__title mb-0 fw-bold text-dark flex-grow-1 min-w-0" data-testid="service-detail-title">
+                {{ title }}
+              </h1>
+              <p-button
+                type="button"
+                label="بدء الخدمة"
+                severity="success"
+                styleClass="u-figma-primary-action flex-shrink-0"
+                data-testid="service-detail-start-btn"
+              />
+            </div>
+
+            <div class="d-flex flex-wrap gap-2 w-100" data-testid="service-detail-tags" role="list">
+              @for (tag of tags; track tag.label) {
+                <span [class]="tagClass(tag)" role="listitem">{{ tag.label }}</span>
+              }
+            </div>
+
+            <p class="mb-0 text-dark lh-base service-detail-page__body-max" data-testid="service-detail-description">
+              {{ description }}
+            </p>
+
+            <a
+              class="d-inline-flex align-items-center gap-2 text-decoration-none service-detail-page__link-primary small"
+              href="#"
+              data-testid="service-detail-sla-link"
+            >
+              <span>{{ slaLabel }}</span>
+              <i class="bi bi-paperclip" aria-hidden="true"></i>
+            </a>
+          </div>
+
+          <!-- Figma Info `2036:31099` — tab list, video, steps are direct siblings under this stack (see `2036:31100`, `2036:31101`, `2036:31103`). -->
+          <div
+            class="service-detail-page__info d-flex flex-column gap-4 w-100"
+            data-figma-node="2036:31099"
+            aria-label="تفاصيل إجراءات الخدمة"
+          >
+            <div
+              class="service-detail-page__tablist d-flex flex-wrap gap-1 border-bottom w-100"
+              role="tablist"
+              data-figma-node="2036:31100"
+              data-testid="service-detail-tabs"
+            >
+              <button
+                type="button"
+                role="tab"
+                id="service-detail-tab-steps"
+                class="service-detail-page__tab btn btn-link text-decoration-none border-0 shadow-none rounded-2"
+                [class.service-detail-page__tab--active]="activeTab() === 'steps'"
+                [attr.aria-selected]="activeTab() === 'steps'"
+                [attr.tabindex]="activeTab() === 'steps' ? 0 : -1"
+                aria-controls="service-detail-video-region"
+                (click)="selectInfoTab('steps')"
+              >
+                الخطوات
+              </button>
+              <button
+                type="button"
+                role="tab"
+                id="service-detail-tab-terms"
+                class="service-detail-page__tab btn btn-link text-decoration-none border-0 shadow-none rounded-2"
+                [class.service-detail-page__tab--active]="activeTab() === 'terms'"
+                [attr.aria-selected]="activeTab() === 'terms'"
+                [attr.tabindex]="activeTab() === 'terms' ? 0 : -1"
+                aria-controls="service-detail-panel-terms"
+                (click)="selectInfoTab('terms')"
+              >
+                شروط الاستخدام
+              </button>
+              <button
+                type="button"
+                role="tab"
+                id="service-detail-tab-documents"
+                class="service-detail-page__tab btn btn-link text-decoration-none border-0 shadow-none rounded-2"
+                [class.service-detail-page__tab--active]="activeTab() === 'documents'"
+                [attr.aria-selected]="activeTab() === 'documents'"
+                [attr.tabindex]="activeTab() === 'documents' ? 0 : -1"
+                aria-controls="service-detail-panel-documents"
+                (click)="selectInfoTab('documents')"
+              >
+                المستندات المطلوبة
+              </button>
+              <button
+                type="button"
+                role="tab"
+                id="service-detail-tab-faq"
+                class="service-detail-page__tab btn btn-link text-decoration-none border-0 shadow-none rounded-2"
+                [class.service-detail-page__tab--active]="activeTab() === 'faq'"
+                [attr.aria-selected]="activeTab() === 'faq'"
+                [attr.tabindex]="activeTab() === 'faq' ? 0 : -1"
+                aria-controls="service-detail-panel-faq"
+                (click)="selectInfoTab('faq')"
+              >
+                الأسئلة الشائعة
+              </button>
+            </div>
+
+            @if (activeTab() === 'steps') {
+              <div
+                id="service-detail-video-region"
+                class="service-detail-page__video rounded-4 d-flex align-items-center justify-content-center position-relative overflow-hidden"
+                role="img"
+                aria-label="معاينة فيديو توضيحي للخدمة"
+                data-testid="service-detail-video-placeholder"
+                data-figma-node="2036:31101"
+              >
+                <span
+                  class="service-detail-page__play btn d-inline-flex align-items-center justify-content-center rounded-circle p-0 border-0"
+                  aria-hidden="true"
+                >
+                  <i class="bi bi-play-fill text-white lh-1"></i>
+                </span>
+              </div>
+              <ol
+                class="service-detail-page__steps list-unstyled mb-0 d-flex flex-column gap-3 w-100"
+                data-testid="service-detail-tab-steps"
+                data-figma-node="2036:31103"
+                aria-labelledby="service-detail-tab-steps"
+              >
+                @for (line of steps; track $index) {
+                  <li class="d-flex gap-2 align-items-baseline">
+                    <span class="flex-shrink-0 text-muted service-detail-page__step-num" dir="ltr" lang="en"
+                      >{{ $index + 1 }}</span
+                    >
+                    <span class="flex-shrink-0 text-muted service-detail-page__step-sep" aria-hidden="true">-</span>
+                    <span class="mb-0 flex-grow-1 min-w-0">{{ line }}</span>
+                  </li>
+                }
+              </ol>
+            } @else if (activeTab() === 'terms') {
+              <div
+                id="service-detail-panel-terms"
+                role="tabpanel"
+                class="w-100"
+                aria-labelledby="service-detail-tab-terms"
+              >
+                <p class="mb-0 text-dark lh-base" data-testid="service-detail-tab-terms">{{ terms }}</p>
+              </div>
+            } @else if (activeTab() === 'documents') {
+              <div
+                id="service-detail-panel-documents"
+                role="tabpanel"
+                class="w-100"
+                aria-labelledby="service-detail-tab-documents"
+              >
+                <p class="mb-0 text-dark lh-base" data-testid="service-detail-tab-documents">{{ documents }}</p>
+              </div>
+            } @else {
+              <div
+                id="service-detail-panel-faq"
+                role="tabpanel"
+                class="w-100"
+                aria-labelledby="service-detail-tab-faq"
+              >
+                <p class="mb-0 text-dark lh-base" data-testid="service-detail-faq-panel">{{ faq }}</p>
+              </div>
+            }
+          </div>
+        </div>
+      </div>
+
+      <aside
+        class="col-12 col-lg-4"
+        aria-label="معلومات الخدمة"
+        data-testid="service-detail-sidebar"
+        data-figma-node="2036:31034"
+      >
+        <div class="service-detail-page__sidebar card border rounded-4 h-100 bg-white d-flex flex-column gap-4">
+          <!-- Figma `2036:31035` Service Info — https://www.figma.com/design/wh34oGmGLBesPFMgXM4BLS/Frontend-Task--RTL?node-id=2036-31035&m=dev -->
+          <div class="service-detail-page__sidebar-block d-flex flex-column gap-3 w-100">
+            <div class="d-flex flex-column gap-3 w-100" data-figma-node="2036:31035">
+              <div class="d-flex gap-2 align-items-start w-100">
+                <i class="bi bi-people service-detail-page__sidebar-icon service-detail-page__sidebar-icon--accent" aria-hidden="true"></i>
+                <div class="d-flex flex-column gap-1 flex-grow-1 min-w-0">
+                  <p class="service-detail-page__sidebar-label mb-0">{{ sidebar.audienceLabel }}</p>
+                  <p class="service-detail-page__sidebar-value mb-0">{{ sidebar.audienceValue }}</p>
+                </div>
+              </div>
+              <div class="d-flex gap-2 align-items-start w-100">
+                <i class="bi bi-clock service-detail-page__sidebar-icon service-detail-page__sidebar-icon--accent" aria-hidden="true"></i>
+                <div class="d-flex flex-column gap-1 flex-grow-1 min-w-0">
+                  <p class="service-detail-page__sidebar-label mb-0">{{ sidebar.durationLabel }}</p>
+                  <p class="service-detail-page__sidebar-value mb-0">{{ sidebar.durationValue }}</p>
+                </div>
+              </div>
+              <div class="d-flex gap-2 align-items-start w-100">
+                <span class="service-detail-page__sidebar-icon-dual service-detail-page__sidebar-icon--accent" aria-hidden="true">
+                  <i class="bi bi-laptop"></i>
+                  <i class="bi bi-phone"></i>
+                </span>
+                <div class="d-flex flex-column gap-1 flex-grow-1 min-w-0">
+                  <p class="service-detail-page__sidebar-label mb-0">{{ sidebar.channelsLabel }}</p>
+                  <p class="service-detail-page__sidebar-value mb-0">{{ sidebar.channelsValue }}</p>
+                </div>
+              </div>
+              <div class="d-flex gap-2 align-items-start w-100">
+                <i class="bi bi-cash-coin service-detail-page__sidebar-icon service-detail-page__sidebar-icon--accent" aria-hidden="true"></i>
+                <div class="d-flex flex-column gap-1 flex-grow-1 min-w-0">
+                  <p class="service-detail-page__sidebar-label mb-0">{{ sidebar.costLabel }}</p>
+                  <p class="service-detail-page__sidebar-value mb-0">{{ sidebar.costValue }}</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Figma `2036:31057` — https://www.figma.com/design/wh34oGmGLBesPFMgXM4BLS/Frontend-Task--RTL?node-id=2036-31057&m=dev -->
+            <div class="d-flex flex-column gap-2 align-items-start w-100" data-figma-node="2036:31057">
+              <p class="service-detail-page__sidebar-heading-lg mb-0 w-100">{{ sidebar.paymentsHeading }}</p>
+              <div class="d-flex flex-wrap gap-2 justify-content-start" data-testid="service-detail-payments">
+                <div class="service-detail-page__pay-tile">
+                  <img [src]="paymentImages.stcPay" alt="STC Pay" class="service-detail-page__pay-img" />
+                </div>
+                <div class="service-detail-page__pay-tile">
+                  <img [src]="paymentImages.mada" alt="مدى" class="service-detail-page__pay-img" />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <hr class="service-detail-page__sidebar-sep" data-figma-node="2036:31062" />
+
+          <!-- Figma `2036:31063` Contact Info — https://www.figma.com/design/wh34oGmGLBesPFMgXM4BLS/Frontend-Task--RTL?node-id=2036-31063&m=dev -->
+          <div class="service-detail-page__sidebar-block d-flex flex-column gap-3 w-100" data-figma-node="2036:31063">
+            <div class="d-flex flex-column gap-1 w-100 align-items-start">
+              <p class="service-detail-page__sidebar-heading-lg mb-0">{{ sidebar.faqHeading }}</p>
+              <a
+                class="service-detail-page__sidebar-external-link d-inline-flex align-items-center gap-2 text-decoration-none service-detail-page__link-primary"
+                href="#"
+                data-testid="service-detail-faq-link"
+              >
+                <span class="min-w-0">{{ sidebar.faqLinkLabel }}</span>
+                <i class="bi bi-box-arrow-up-left service-detail-page__sidebar-icon--link flex-shrink-0" aria-hidden="true"></i>
+              </a>
+            </div>
+            <div class="d-flex gap-2 align-items-start w-100">
+              <i class="bi bi-telephone-fill service-detail-page__sidebar-icon service-detail-page__sidebar-icon--accent flex-shrink-0" aria-hidden="true"></i>
+              <div class="d-flex flex-column gap-1 flex-grow-1 min-w-0">
+                <p class="service-detail-page__sidebar-label mb-0">{{ sidebar.phoneLabel }}</p>
+                <a
+                  class="service-detail-page__sidebar-external-link service-detail-page__link-primary text-decoration-none d-inline-flex align-items-center gap-2"
+                  href="tel:9200343222"
+                >
+                  <span class="min-w-0">{{ sidebar.phoneValue }}</span>
+                  <i class="bi bi-box-arrow-up-left service-detail-page__sidebar-icon--link flex-shrink-0" aria-hidden="true"></i>
+                </a>
+              </div>
+            </div>
+            <div class="d-flex gap-2 align-items-start w-100">
+              <i class="bi bi-envelope-fill service-detail-page__sidebar-icon service-detail-page__sidebar-icon--accent flex-shrink-0" aria-hidden="true"></i>
+              <div class="d-flex flex-column gap-1 flex-grow-1 min-w-0">
+                <p class="service-detail-page__sidebar-label mb-0">{{ sidebar.emailLabel }}</p>
+                <a
+                  class="service-detail-page__sidebar-external-link service-detail-page__link-primary text-decoration-none d-inline-flex align-items-center gap-2 text-break"
+                  href="mailto:help@company.sa"
+                >
+                  <span class="min-w-0 text-break">{{ sidebar.emailValue }}</span>
+                  <i class="bi bi-box-arrow-up-left service-detail-page__sidebar-icon--link flex-shrink-0" aria-hidden="true"></i>
+                </a>
+              </div>
+            </div>
+            <button type="button" class="service-detail-page__user-guide-btn w-100" data-testid="service-detail-user-guide-btn">
+              {{ sidebar.userGuideLabel }}
+            </button>
+          </div>
+
+          <hr class="service-detail-page__sidebar-sep" data-figma-node="2036:31079" />
+
+          <!-- Store rows: user PNG icons + text; fixed size; no AppGallery per design. -->
+          <div class="service-detail-page__sidebar-block d-flex flex-column gap-2 align-items-start w-100" data-figma-node="2036:31080">
+            <p class="service-detail-page__sidebar-heading-lg mb-0">{{ sidebar.appsHeading }}</p>
+            <div class="service-detail-page__apps-badges d-flex flex-wrap align-items-stretch" data-testid="service-detail-store-badges">
+              <a
+                class="service-detail-page__store-btn text-decoration-none text-white"
+                href="#"
+                dir="ltr"
+                lang="en"
+                aria-label="Get it on Google Play"
+              >
+                <img [src]="storeIcons.googlePlay" alt="" class="service-detail-page__store-btn-icon" width="21" height="24" />
+                <span class="service-detail-page__store-btn-copy">
+                  <span class="service-detail-page__store-btn-line service-detail-page__store-btn-line--sm">{{ sidebar.storeGoogleLine1 }}</span>
+                  <span class="service-detail-page__store-btn-line service-detail-page__store-btn-line--lg">{{ sidebar.storeGoogleLine2 }}</span>
+                </span>
+              </a>
+              <a
+                class="service-detail-page__store-btn text-decoration-none text-white"
+                href="#"
+                dir="ltr"
+                lang="en"
+                aria-label="Download on the App Store"
+              >
+                <img [src]="storeIcons.apple" alt="" class="service-detail-page__store-btn-icon" width="20" height="24" />
+                <span class="service-detail-page__store-btn-copy">
+                  <span class="service-detail-page__store-btn-line service-detail-page__store-btn-line--sm">{{ sidebar.storeAppleLine1 }}</span>
+                  <span class="service-detail-page__store-btn-line service-detail-page__store-btn-line--md">{{ sidebar.storeAppleLine2 }}</span>
+                </span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+  </div>
+</div>
+
+<!-- Figma `2036:31111` — same services carousel chrome as home `2036:65719`. https://www.figma.com/design/wh34oGmGLBesPFMgXM4BLS/Frontend-Task--RTL?node-id=2036-31111&m=dev -->
+<section
+  class="position-relative z-0 u-bg-primary-25 u-page-strip-x py-4 py-lg-5"
+  aria-labelledby="service-related-title"
+  data-testid="service-detail-related"
+  data-figma-node="2036:31111"
+>
+  <div class="container-xxl d-flex flex-column u-gap-section-block">
+    <app-section-header
+      title="خدمات ذات صلة"
+      titleId="service-related-title"
+      [subtitle]="relatedSubtitle"
+      actionLabel="عرض الكل"
+      actionRoute="/service"
+      data-testid="service-detail-related-header"
+    />
+    <div class="service-detail-page__related-services-frame d-flex w-100 flex-column align-items-center gap-4 px-4">
+      <div class="service-detail-page__related-services-ltr w-100" dir="ltr">
+        <p-carousel
+          class="service-detail-page__related-services-carousel w-100"
+          [value]="relatedServices"
+          [numVisible]="3"
+          [numScroll]="1"
+          [responsiveOptions]="relatedServicesCarouselResponsive"
+          [showNavigators]="true"
+          [showIndicators]="true"
+          [circular]="false"
+          [prevButtonProps]="{
+            ariaLabel: 'الخدمات السابقة',
+            text: true,
+            rounded: true,
+            severity: 'success',
+            styleClass: 'home-page__carousel-round-nav',
+          }"
+          [nextButtonProps]="{
+            ariaLabel: 'الخدمات التالية',
+            text: true,
+            rounded: true,
+            severity: 'success',
+            styleClass: 'home-page__carousel-round-nav',
+          }"
+          role="region"
+          aria-roledescription="عرض شرائح"
+          aria-label="خدمات ذات صلة — عرض أفقي"
+        >
+          <ng-template let-card #item>
+            <div class="px-2" dir="rtl" lang="ar">
+              <app-service-card
+                [title]="card.title"
+                [description]="card.description"
+                [tags]="card.tags"
+                [primaryLabel]="card.primaryLabel"
+                [secondaryLabel]="card.secondaryLabel"
+              />
+            </div>
+          </ng-template>
+        </p-carousel>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Figma `2036:31121` — padding + full-bleed borders live on `app-feedback-block`. -->
+<section class="bg-white" data-testid="service-detail-feedback" aria-label="التقييم والملاحظات" data-figma-node="2036:31121">
+  <app-feedback-block
+    [showLastModifiedRow]="true"
+    [showLastModifiedRowAlign]="'end'"
+    [showServiceRatingRow]="true"
+    [showHelpfulnessRow]="true"
+    [seedYes]="1706"
+    [seedNo]="1137"
+    (rateClick)="onRateService()"
+  />
 </section>

@@ -9,7 +9,8 @@ _Updated: 2026-04-18._
 - **M2 — Shared Layout: Footer:** ✅ complete. PRD [#14](https://github.com/Moumokhtar/elm-frontend-task/issues/14) and slice issues #15–#19 closed. Footer lives at `src/app/layout/footer/footer.ts`, mounted from `shell.html`, with four link columns, social + accessibility icon rows, bottom legal/links, and local assets under `public/images/footer-*`.
 - **M3 — Shared UI Components:** ✅ complete. PRD [#20](https://github.com/Moumokhtar/elm-frontend-task/issues/20) and slices #21–#27 closed. Shared pieces under `src/app/shared/` include `FeedbackBlock` (Figma-aligned feedback stack; optional top rows), `ServiceCard`, `NewsCard`, `PartnerLogo`, `Breadcrumb`, `SectionHeader`, plus tokens and home visual QA wiring.
 - **M4 — Home Page:** ✅ complete. PRD [#28](https://github.com/Moumokhtar/elm-frontend-task/issues/28) and slices #29–#35. Composition in `src/app/features/home/` (hero, about + stats, services / news / partners carousels, feedback strip, `home-mock.ts`).
-- **Next up:** **M5 — Service Detail Page** per `ELM_TASK_PLAN.md`.
+- **M5 — Service Detail Page:** ✅ complete. PRD [#36](https://github.com/Moumokhtar/elm-frontend-task/issues/36) and slice [#37](https://github.com/Moumokhtar/elm-frontend-task/issues/37). Route `/service` → `src/app/features/service/` (`service-detail-page`, `service-detail-mock.ts`): tent + main/sidebar Figma frames, Bootstrap-icon sidebar rows, payment SVG tiles, store CTAs (user PNG icons + LTR copy), related services carousel matching home services chrome (`HOME_SERVICES` length), `FeedbackBlock` with full-bleed brand borders and `u-page-strip-y` on host (home + service sections use `bg-white` wrapper only).
+- **Next up:** **M6 — Form Page** per `ELM_TASK_PLAN.md`.
 
 ## Conventions the next agent must follow
 

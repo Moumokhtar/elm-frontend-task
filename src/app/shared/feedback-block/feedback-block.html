@@ -1,6 +1,6 @@
 <!--
-  Figma Service Page `2036:31010` → Feedback `2036:31121` (column stack).
-  https://www.figma.com/design/wh34oGmGLBesPFMgXM4BLS/Frontend-Task--RTL?node-id=2036-31010&m=dev
+  Figma `2036:31121` — outer vertical padding lives on `:host` (`u-page-strip-y`).
+  Brand top borders sit on full-bleed rows; horizontal gutter is on inner `u-page-strip-x` wrappers only.
 -->
 <div
   dir="rtl"
@@ -9,8 +9,8 @@
   data-testid="feedback-block"
 >
   @if (showLastModifiedRow()) {
-    <!-- Service `2036:31122`; Home last strip `2036:65757` — align to `u-page-content-max` like other home sections (avoid `u-page-strip-x` here when the host section already applies strip padding). -->
-    <div class="bg-white w-100 py-3">
+    <!-- `2036:31122` / Home `2036:65757` -->
+    <div class="bg-white w-100 py-3 u-page-strip-x">
       <div
         class="u-page-content-max mx-auto w-100 d-flex align-items-center"
         [class.justify-content-end]="showLastModifiedRowAlign() === 'end'"
@@ -29,13 +29,12 @@
   }
 
   @if (showServiceRatingRow()) {
-    <!-- 2036:27925 Rating1 RTL -->
-    <div
-      class="bg-white d-flex align-items-center w-100 py-4 u-page-strip-x u-brand-border-top-2 u-feedback-bar-min-h"
-    >
-      <div
-        class="u-page-content-max d-flex flex-column flex-md-row align-items-md-center justify-content-md-between gap-3 w-100 mx-auto"
-      >
+    <!-- 2036:27925 — border edge-to-edge; content inset via inner strip -->
+    <div class="bg-white d-flex align-items-center w-100 py-4 u-brand-border-top-2 u-feedback-bar-min-h">
+      <div class="u-page-strip-x w-100">
+        <div
+          class="u-page-content-max d-flex flex-column flex-md-row align-items-md-center justify-content-md-between gap-3 mx-auto w-100"
+        >
         <!-- start (inline-start / right in RTL): copy + count + stars -->
         <div class="d-flex flex-column flex-sm-row align-items-sm-center gap-4 flex-grow-1 min-w-0">
           <p class="mb-0 text-start lh-sm text-dark fs-6" data-testid="feedback-rating-summary">
@@ -77,22 +76,24 @@
           />
         </div>
       </div>
+      </div>
     </div>
   }
 
   @if (showHelpfulnessRow()) {
-  <!-- 2036:30008 FeedbackDesktop — RTL: question (inline-start) then buttons -->
+  <!-- 2036:30008 — border full-bleed when stacked; content uses inner strip -->
   <section
-    class="feedback-block__helpfulness bg-white d-flex align-items-center w-100 py-4 u-page-strip-x u-feedback-bar-min-h"
+    class="feedback-block__helpfulness bg-white d-flex align-items-center w-100 py-4 u-feedback-bar-min-h"
     [class.u-brand-border-top-2]="helpfulnessHasUpperRow()"
     data-testid="page-feedback-bar"
     aria-label="تقييم الصفحة"
   >
-    <div
-      class="u-page-content-max d-flex flex-column flex-md-row align-items-md-center gap-3 w-100 mx-auto px-3 px-md-0"
-      [class.justify-content-md-between]="showStatsLine()"
-      [class.justify-content-md-start]="!showStatsLine()"
-    >
+    <div class="u-page-strip-x w-100">
+      <div
+        class="u-page-content-max d-flex flex-column flex-md-row align-items-md-center gap-3 mx-auto w-100"
+        [class.justify-content-md-between]="showStatsLine()"
+        [class.justify-content-md-start]="!showStatsLine()"
+      >
       <div class="d-flex flex-column flex-sm-row align-items-sm-center gap-4 min-w-0 flex-shrink-0">
         <p class="mb-0 text-start lh-base text-dark fs-6 flex-grow-1 flex-sm-grow-0">
           هل كانت هذه الصفحة مفيدة؟
@@ -123,6 +124,7 @@
           {{ yesPercent() }}% من المستخدمين قالوا نعم من {{ totalResponses() }} تعليقًا
         </p>
       }
+      </div>
     </div>
   </section>
   }

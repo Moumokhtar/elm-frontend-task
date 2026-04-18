@@ -10,11 +10,11 @@ import {
 import { Button } from 'primeng/button';
 
 /**
- * Figma **Feedback** `2036:31121` on [Service Page – AR `2036:31010`](https://www.figma.com/design/wh34oGmGLBesPFMgXM4BLS/Frontend-Task--RTL?node-id=2036-31010&m=dev):
- * column stack (`flex-col` / `items-start` in MCP) — last modified, service rating, page helpfulness.
+ * Figma **Feedback** `2036:31121` / Home `2036:65757` — column stack (last modified, service rating, helpfulness).
+ * Outer **vertical** padding: `:host` uses `u-page-strip-y`. **Horizontal** gutter: `u-page-strip-x` on row inners only.
+ * Brand top borders (`u-brand-border-top-2`) sit on full-width rows so strokes span the viewport edge-to-edge.
  *
- * **Required:** the page-helpfulness row (yes/no + stats) is always rendered.
- * **Optional:** last-modified and service-rating rows (`showLastModifiedRow`, `showServiceRatingRow`).
+ * **Required:** helpfulness row. **Optional:** `showLastModifiedRow`, `showServiceRatingRow`.
  */
 export type LastModifiedRowAlign = 'start' | 'end';
 
@@ -25,7 +25,7 @@ export type LastModifiedRowAlign = 'start' | 'end';
   styleUrl: './feedback-block.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
-    class: 'd-block w-100',
+    class: 'd-block w-100 bg-white u-page-strip-y',
     '[attr.dir]': '"rtl"',
     '[attr.lang]': '"ar"',
   },

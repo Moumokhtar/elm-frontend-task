@@ -10,6 +10,9 @@
   --spacing-xl: 16px;
   --spacing-3xl: 24px;
   --spacing-4xl: 32px;
+  /* Figma `2036:31033` Service frame — card padding, section gaps */
+  --spacing-5xl: 40px;
+  --spacing-7xl: 64px;
 
   // Radii
   --radius-sm: 4px;
@@ -85,6 +88,10 @@
   // Backgrounds
   --background-menu: #ffffff;
   --background-page-muted: #f9fafb;
+  /* Figma `2036:31011` Background — token `background/background-primary-25` */
+  --background-primary-25: #f7fdf9;
+  /* Full Service Page `2036:31010` — Background strip height (under header artboard), not isolated `2036:31011` frame */
+  --service-detail-tent-height: 298px;
 
   // Home page section shell — full frame “Home Page - Desktop AR” 2036:65608 (Services / About / …):
   // outer strip: px global/spacing-8xl (80px), py spacing-5xl (40px); inner column max 1280px.
@@ -113,6 +120,10 @@
  * (clamp padding, 2px brand top stroke, content max width). Prefer Bootstrap
  * `d-flex`, `gap-*`, `py-*`, etc. in templates; use these only when needed.
  */
+.u-bg-primary-25 {
+  background-color: var(--background-primary-25);
+}
+
 .u-page-strip-x {
   padding-inline: clamp(var(--spacing-xl), 4vw, var(--page-strip-padding-inline));
 }

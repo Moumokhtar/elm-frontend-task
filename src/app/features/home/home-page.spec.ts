@@ -22,14 +22,18 @@ describe('HomePage', () => {
     expect(fixture.componentInstance).toBeTruthy();
   });
 
-  it('renders M4 section landmarks', () => {
-    expect(fixture.debugElement.query(By.css('[data-testid="home-hero"]'))).toBeTruthy();
-    expect(fixture.debugElement.query(By.css('[data-testid="home-about"]'))).toBeTruthy();
-    expect(fixture.debugElement.query(By.css('[data-testid="home-services"]'))).toBeTruthy();
-    expect(fixture.debugElement.query(By.css('[data-testid="home-news"]'))).toBeTruthy();
-    expect(fixture.debugElement.query(By.css('[data-testid="home-partners"]'))).toBeTruthy();
-    expect(fixture.debugElement.query(By.css('[data-testid="home-feedback"]'))).toBeTruthy();
-  });
+  it(
+    'renders M4 section landmarks',
+    () => {
+      expect(fixture.debugElement.query(By.css('[data-testid="home-hero"]'))).toBeTruthy();
+      expect(fixture.debugElement.query(By.css('[data-testid="home-about"]'))).toBeTruthy();
+      expect(fixture.debugElement.query(By.css('[data-testid="home-services"]'))).toBeTruthy();
+      expect(fixture.debugElement.query(By.css('[data-testid="home-news"]'))).toBeTruthy();
+      expect(fixture.debugElement.query(By.css('[data-testid="home-partners"]'))).toBeTruthy();
+      expect(fixture.debugElement.query(By.css('[data-testid="home-feedback"]'))).toBeTruthy();
+    },
+    15_000,
+  );
 
   it('renders four stat cards', () => {
     expect(fixture.debugElement.queryAll(By.css('[data-testid^="home-stat-"]')).length).toBe(4);

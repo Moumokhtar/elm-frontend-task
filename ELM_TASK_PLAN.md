@@ -60,49 +60,9 @@ Shipped. See [PRD #28](https://github.com/Moumokhtar/elm-frontend-task/issues/28
 
 ---
 
-## MILESTONE 5 — Service Detail Page
+## MILESTONE 5 — Service Detail Page ✅ Complete
 
-**Goal:**
-Full service detail page with sidebar info panel, tabs, video placeholder, related services carousel, and rating.
-
-**Scope:**
-
-**Right column (main content):**
-
-- `BreadcrumbComponent` at top
-- Service title (رخصة بناء), tag chips (الجهة, رحلة الحياة, المنصة)
-- Description paragraph
-- "اتفاقية مستوى الخدمة" link with icon
-- PrimeNG `TabView` with 3 tabs: الخطوات | شروط الاستخدام | المستندات المطلوبة
-- الخطوات tab content: video placeholder (dark bg + play button icon) + numbered steps list
-- `FeedbackBlock` (helpfulness row) at bottom of main content
-- Rating row: star rating (PrimeNG Rating, readonly, 3.9) + review count + "قيم هذه الخدمة" button
-
-**Left sidebar:**
-
-- "بدء الخدمة" primary button (full width)
-- Info rows: الفئة المستهدفة, مدة الخدمة, قنوات الخدمة, تكلفة الخدمة, قنوات الدفع (stc pay + mada logos), الاسئلة الشائعة link, الهاتف, البريد الإلكتروني, تحميل دليل المستخدم button
-- Mobile app badges: App Store, Google Play, AppGallery
-
-**Related services section:**
-
-- `SectionHeaderComponent` (خدمات ذات صلة)
-- PrimeNG Carousel of `ServiceCardComponent` items
-
-On mobile: sidebar moves below main content. Tabs remain functional.
-
-**Done when:**
-
-- [ ] Breadcrumb renders correctly
-- [ ] Tags render as styled chips
-- [ ] All 3 tabs are keyboard switchable with correct ARIA roles
-- [ ] Video placeholder renders with centered play icon
-- [ ] Steps list renders as numbered items
-- [ ] Sidebar info rows all render with icons and values
-- [ ] Rating displays correctly (readonly stars + count)
-- [ ] Related services carousel works
-- [ ] `FeedbackBlock` renders at bottom
-- [ ] Layout stacks correctly on mobile
+Shipped. See [PRD #36](https://github.com/Moumokhtar/elm-frontend-task/issues/36) and slice [#37](https://github.com/Moumokhtar/elm-frontend-task/issues/37).
 
 ---
 
