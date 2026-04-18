@@ -85,6 +85,25 @@
   --padding-feedback-bar-y: 24px;
   --color-text-secondary-paragraph: #6c737f;
 
+  /* Form page inputs — Figma Form `2036:75327` / MCP tokens */
+  --form-field-border-default: #9da4ae;
+  --form-field-border-error: #b42318;
+  --form-field-text-placeholder: #6c737f;
+  --form-field-label-gap: 8px;
+  --form-field-height: 40px;
+  --form-input-padding-inline-end: 16px;
+  --form-input-padding-inline-start: 8px;
+  --form-affix-bg: var(--button-background-neutral-default);
+  --stepper-line-completed: #1b8354;
+  --stepper-button-completed: #1b8354;
+  --stepper-button-current: #1b8354;
+  --stepper-button-upcoming: #d2d6db;
+  --stepper-text-primary: #1f2a37;
+  --stepper-text-secondary: #384250;
+  --color-text-error: #b42318;
+  --color-input-text-disabled: #9da4ae;
+  --color-border-disabled: #d2d6db;
+
   // Backgrounds
   --background-menu: #ffffff;
   --background-page-muted: #f9fafb;

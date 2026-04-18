@@ -1,4 +1,367 @@
-<section class="page-placeholder">
-  <h1>نموذج</h1>
-  <p lang="en">Form · placeholder</p>
+<!-- Figma Form Page – AR `2036:75327` — https://www.figma.com/design/wh34oGmGLBesPFMgXM4BLS/Frontend-Task--RTL?node-id=2036-75327&m=dev -->
+<section class="bg-white" data-testid="form-page" data-figma-node="2036:75327" aria-label="صفحة النموذج">
+  <div class="u-page-strip-x u-page-strip-y">
+    <div class="container-xxl">
+      <div class="row form-page__grid align-items-start">
+        <aside
+          class="col-12 col-lg-4 order-1 order-lg-2"
+          data-testid="form-page-sidebar"
+          data-figma-node="2036:75351"
+        >
+          <p
+            class="form-page__mobile-progress d-lg-none mb-0 text-start w-100"
+            data-testid="form-page-mobile-progress"
+            aria-live="polite"
+          >
+            {{ mobileProgressLabel() }}
+          </p>
+
+          <div class="form-page__stepper-card d-none d-lg-block w-100" data-testid="form-page-stepper" role="list" aria-label="خطوات النموذج">
+            @for (step of steps(); track step.id; let i = $index; let isLast = $last) {
+              <div class="d-flex form-page__step-row align-items-start" role="listitem">
+                <div class="d-flex flex-column align-items-start text-start flex-grow-1 min-w-0 form-page__step-copy">
+                  <span class="form-page__step-title fw-normal mb-0">{{ step.title }}</span>
+                  <span class="form-page__step-desc mb-0">{{ step.description }}</span>
+                </div>
+                <div class="d-flex flex-column align-items-center form-page__step-rail">
+                  @switch (step.status) {
+                    @case ('completed') {
+                      <span class="form-page__step-circle form-page__step-circle--completed" aria-hidden="true">
+                        <i class="bi bi-check-lg" aria-hidden="true"></i>
+                      </span>
+                    }
+                    @case ('active') {
+                      <span
+                        class="form-page__step-circle form-page__step-circle--active"
+                        aria-current="step"
+                        [attr.aria-label]="'الخطوة الحالية: ' + step.title"
+                      >{{ step.id }}</span>
+                    }
+                    @default {
+                      <span class="form-page__step-circle form-page__step-circle--upcoming" aria-hidden="true">{{ step.id }}</span>
+                    }
+                  }
+                  @if (!isLast) {
+                    <div class="form-page__step-line" aria-hidden="true"></div>
+                  }
+                </div>
+              </div>
+            }
+          </div>
+        </aside>
+
+        <div
+          class="col-12 col-lg-8 order-2 order-lg-1 d-flex flex-column form-page__main-stack"
+          data-testid="form-page-main"
+          data-figma-node="2036:75355"
+        >
+          <div class="d-flex flex-column gap-3 align-items-start text-start w-100">
+            <app-breadcrumb [items]="breadcrumbs" />
+            <div class="d-flex flex-column gap-3 align-items-start w-100">
+              <h1 class="form-page__title mb-0 w-100 text-start" data-testid="form-page-heading">{{ title }}</h1>
+              @if (activeStepIndex() === fieldsStepIndex) {
+                <p class="form-page__intro mb-0 w-100 text-start">{{ intro }}</p>
+                <p class="form-page__required-notice mb-0 text-start" data-testid="form-page-required-notice">{{ requiredNotice }}</p>
+              }
+            </div>
+          </div>
+
+          <form class="d-flex flex-column gap-4 w-100" [formGroup]="form" novalidate>
+            @switch (activeStepIndex()) {
+              @case (0) {
+                <div
+                  class="rounded-2 border border-secondary-subtle bg-light p-4 text-start text-muted"
+                  data-testid="form-step-placeholder-0"
+                >
+                  <p class="mb-2 fw-semibold text-body">الخطوة الأولى</p>
+                  <p class="mb-0 small">محتوى نائب — سيتم إضافة تفاصيل هذه الخطوة لاحقًا.</p>
+                </div>
+              }
+              @case (2) {
+                <div
+                  class="rounded-2 border border-secondary-subtle bg-light p-4 text-start text-muted"
+                  data-testid="form-step-placeholder-2"
+                >
+                  <p class="mb-2 fw-semibold text-body">الخطوة الثالثة</p>
+                  <p class="mb-0 small">محتوى نائب — سيتم إضافة تفاصيل هذه الخطوة لاحقًا.</p>
+                </div>
+              }
+              @case (1) {
+            <!-- Figma `2036:75364` — https://www.figma.com/design/wh34oGmGLBesPFMgXM4BLS/Frontend-Task--RTL?node-id=2036-75364&m=dev -->
+            <div class="row form-page__field-row" data-testid="form-row-plain" data-figma-node="2036:75364">
+              <div class="col-12 col-lg-6">
+                <label class="form-label small fw-semibold text-start w-100 mb-2" for="form-opt-plain">إدخال النص الاختياري</label>
+                <input
+                  id="form-opt-plain"
+                  type="text"
+                  class="form-control form-page__field w-100 text-start rounded-1 shadow-none"
+                  formControlName="optPlain"
+                  placeholder="نص تلميحي"
+                  autocomplete="off"
+                />
+              </div>
+              <div class="col-12 col-lg-6">
+                <label class="form-label small fw-semibold text-start w-100 mb-2 d-flex justify-content-start gap-1" for="form-req-plain">
+                  <span>إدخال النص الإلزامي</span>
+                  <span class="text-danger" aria-hidden="true">*</span>
+                </label>
+                <input
+                  id="form-req-plain"
+                  type="text"
+                  class="form-control form-page__field w-100 text-start rounded-1 shadow-none"
+                  [class.is-invalid]="fieldInvalid('reqPlain')"
+                  formControlName="reqPlain"
+                  placeholder="نص تلميحي"
+                  autocomplete="off"
+                  [attr.aria-invalid]="fieldInvalid('reqPlain')"
+                  [attr.aria-describedby]="fieldInvalid('reqPlain') ? 'err-req-plain' : null"
+                />
+                @if (fieldInvalid('reqPlain')) {
+                  <p id="err-req-plain" class="text-danger small mb-0 mt-1 text-start w-100" role="alert">هذا الحقل مطلوب</p>
+                }
+              </div>
+            </div>
+
+            <!-- Figma `2036:75367` — https://www.figma.com/design/wh34oGmGLBesPFMgXM4BLS/Frontend-Task--RTL?node-id=2036-75367&m=dev -->
+            <div class="row form-page__field-row" data-testid="form-row-search" data-figma-node="2036:75367">
+              <div class="col-12 col-lg-6">
+                <label class="form-label small fw-semibold text-start w-100 mb-2" for="form-opt-search">إدخال النص الاختياري</label>
+                <div class="position-relative w-100">
+                  <input
+                    id="form-opt-search"
+                    type="search"
+                    class="form-control form-page__field form-page__field--with-icon w-100 text-start rounded-1 shadow-none"
+                    formControlName="optSearch"
+                    placeholder="نص تلميحي"
+                    autocomplete="off"
+                  />
+                  <i class="bi bi-search position-absolute top-50 translate-middle-y start-0 ms-3 fs-5" aria-hidden="true"></i>
+                </div>
+              </div>
+              <div class="col-12 col-lg-6">
+                <label class="form-label small fw-semibold text-start w-100 mb-2 d-flex justify-content-start gap-1" for="form-req-search">
+                  <span>إدخال النص الإلزامي</span>
+                  <span class="text-danger" aria-hidden="true">*</span>
+                </label>
+                <div class="position-relative w-100">
+                  <input
+                    id="form-req-search"
+                    type="search"
+                    class="form-control form-page__field form-page__field--with-icon w-100 text-start rounded-1 shadow-none"
+                    [class.is-invalid]="fieldInvalid('reqSearch')"
+                    formControlName="reqSearch"
+                    placeholder="نص تلميحي"
+                    autocomplete="off"
+                    [attr.aria-invalid]="fieldInvalid('reqSearch')"
+                    [attr.aria-describedby]="fieldInvalid('reqSearch') ? 'err-req-search' : null"
+                  />
+                  <i class="bi bi-search position-absolute top-50 translate-middle-y start-0 ms-3 fs-5" aria-hidden="true"></i>
+                </div>
+                @if (fieldInvalid('reqSearch')) {
+                  <p id="err-req-search" class="text-danger small mb-0 mt-1 text-start w-100" role="alert">هذا الحقل مطلوب</p>
+                }
+              </div>
+            </div>
+
+            <!-- Figma `2036:75370` — https://www.figma.com/design/wh34oGmGLBesPFMgXM4BLS/Frontend-Task--RTL?node-id=2036-75370&m=dev -->
+            <div class="row form-page__field-row" data-testid="form-row-text-prefix" data-figma-node="2036:75370">
+              <div class="col-12 col-lg-6">
+                <label class="form-label small fw-semibold text-start w-100 mb-2" for="form-opt-prefix">إدخال النص الاختياري</label>
+                <div class="input-group form-page__affix form-page__affix--prefix" dir="rtl">
+                  <input
+                    id="form-opt-prefix"
+                    type="text"
+                    class="form-control form-page__field text-start shadow-none"
+                    formControlName="optPrefix"
+                    placeholder="نص تلميحي"
+                    autocomplete="off"
+                  />
+                  <span class="input-group-text bg-light border-secondary text-secondary px-4 py-0 small">نص</span>
+                </div>
+              </div>
+              <div class="col-12 col-lg-6">
+                <label class="form-label small fw-semibold text-start w-100 mb-2 d-flex justify-content-start gap-1" for="form-req-prefix">
+                  <span>إدخال النص الإلزامي</span>
+                  <span class="text-danger" aria-hidden="true">*</span>
+                </label>
+                <div class="input-group form-page__affix form-page__affix--prefix" dir="rtl">
+                  <input
+                    id="form-req-prefix"
+                    type="text"
+                    class="form-control form-page__field text-start shadow-none"
+                    [class.is-invalid]="fieldInvalid('reqPrefix')"
+                    formControlName="reqPrefix"
+                    placeholder="نص تلميحي"
+                    autocomplete="off"
+                    [attr.aria-invalid]="fieldInvalid('reqPrefix')"
+                    [attr.aria-describedby]="fieldInvalid('reqPrefix') ? 'err-req-prefix' : null"
+                  />
+                  <span class="input-group-text bg-light border-secondary text-secondary px-4 py-0 small">نص</span>
+                </div>
+                @if (fieldInvalid('reqPrefix')) {
+                  <p id="err-req-prefix" class="text-danger small mb-0 mt-1 text-start w-100" role="alert">هذا الحقل مطلوب</p>
+                }
+              </div>
+            </div>
+
+            <!-- Figma `2036:75373` — https://www.figma.com/design/wh34oGmGLBesPFMgXM4BLS/Frontend-Task--RTL?node-id=2036-75373&m=dev -->
+            <div class="row form-page__field-row" data-testid="form-row-text-suffix" data-figma-node="2036:75373">
+              <div class="col-12 col-lg-6">
+                <label class="form-label small fw-semibold text-start w-100 mb-2" for="form-opt-suffix">إدخال النص الاختياري</label>
+                <div class="input-group form-page__affix form-page__affix--suffix" dir="rtl">
+                  <span class="input-group-text bg-light border-secondary text-secondary px-4 py-0 small">نص</span>
+                  <input
+                    id="form-opt-suffix"
+                    type="text"
+                    class="form-control form-page__field text-start shadow-none"
+                    formControlName="optSuffix"
+                    placeholder="نص تلميحي"
+                    autocomplete="off"
+                  />
+                </div>
+              </div>
+              <div class="col-12 col-lg-6">
+                <label class="form-label small fw-semibold text-start w-100 mb-2 d-flex justify-content-start gap-1" for="form-req-suffix">
+                  <span>إدخال النص الإلزامي</span>
+                  <span class="text-danger" aria-hidden="true">*</span>
+                </label>
+                <div class="input-group form-page__affix form-page__affix--suffix" dir="rtl">
+                  <span class="input-group-text bg-light border-secondary text-secondary px-4 py-0 small">نص</span>
+                  <input
+                    id="form-req-suffix"
+                    type="text"
+                    class="form-control form-page__field text-start shadow-none"
+                    [class.is-invalid]="fieldInvalid('reqSuffix')"
+                    formControlName="reqSuffix"
+                    placeholder="نص تلميحي"
+                    autocomplete="off"
+                    [attr.aria-invalid]="fieldInvalid('reqSuffix')"
+                    [attr.aria-describedby]="fieldInvalid('reqSuffix') ? 'err-req-suffix' : null"
+                  />
+                </div>
+                @if (fieldInvalid('reqSuffix')) {
+                  <p id="err-req-suffix" class="text-danger small mb-0 mt-1 text-start w-100" role="alert">هذا الحقل مطلوب</p>
+                }
+              </div>
+            </div>
+
+            <!-- Figma `2036:75376` — https://www.figma.com/design/wh34oGmGLBesPFMgXM4BLS/Frontend-Task--RTL?node-id=2036-75376&m=dev -->
+            <div class="row form-page__field-row" data-testid="form-row-helper" data-figma-node="2036:75376">
+              <div class="col-12 col-lg-6">
+                <label class="form-label small fw-semibold text-start w-100 mb-2" for="form-opt-helper">إدخال النص الاختياري</label>
+                <input
+                  id="form-opt-helper"
+                  type="text"
+                  class="form-control form-page__field w-100 text-start rounded-1 shadow-none"
+                  formControlName="optHelper"
+                  placeholder="نص تلميحي"
+                  autocomplete="off"
+                  aria-describedby="hint-opt-helper"
+                />
+                <div class="d-flex align-items-center justify-content-start gap-2 py-1 small form-page__field-hint w-100">
+                  <span id="hint-opt-helper" class="text-start">نص مساعد</span>
+                  <i class="bi bi-question-circle flex-shrink-0" aria-hidden="true"></i>
+                </div>
+              </div>
+              <div class="col-12 col-lg-6">
+                <label class="form-label small fw-semibold text-start w-100 mb-2 d-flex justify-content-start gap-1" for="form-req-helper">
+                  <span>إدخال النص الإلزامي</span>
+                  <span class="text-danger" aria-hidden="true">*</span>
+                </label>
+                <input
+                  id="form-req-helper"
+                  type="text"
+                  class="form-control form-page__field w-100 text-start rounded-1 shadow-none"
+                  [class.is-invalid]="fieldInvalid('reqHelper')"
+                  formControlName="reqHelper"
+                  placeholder="نص تلميحي"
+                  autocomplete="off"
+                  [attr.aria-invalid]="fieldInvalid('reqHelper')"
+                  [attr.aria-describedby]="fieldInvalid('reqHelper') ? 'err-req-helper hint-req-helper' : 'hint-req-helper'"
+                />
+                <div class="d-flex align-items-center justify-content-start gap-2 py-1 small form-page__field-hint w-100" id="hint-req-helper">
+                  <span class="text-start">نص مساعد</span>
+                  <i class="bi bi-question-circle flex-shrink-0" aria-hidden="true"></i>
+                </div>
+                @if (fieldInvalid('reqHelper')) {
+                  <p id="err-req-helper" class="text-danger small mb-0 mt-1 text-start w-100" role="alert">هذا الحقل مطلوب</p>
+                }
+              </div>
+            </div>
+
+            <!-- Figma `2036:75382` — https://www.figma.com/design/wh34oGmGLBesPFMgXM4BLS/Frontend-Task--RTL?node-id=2036-75382&m=dev -->
+            <div class="row form-page__field-row" data-testid="form-row-disabled" data-figma-node="2036:75382">
+              <div class="col-12 col-lg-6">
+                <label class="form-label small fw-semibold text-secondary text-start w-100 mb-2" for="form-dis-opt">إدخال النص الاختياري</label>
+                <input
+                  id="form-dis-opt"
+                  type="text"
+                  class="form-control form-page__field form-page__field--disabled w-100 text-start rounded-1 shadow-none"
+                  disabled
+                  placeholder="نص تلميحي"
+                  tabindex="-1"
+                />
+              </div>
+              <div class="col-12 col-lg-6">
+                <label class="form-label small fw-semibold text-secondary text-start w-100 mb-2 d-flex justify-content-start gap-1" for="form-dis-req">
+                  <span>إدخال النص الإلزامي</span>
+                  <span class="text-danger" aria-hidden="true">*</span>
+                </label>
+                <input
+                  id="form-dis-req"
+                  type="text"
+                  class="form-control form-page__field form-page__field--disabled w-100 text-start rounded-1 shadow-none"
+                  disabled
+                  placeholder="نص تلميحي"
+                  tabindex="-1"
+                />
+              </div>
+            </div>
+
+            <!--
+              Field variant Figma (MCP `get_design_context`):
+              Default `2036:75364` — https://www.figma.com/design/wh34oGmGLBesPFMgXM4BLS/Frontend-Task--RTL?node-id=2036-75364&m=dev
+              + icon `2036:75367` — https://www.figma.com/design/wh34oGmGLBesPFMgXM4BLS/Frontend-Task--RTL?node-id=2036-75367&m=dev
+              + prefix `2036:75370` — https://www.figma.com/design/wh34oGmGLBesPFMgXM4BLS/Frontend-Task--RTL?node-id=2036-75370&m=dev
+              + suffix `2036:75373` — https://www.figma.com/design/wh34oGmGLBesPFMgXM4BLS/Frontend-Task--RTL?node-id=2036-75373&m=dev
+              + helper `2036:75376` — https://www.figma.com/design/wh34oGmGLBesPFMgXM4BLS/Frontend-Task--RTL?node-id=2036-75376&m=dev
+              + disabled `2036:75382` — https://www.figma.com/design/wh34oGmGLBesPFMgXM4BLS/Frontend-Task--RTL?node-id=2036-75382&m=dev
+            -->
+              }
+            }
+            <div class="d-flex gap-3 justify-content-start flex-wrap w-100 pt-1" data-testid="form-page-actions">
+              <p-button
+                type="button"
+                label="رجوع"
+                severity="secondary"
+                [outlined]="true"
+                styleClass="u-figma-outline-action"
+                data-testid="form-btn-back"
+                [disabled]="activeStepIndex() <= 0"
+                (onClick)="onBack()"
+              />
+              <p-button
+                type="button"
+                label="التالي"
+                styleClass="u-figma-primary-action"
+                data-testid="form-btn-next"
+                [disabled]="activeStepIndex() === lastStepIndex"
+                (onClick)="onNext()"
+              />
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="bg-white" data-testid="form-page-feedback" aria-label="التقييم والملاحظات" data-figma-node="2036:31121">
+  <app-feedback-block
+    [showLastModifiedRow]="false"
+    [showServiceRatingRow]="false"
+    [showHelpfulnessRow]="true"
+    [seedYes]="1706"
+    [seedNo]="1137"
+  />
 </section>

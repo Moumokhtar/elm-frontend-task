@@ -66,67 +66,19 @@ Shipped. See [PRD #36](https://github.com/Moumokhtar/elm-frontend-task/issues/36
 
 ---
 
-## MILESTONE 6 — Form Page (Multi-Step)
+## MILESTONE 6 — Form Page ✅ Complete
 
-**Goal:**
-Multi-step form page with step wizard, varied field types, validation states, and back/next navigation.
-
-**Scope:**
-
-**Left sidebar (desktop):**
-
-- Step wizard: Step 1 (checkmark = completed), Step 2 (active, number badge), Step 3 (inactive). Each step has title + subtitle. Connected by vertical line.
-- On mobile: replaced by top progress indicator "الخطوة الأول — وصف الخطوة — 1 من 4"
-
-**Main form area:**
-Page title (حقول النص) + description paragraph.
-"\* المعلومات المطلوبة" required fields notice in red.
-
-2-column Bootstrap grid of field pairs (right = required إلزامي, left = optional اختياري):
-
-| Row | Right (Required)                             | Left (Optional)                 |
-| --- | -------------------------------------------- | ------------------------------- |
-| 1   | Plain text input                             | Plain text input                |
-| 2   | Text input with search icon (suffix)         | Text input with search icon     |
-| 3   | Text input with text prefix (نص)             | Text input with text prefix     |
-| 4   | Text input with dropdown prefix              | Text input with dropdown prefix |
-| 5   | Plain text + helper text (نص مساعد)          | Plain text + helper text        |
-| 6   | Error state (red border + red error message) | Error state                     |
-| 7   | Disabled input (full row, single column)     | Disabled input                  |
-
-Bottom: رجوع (back) + التالي (next, primary) buttons, right-aligned.
-`FeedbackBlock` (helpfulness row) above footer.
-
-On mobile: single column, same fields stacked.
-
-**Validation:**
-
-- Required fields show red border + error message when submitted empty
-- Helper text renders below field in grey
-- Disabled fields are non-interactive with muted styling
-
-**Done when:**
-
-- [ ] Step wizard renders all 3 steps with correct states (done/active/inactive)
-- [ ] Mobile step progress indicator renders correctly
-- [ ] Required field indicator (\*) renders in red
-- [ ] All 7 field row types render correctly matching Figma
-- [ ] Error state renders with red border and red helper text
-- [ ] Disabled state renders as non-interactive
-- [ ] Back button is visible; Next button is primary green
-- [ ] Form fields are all labelled (explicit `<label for>` or `aria-label`)
-- [ ] Tab key moves through all fields in logical order
-- [ ] `FeedbackBlock` renders
+Shipped. See [PRD #38](https://github.com/Moumokhtar/elm-frontend-task/issues/38) and slices [#39](https://github.com/Moumokhtar/elm-frontend-task/issues/39)–[#43](https://github.com/Moumokhtar/elm-frontend-task/issues/43). Implementation: `src/app/features/form/` (`form-page`, `form-mock.ts`), route `/form`, stepper + التالي/رجوع step state with validation on the fields step, Figma input variants (incl. merged affix corners), `FeedbackBlock`.
 
 ---
 
 ## MILESTONE 7 — Routing & Page Shell
 
 **Goal:**
-Wire all routes, add active nav link highlighting, and ensure back/next on the form page navigates correctly.
+Finalize cross-app routing polish: active nav highlighting, 404, and any remaining shell consistency (form step flow ships in M6).
 
 **Scope:**
-`app.routes.ts` routes finalized. `RouterLink` on nav items. Active route gets highlighted nav item. Form page Next button navigates to a dummy step 2 placeholder (or loops). Breadcrumb links are functional. 404 fallback route renders a simple "الصفحة غير موجودة" message.
+`app.routes.ts` finalized where needed. `RouterLink` on nav items. Active route gets highlighted nav item. Breadcrumb links remain functional. 404 fallback route renders a simple "الصفحة غير موجودة" message.
 
 **Done when:**
 
@@ -135,7 +87,6 @@ Wire all routes, add active nav link highlighting, and ensure back/next on the f
 - [ ] `/form` loads form page
 - [ ] Active nav item is visually highlighted
 - [ ] Breadcrumb home link navigates to `/`
-- [ ] Form Next/Back buttons work (step state changes or route changes)
 - [ ] Unknown route shows 404 message
 - [ ] Browser back/forward buttons work correctly
 

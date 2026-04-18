@@ -1,0 +1,207 @@
+:host {
+  display: block;
+  width: 100%;
+  direction: rtl;
+}
+
+/* Figma `2036:75349` — 32px gutter between stepper card and form column */
+.form-page__grid {
+  --bs-gutter-x: var(--spacing-4xl);
+  --bs-gutter-y: var(--spacing-4xl);
+}
+
+/* Figma `2036:75351` — Progress card */
+.form-page__stepper-card {
+  max-width: 416px;
+  width: 100%;
+  padding: var(--spacing-5xl);
+  border-radius: var(--radius-lg);
+  background-color: var(--background-page-muted);
+}
+
+.form-page__step-row {
+  gap: var(--spacing-md);
+}
+
+.form-page__step-copy {
+  gap: var(--spacing-xs);
+}
+
+.form-page__step-title {
+  font-size: 1rem;
+  line-height: 1.5rem;
+  color: var(--stepper-text-primary);
+}
+
+.form-page__step-desc {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  color: var(--stepper-text-secondary);
+}
+
+.form-page__step-rail {
+  width: 32px;
+  flex-shrink: 0;
+}
+
+.form-page__step-circle {
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.5rem;
+}
+
+.form-page__step-circle--completed {
+  background-color: var(--stepper-button-completed);
+  color: #fff;
+  border: none;
+}
+
+.form-page__step-circle--active {
+  background-color: #fff;
+  color: var(--stepper-button-current);
+  border: 2px solid var(--stepper-button-current);
+}
+
+.form-page__step-circle--upcoming {
+  background-color: #fff;
+  color: var(--stepper-button-upcoming);
+  border: 2px solid var(--stepper-button-upcoming);
+}
+
+.form-page__step-line {
+  width: 2px;
+  flex: 1 1 auto;
+  min-height: 48px;
+  margin-block: 0;
+  border: 0;
+  border-radius: 1px;
+  background-color: var(--stepper-line-completed);
+}
+
+.form-page__mobile-progress {
+  padding: var(--spacing-md) var(--spacing-xl);
+  margin-bottom: var(--spacing-3xl);
+  border-radius: var(--radius-sm);
+  background-color: var(--background-page-muted);
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  color: var(--stepper-text-primary);
+}
+
+.form-page__title {
+  font-size: 1.875rem;
+  line-height: 2.375rem;
+  font-weight: 700;
+  color: var(--color-text-default);
+}
+
+.form-page__intro {
+  font-size: 1rem;
+  line-height: 1.5rem;
+  color: var(--color-text-default);
+}
+
+.form-page__required-notice {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  color: var(--color-text-error);
+}
+
+.form-page__field-row {
+  --bs-gutter-x: var(--spacing-3xl);
+  --bs-gutter-y: var(--spacing-3xl);
+}
+
+/*
+ * Prefix / suffix input-groups (`dir="rtl"`): flat join on the shared edge, outer corners `--radius-sm`.
+ * DOM prefix = [input][addon] → input inline-start outer; addon inline-end outer.
+ * DOM suffix = [addon][input] → addon inline-start outer; input inline-end outer.
+ */
+.form-page__affix .input-group-text {
+  min-height: var(--form-field-height);
+  align-items: center;
+  display: inline-flex;
+}
+
+.form-page__affix--prefix .form-page__field {
+  border-start-start-radius: var(--radius-sm);
+  border-end-start-radius: var(--radius-sm);
+  border-start-end-radius: 0;
+  border-end-end-radius: 0;
+}
+
+.form-page__affix--prefix .input-group-text {
+  border-start-start-radius: 0;
+  border-end-start-radius: 0;
+  border-start-end-radius: var(--radius-sm);
+  border-end-end-radius: var(--radius-sm);
+}
+
+.form-page__affix--suffix .input-group-text {
+  border-start-start-radius: var(--radius-sm);
+  border-end-start-radius: var(--radius-sm);
+  border-start-end-radius: 0;
+  border-end-end-radius: 0;
+}
+
+.form-page__affix--suffix .form-page__field {
+  border-start-start-radius: 0;
+  border-end-start-radius: 0;
+  border-start-end-radius: var(--radius-sm);
+  border-end-end-radius: var(--radius-sm);
+}
+
+/*
+ * Shared input chrome — MCP frames `2036:75364`, `2036:75367`, `2036:75370`, `2036:75373`, `2036:75376`, `2036:75382`
+ * (40px height, #9da4ae border, 4px radius, 8/16px horizontal inset, placeholder #6c737f).
+ */
+.form-page__field {
+  height: var(--form-field-height);
+  min-height: var(--form-field-height);
+  padding-inline: var(--form-input-padding-inline-start) var(--form-input-padding-inline-end);
+  border-color: var(--form-field-border-default);
+  color: var(--color-text-default);
+}
+
+.form-page__field::placeholder {
+  color: var(--form-field-text-placeholder);
+}
+
+.form-page__field:focus {
+  border-color: var(--form-field-border-default);
+  box-shadow: 0 0 0 0.2rem rgba(27, 131, 84, 0.12);
+}
+
+.form-page__field.is-invalid,
+.form-page__field.is-invalid:focus {
+  border-color: var(--form-field-border-error);
+  box-shadow: none;
+}
+
+/* `2036:75367` — icon on inline-start; reserve space so text does not overlap */
+.form-page__field--with-icon {
+  padding-inline-start: 2.5rem;
+}
+
+/* `2036:75382` — disabled field (border #d2d6db, label #9da4ae, placeholder #9da4ae) */
+.form-page__field--disabled:disabled {
+  color: var(--color-input-text-disabled);
+  background-color: transparent;
+  border-color: var(--color-border-disabled);
+  opacity: 1;
+}
+
+/* Figma `2036:75376` helper copy — `text/text-primary-paragraph` */
+.form-page__field-hint {
+  color: var(--stepper-text-secondary);
+}
+
+.form-page__main-stack {
+  gap: var(--spacing-4xl);
+}

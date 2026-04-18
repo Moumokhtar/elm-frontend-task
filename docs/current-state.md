@@ -10,7 +10,8 @@ _Updated: 2026-04-18._
 - **M3 — Shared UI Components:** ✅ complete. PRD [#20](https://github.com/Moumokhtar/elm-frontend-task/issues/20) and slices #21–#27 closed. Shared pieces under `src/app/shared/` include `FeedbackBlock` (Figma-aligned feedback stack; optional top rows), `ServiceCard`, `NewsCard`, `PartnerLogo`, `Breadcrumb`, `SectionHeader`, plus tokens and home visual QA wiring.
 - **M4 — Home Page:** ✅ complete. PRD [#28](https://github.com/Moumokhtar/elm-frontend-task/issues/28) and slices #29–#35. Composition in `src/app/features/home/` (hero, about + stats, services / news / partners carousels, feedback strip, `home-mock.ts`).
 - **M5 — Service Detail Page:** ✅ complete. PRD [#36](https://github.com/Moumokhtar/elm-frontend-task/issues/36) and slice [#37](https://github.com/Moumokhtar/elm-frontend-task/issues/37). Route `/service` → `src/app/features/service/` (`service-detail-page`, `service-detail-mock.ts`): tent + main/sidebar Figma frames, Bootstrap-icon sidebar rows, payment SVG tiles, store CTAs (user PNG icons + LTR copy), related services carousel matching home services chrome (`HOME_SERVICES` length), `FeedbackBlock` with full-bleed brand borders and `u-page-strip-y` on host (home + service sections use `bg-white` wrapper only).
-- **Next up:** **M6 — Form Page** per `ELM_TASK_PLAN.md`.
+- **M6 — Form Page:** ✅ complete. PRD [#38](https://github.com/Moumokhtar/elm-frontend-task/issues/38) and slices #39–#43. Route `/form` → `src/app/features/form/` (`form-page`, `form-mock.ts`): RTL stepper + mobile progress, step navigation (رجوع / التالي) with validation on the fields step, placeholders on steps 1 and 3, Figma-aligned text inputs (plain, search icon, text prefix/suffix with merged radii, helper, disabled), `FeedbackBlock` helpfulness row, tokens in `_tokens.scss`.
+- **Next up:** **M7 — Routing & Page Shell** per `ELM_TASK_PLAN.md` (nav active state, 404, polish).
 
 ## Conventions the next agent must follow
 

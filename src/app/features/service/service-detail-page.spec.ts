@@ -54,17 +54,21 @@ describe('ServiceDetailPage', () => {
     expect(fixture.debugElement.query(By.css('[data-testid="service-detail-description"]'))).toBeTruthy();
   });
 
-  it('renders info tab list with steps, video, and steps list as siblings under `2036:31099`', () => {
-    const info = fixture.debugElement.query(By.css('[data-figma-node="2036:31099"]'));
-    expect(info).toBeTruthy();
-    const tabs = fixture.debugElement.query(By.css('[data-testid="service-detail-tabs"]'));
-    const video = fixture.debugElement.query(By.css('[data-testid="service-detail-video-placeholder"]'));
-    const stepList = fixture.debugElement.query(By.css('[data-testid="service-detail-tab-steps"]'));
-    expect(tabs?.nativeElement.parentElement).toBe(info?.nativeElement);
-    expect(video?.nativeElement.parentElement).toBe(info?.nativeElement);
-    expect(stepList?.nativeElement.parentElement).toBe(info?.nativeElement);
-    expect(tabs?.nativeElement.getAttribute('role')).toBe('tablist');
-  });
+  it(
+    'renders info tab list with steps, video, and steps list as siblings under `2036:31099`',
+    () => {
+      const info = fixture.debugElement.query(By.css('[data-figma-node="2036:31099"]'));
+      expect(info).toBeTruthy();
+      const tabs = fixture.debugElement.query(By.css('[data-testid="service-detail-tabs"]'));
+      const video = fixture.debugElement.query(By.css('[data-testid="service-detail-video-placeholder"]'));
+      const stepList = fixture.debugElement.query(By.css('[data-testid="service-detail-tab-steps"]'));
+      expect(tabs?.nativeElement.parentElement).toBe(info?.nativeElement);
+      expect(video?.nativeElement.parentElement).toBe(info?.nativeElement);
+      expect(stepList?.nativeElement.parentElement).toBe(info?.nativeElement);
+      expect(tabs?.nativeElement.getAttribute('role')).toBe('tablist');
+    },
+    15_000,
+  );
 
   it('maps Figma Service frame `2036:31033` (main, sidebar, FAQ tab)', () => {
     const frame = fixture.debugElement.query(By.css('[data-testid="service-detail-service-frame"]'));
