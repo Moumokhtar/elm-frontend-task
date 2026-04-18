@@ -151,31 +151,31 @@ const newsBody =
 
 export const HOME_NEWS: HomeNewsItem[] = [
   {
-    imageSrc: '/images/news-card-placeholder.jpg',
+    imageSrc: 'images/news-card-placeholder.jpg',
     imageAlt: 'صورة الغلاف للخبر',
     title: 'عنوان بطاقة الأخبار في سطرين',
     body: newsBody,
   },
   {
-    imageSrc: '/images/news-card-placeholder.jpg',
+    imageSrc: 'images/news-card-placeholder.jpg',
     imageAlt: 'صورة الغلاف للخبر الثاني',
     title: 'عنوان بطاقة الأخبار في سطرين',
     body: newsBody,
   },
   {
-    imageSrc: '/images/news-card-placeholder.jpg',
+    imageSrc: 'images/news-card-placeholder.jpg',
     imageAlt: 'صورة الغلاف للخبر الثالث',
     title: 'عنوان بطاقة الأخبار في سطرين',
     body: newsBody,
   },
   {
-    imageSrc: '/images/news-card-placeholder.jpg',
+    imageSrc: 'images/news-card-placeholder.jpg',
     imageAlt: 'صورة الغلاف للخبر الرابع',
     title: 'عنوان بطاقة الأخبار في سطرين',
     body: newsBody,
   },
   {
-    imageSrc: '/images/news-card-placeholder.jpg',
+    imageSrc: 'images/news-card-placeholder.jpg',
     imageAlt: 'صورة الغلاف للخبر الخامس',
     title: 'عنوان بطاقة الأخبار في سطرين',
     body: newsBody,
@@ -183,7 +183,7 @@ export const HOME_NEWS: HomeNewsItem[] = [
 ];
 
 export const HOME_PARTNERS: HomePartnerItem[] = Array.from({ length: 9 }, (_, i) => ({
-  logoSrc: '/images/logo-desktop.svg',
+  logoSrc: 'images/logo-desktop.svg',
   logoAlt: `شعار الشريك ${i + 1}`,
   label: 'شعار المنصة',
 }));

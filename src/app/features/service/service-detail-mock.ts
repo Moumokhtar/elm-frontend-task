@@ -70,14 +70,14 @@ export const SERVICE_SIDEBAR = {
 
 /** User-provided PNG marks only — labels rendered as text in the template. */
 export const SERVICE_STORE_ICONS = {
-  googlePlay: '/images/service-detail/store/google-play-icon.png',
-  apple: '/images/service-detail/store/apple-icon.png',
+  googlePlay: 'images/service-detail/store/google-play-icon.png',
+  apple: 'images/service-detail/store/apple-icon.png',
 };
 
 /** Figma `2036:31057` — exports are SVG saved with `.png`; use `.svg` copies so `<img>` renders reliably. */
 export const SERVICE_PAYMENT_IMAGES = {
-  stcPay: '/images/service-detail/sidebar/payment-stcpay.svg',
-  mada: '/images/service-detail/sidebar/payment-mada.svg',
+  stcPay: 'images/service-detail/sidebar/payment-stcpay.svg',
+  mada: 'images/service-detail/sidebar/payment-mada.svg',
 };
 
 /** Same six cards as home `HOME_SERVICES` so desktop `numVisible: 3` can scroll (3 items fits one page and disables nav). */

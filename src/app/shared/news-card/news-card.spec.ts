@@ -15,7 +15,7 @@ describe('NewsCard', () => {
   });
 
   function setup() {
-    fixture.componentRef.setInput('imageSrc', '/images/news-card-placeholder.jpg');
+    fixture.componentRef.setInput('imageSrc', 'images/news-card-placeholder.jpg');
     fixture.componentRef.setInput('imageAlt', 'صورة الغلاف');
     fixture.componentRef.setInput('title', 'عنوان الخبر');
     fixture.componentRef.setInput('body', 'نص مختصر للخبر يظهر في البطاقة.');

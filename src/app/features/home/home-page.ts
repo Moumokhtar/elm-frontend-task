@@ -47,7 +47,7 @@ export class HomePage {
   newsItems = HOME_NEWS;
   partners = HOME_PARTNERS;
 
-  heroBg = '/images/home/hero-bg.jpg';
+  heroBg = 'images/home/hero-bg.jpg';
 
   servicesCarouselResponsive = [
     { breakpoint: '1199px', numVisible: 2, numScroll: 1 },
