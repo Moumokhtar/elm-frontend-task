@@ -39,15 +39,14 @@
             <div
               class="u-max-w-hero-copy d-flex flex-column align-items-start text-start w-100 gap-4"
             >
-              <p class="mb-0 home-page__hero-title" role="presentation">
-                {{ slide.title }}
-              </p>
+              <h2 class="mb-0 mt-0 home-page__hero-title">{{ slide.title }}</h2>
               <p class="mb-0 home-page__hero-body">{{ slide.body }}</p>
             </div>
             <button
               type="button"
               class="border-0 bg-white text-dark fw-medium rounded-1 d-inline-flex align-items-center justify-content-center px-3 shadow-none text-nowrap flex-shrink-0 lh-sm home-page__hero-cta-btn"
               data-testid="home-hero-cta"
+              [attr.aria-label]="slide.ctaLabel + '، ' + slide.title"
             >
               {{ slide.ctaLabel }}
             </button>
