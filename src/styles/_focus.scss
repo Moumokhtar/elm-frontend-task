@@ -1,0 +1,52 @@
+// M8-S1 — Global keyboard focus policy (WCAG 2.4.7 Focus Visible).
+//
+// - Loaded after `tokens` in `styles.scss` so `--color-border-primary` and friends exist.
+// - Uses `:focus-visible` only so pointer activation does not leave a persistent ring.
+// - Component SCSS may override with equal or higher specificity for branded controls (e.g. navbar CTA fill).
+//
+// Spot-check: Tab through shell nav links, a `.btn`, a Prime `p-button`, and a `p-inputtext` field.
+
+:root {
+  --focus-ring-color: var(--color-border-primary);
+  --focus-ring-width: 2px;
+  --focus-ring-offset: 2px;
+}
+
+// Native controls + common ARIA widgets (tabs, toolbar buttons).
+a:focus-visible,
+button:focus-visible,
+input:not([type='hidden']):focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+summary:focus-visible,
+[role='button']:focus-visible,
+[role='tab']:focus-visible,
+[role='menuitem']:focus-visible,
+[role='link']:focus-visible,
+[tabindex]:not([tabindex='-1']):focus-visible {
+  outline: var(--focus-ring-width) solid var(--focus-ring-color);
+  outline-offset: var(--focus-ring-offset);
+}
+
+// Bootstrap trades outline for box-shadow on `.btn` / `.form-control`; restore a visible keyboard ring.
+.btn:focus-visible,
+.form-control:focus-visible,
+.form-select:focus-visible {
+  box-shadow: none;
+  outline: var(--focus-ring-width) solid var(--focus-ring-color);
+  outline-offset: var(--focus-ring-offset);
+}
+
+// PrimeNG native controls: theme often uses box-shadow for focus — keep a clear ring for keyboard users.
+button.p-button:focus-visible,
+a.p-button:focus-visible {
+  box-shadow: none !important;
+  outline: var(--focus-ring-width) solid var(--focus-ring-color);
+  outline-offset: var(--focus-ring-offset);
+}
+
+.p-inputtext:enabled:focus-visible,
+.p-inputtextarea:enabled:focus-visible {
+  outline: var(--focus-ring-width) solid var(--focus-ring-color);
+  outline-offset: var(--focus-ring-offset);
+}
