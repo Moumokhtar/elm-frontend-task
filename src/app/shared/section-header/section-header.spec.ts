@@ -8,12 +8,14 @@ describe('SectionHeader', () => {
 
   function setup(inputs: {
     title: string;
+    titleId?: string;
     subtitle?: string;
     actionLabel?: string;
     actionRoute?: string | readonly (string | number)[];
   }) {
     fixture = TestBed.createComponent(SectionHeader);
     fixture.componentRef.setInput('title', inputs.title);
+    if (inputs.titleId !== undefined) fixture.componentRef.setInput('titleId', inputs.titleId);
     if (inputs.subtitle !== undefined) fixture.componentRef.setInput('subtitle', inputs.subtitle);
     if (inputs.actionLabel !== undefined) fixture.componentRef.setInput('actionLabel', inputs.actionLabel);
     if (inputs.actionRoute !== undefined) fixture.componentRef.setInput('actionRoute', inputs.actionRoute);
@@ -33,6 +35,12 @@ describe('SectionHeader', () => {
     expect(title).toBeTruthy();
     expect(title.nativeElement.tagName.toLowerCase()).toBe('h2');
     expect(title.nativeElement.textContent.trim()).toBe('عنوان القسم');
+  });
+
+  it('sets id on title when titleId is provided', () => {
+    setup({ title: 'قسم الشركاء', titleId: 'home-partners-title' });
+    const title = fixture.debugElement.query(By.css('[data-testid="section-header-title"]'));
+    expect(title.nativeElement.getAttribute('id')).toBe('home-partners-title');
   });
 
   it('does not render subtitle or action when omitted', () => {

@@ -1,4 +1,12 @@
-import { ChangeDetectionStrategy, Component, computed, input, output, signal } from '@angular/core';
+import {
+  booleanAttribute,
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  input,
+  output,
+  signal,
+} from '@angular/core';
 import { Button } from 'primeng/button';
 
 /**
@@ -8,6 +16,8 @@ import { Button } from 'primeng/button';
  * **Required:** the page-helpfulness row (yes/no + stats) is always rendered.
  * **Optional:** last-modified and service-rating rows (`showLastModifiedRow`, `showServiceRatingRow`).
  */
+export type LastModifiedRowAlign = 'start' | 'end';
+
 @Component({
   selector: 'app-feedback-block',
   imports: [Button],
@@ -23,8 +33,12 @@ import { Button } from 'primeng/button';
 export class FeedbackBlock {
   /** Optional — Figma `2036:31122` Last Modified row. */
   showLastModifiedRow = input(false);
+  /** Horizontal alignment when `showLastModifiedRow` is true. Default `end` preserves previous layout. */
+  showLastModifiedRowAlign = input<LastModifiedRowAlign>('end');
   /** Optional — Figma `2036:27925` Rating1 row. */
   showServiceRatingRow = input(false);
+  /** Page helpfulness row (`2036:30008`). Home frame `2036:65608` shows last-modified only — set false there. */
+  showHelpfulnessRow = input(true, { transform: booleanAttribute });
 
   lastModifiedText = input(
     'تاريخ آخر تعديل: 04/12/2020 - 4:13 م بتوقيت السعودية',

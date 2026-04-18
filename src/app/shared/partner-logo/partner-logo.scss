@@ -2,6 +2,19 @@
   display: block;
 }
 
+/* Figma `2036:65731` card shell — border `border-neutral-primary` #d2d6db, radius `radius-lg` 16px. */
+.partner-logo__shell {
+  border-color: var(--color-neutral-300) !important;
+  border-radius: var(--radius-lg);
+}
+
+.partner-logo__label {
+  color: var(--color-text-secondary-paragraph);
+  font-weight: 500;
+  font-size: 0.75rem;
+  line-height: 1.125rem;
+}
+
 .partner-logo-container {
   width: 96px;
   height: 48px;

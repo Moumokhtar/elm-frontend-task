@@ -22,6 +22,12 @@ describe('FeedbackBlock', () => {
     expect(fixture.debugElement.query(By.css('[data-testid="feedback-rate-service-btn"]'))).toBeNull();
   });
 
+  it('hides helpfulness row when showHelpfulnessRow is false', () => {
+    fixture.componentRef.setInput('showHelpfulnessRow', false);
+    fixture.detectChanges();
+    expect(fixture.debugElement.query(By.css('[data-testid="page-feedback-bar"]'))).toBeNull();
+  });
+
   it('sets dir and lang on the stack root for RTL', () => {
     fixture.detectChanges();
     const root = fixture.debugElement.query(By.css('[data-testid="feedback-block"]'))
@@ -35,6 +41,33 @@ describe('FeedbackBlock', () => {
     fixture.detectChanges();
     expect(fixture.debugElement.query(By.css('[data-testid="feedback-last-modified"]'))).toBeTruthy();
     expect(fixture.nativeElement.textContent).toContain('تاريخ آخر تعديل');
+  });
+
+  it('last-modified strip defaults to end alignment (justify + text)', () => {
+    fixture.componentRef.setInput('showLastModifiedRow', true);
+    fixture.detectChanges();
+    const strip = fixture.debugElement.query(By.css('[data-testid="feedback-last-modified"]'))
+      ?.parent?.nativeElement as HTMLElement;
+    const p = fixture.debugElement.query(By.css('[data-testid="feedback-last-modified"]'))
+      ?.nativeElement as HTMLElement;
+    expect(strip.classList.contains('justify-content-end')).toBe(true);
+    expect(strip.classList.contains('justify-content-start')).toBe(false);
+    expect(p.classList.contains('text-end')).toBe(true);
+    expect(p.classList.contains('text-start')).toBe(false);
+  });
+
+  it('last-modified strip aligns start when showLastModifiedRowAlign is start', () => {
+    fixture.componentRef.setInput('showLastModifiedRow', true);
+    fixture.componentRef.setInput('showLastModifiedRowAlign', 'start');
+    fixture.detectChanges();
+    const strip = fixture.debugElement.query(By.css('[data-testid="feedback-last-modified"]'))
+      ?.parent?.nativeElement as HTMLElement;
+    const p = fixture.debugElement.query(By.css('[data-testid="feedback-last-modified"]'))
+      ?.nativeElement as HTMLElement;
+    expect(strip.classList.contains('justify-content-start')).toBe(true);
+    expect(strip.classList.contains('justify-content-end')).toBe(false);
+    expect(p.classList.contains('text-start')).toBe(true);
+    expect(p.classList.contains('text-end')).toBe(false);
   });
 
   it('optional service rating row when showServiceRatingRow is true', () => {

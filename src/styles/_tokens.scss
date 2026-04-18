@@ -6,7 +6,9 @@
   // Spacing scale
   --spacing-xs: 4px;
   --spacing-md: 8px;
+  --spacing-lg: 12px;
   --spacing-xl: 16px;
+  --spacing-3xl: 24px;
   --spacing-4xl: 32px;
 
   // Radii
@@ -32,16 +34,16 @@
   --font-service-card-tag-size: 0.75rem; /* 12px — replace with Figma text size if different */
   --font-service-card-tag-line-height: 1rem; /* 16px */
   --font-service-card-tag-weight: 500;
-  --padding-service-card-tag-y: 2px;
+  --padding-service-card-tag-y: 3px;
   --padding-service-card-tag-x: 8px;
 
-  --color-service-card-tag-success-bg: #ecfdf5;
-  --color-service-card-tag-success-border: #1b8354;
-  --color-service-card-tag-success-text: #16694a;
+  --color-service-card-tag-success-bg: #ecfdf3;
+  --color-service-card-tag-success-border: #abefc6;
+  --color-service-card-tag-success-text: #085d3a;
 
-  --color-service-card-tag-info-bg: #eff6ff;
-  --color-service-card-tag-info-border: #2563eb;
-  --color-service-card-tag-info-text: #1d4ed8;
+  --color-service-card-tag-info-bg: #eff8ff;
+  --color-service-card-tag-info-border: #b2ddff;
+  --color-service-card-tag-info-text: #1849a9;
 
   --color-service-card-tag-warn-bg: #fffbeb;
   --color-service-card-tag-warn-border: #d97706;
@@ -65,12 +67,17 @@
 
   // Neutrals
   --color-neutral-300: #d2d6db;
+  --color-border-neutral-secondary: #e5e7eb;
+  /* Services carousel dots — Figma `2036:65712` inactive vs active */
+  --color-carousel-dot-inactive: #e5e7eb;
 
   // Feedback / rating bars — Figma `2036:31121` (border-primary top stroke on white rows).
   // https://www.figma.com/design/wh34oGmGLBesPFMgXM4BLS/Frontend-Task--RTL?node-id=2036-31121&m=dev
   --color-border-primary: #1b8354;
   /* Figma token `button/button-background-primary-default` (MCP FeedbackDesktop 2036:30014–30015). */
   --button-background-primary-default: #1b8354;
+  /* Figma partner carousel nav `2036:65735` / `2036:65756` — `button-background-neutral-default` */
+  --button-background-neutral-default: #f3f4f6;
   --layout-feedback-bar-min-height: 88px;
   --padding-feedback-bar-y: 24px;
   --color-text-secondary-paragraph: #6c737f;
@@ -93,6 +100,12 @@
   --font-section-header-subtitle-line-height: 1.5rem; /* 24px */
   --layout-section-header-subtitle-max-width: 720px;
   --size-section-header-action-height: 40px;
+
+  // Home About stats — Figma `2036:65644` (value color), `2036:65631` (copy width)
+  --color-text-primary-sa-flag: #14573a;
+  --layout-home-stat-card-max-width: 224px;
+  --layout-home-hero-copy-max-width: 624px;
+  --size-home-stat-icon-circle: 56px;
 }
 
 /*
@@ -104,8 +117,38 @@
   padding-inline: clamp(var(--spacing-xl), 4vw, var(--page-strip-padding-inline));
 }
 
+.u-page-strip-y {
+  padding-block: var(--page-strip-padding-block);
+}
+
 .u-page-content-max {
   max-width: var(--layout-page-content-max-width);
+}
+
+.u-max-w-hero-copy {
+  max-width: var(--layout-home-hero-copy-max-width);
+}
+
+.u-max-w-home-stat {
+  max-width: var(--layout-home-stat-card-max-width);
+}
+
+.u-bg-page-muted {
+  background-color: var(--background-page-muted);
+}
+
+.u-text-primary-sa-flag {
+  color: var(--color-text-primary-sa-flag);
+}
+
+.u-home-stat-icon {
+  width: var(--size-home-stat-icon-circle);
+  height: var(--size-home-stat-icon-circle);
+  background-color: var(--icon-bg-brand-light);
+}
+
+.u-ls-stat-value {
+  letter-spacing: -0.06rem;
 }
 
 .u-brand-border-top-2 {
@@ -122,4 +165,82 @@
 
 .u-text-secondary-paragraph {
   color: var(--color-text-secondary-paragraph);
+}
+
+/* Figma `2036:65713` — 32px between section header block and carousel */
+.u-gap-section-block {
+  gap: var(--spacing-4xl);
+}
+
+/*
+ * Figma outline secondary CTA on native PrimeNG `<button class="p-button …">` (via `p-button` `styleClass`).
+ * Section header `2036:65640` + service card secondary `2036:65719` — same chrome; not expressible with Bootstrap
+ * alone without overriding `$secondary` / fighting PrimeNG theme. Pair with `severity="secondary"` + `[outlined]="true"`.
+ */
+.p-button.u-figma-outline-action {
+  width: auto;
+  max-width: 100%;
+  height: var(--size-section-header-action-height);
+  min-height: var(--size-section-header-action-height);
+  max-height: var(--size-section-header-action-height);
+  color: var(--color-text-default) !important;
+  background: transparent !important;
+  border-width: 1px !important;
+  border-style: solid !important;
+  border-color: var(--color-neutral-300) !important;
+  border-radius: var(--radius-sm);
+  padding-inline: var(--spacing-xl);
+  box-shadow: none !important;
+
+  .p-button-label {
+    font-weight: 500;
+    color: inherit !important;
+  }
+
+  &:not(:disabled):hover {
+    border-color: var(--color-neutral-300) !important;
+    background: var(--background-page-muted) !important;
+    color: var(--color-text-default) !important;
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--color-neutral-300);
+    outline-offset: 2px;
+    box-shadow: none !important;
+  }
+}
+
+/*
+ * Figma primary CTA — `button-background-primary-default` (#1b8354), e.g. news card `2036:65730` / service card actions.
+ * PrimeNG default `success` / primary theme tokens can diverge; this locks to design tokens. Use via `p-button` `styleClass`.
+ */
+.p-button.u-figma-primary-action {
+  width: auto;
+  max-width: 100%;
+  height: var(--size-section-header-action-height);
+  min-height: var(--size-section-header-action-height);
+  max-height: var(--size-section-header-action-height);
+  background: var(--button-background-primary-default) !important;
+  border: none !important;
+  border-radius: var(--radius-sm) !important;
+  color: #fff !important;
+  padding-inline: var(--spacing-xl);
+  box-shadow: none !important;
+
+  .p-button-label {
+    font-weight: 500;
+    color: inherit !important;
+  }
+
+  &:not(:disabled):hover {
+    background: var(--button-background-primary-default) !important;
+    filter: brightness(0.96);
+    color: #fff !important;
+  }
+
+  &:focus-visible {
+    outline: 2px solid rgba(255, 255, 255, 0.9);
+    outline-offset: 2px;
+    box-shadow: none !important;
+  }
 }

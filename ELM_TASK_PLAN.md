@@ -54,31 +54,9 @@ Shipped. See [PRD #20](https://github.com/Moumokhtar/elm-frontend-task/issues/20
 
 ---
 
-## MILESTONE 4 — Home Page
+## MILESTONE 4 — Home Page ✅ Complete
 
-**Goal:**
-Full pixel-perfect home page composed from shared components and PrimeNG carousels.
-
-**Scope:**
-Five sections stacked vertically:
-
-1. **Hero** — full-width dark green banner, Arabic heading + subtitle + CTA button on right, dot pagination (PrimeNG Carousel or manual dots), 4 slides
-2. **About (من نحن)** — `SectionHeaderComponent`, secondary CTA button, 4 stats in a row: icon + "1.5M" number + label (شخص). Icons from PrimeNG or Bootstrap Icons.
-3. **Services (قسم الخدمات)** — `SectionHeaderComponent`, horizontal PrimeNG Carousel of `ServiceCardComponent` items, prev/next arrow buttons, dot indicators
-4. **News (قسم الاخبار والمقالات)** — `SectionHeaderComponent`, 3-column Bootstrap grid of `NewsCardComponent`, collapses to 1-column on mobile with carousel
-5. **Partners (قسم الشركاء)** — PrimeNG Carousel of `PartnerLogoComponent` items, prev/next arrows
-
-All sections use `SectionHeaderComponent`. Optional `FeedbackBlock` visual QA strip on Home until full composition; remove for real M4 layout. Last-updated date in footer area.
-
-**Done when:**
-
-- [ ] Hero banner is full-width green with correct text alignment (right)
-- [ ] Hero dot indicators are visible and clickable
-- [ ] Stats section shows 4 items in a row on desktop, 2×2 on mobile
-- [ ] Services carousel scrolls with arrows and dot indicators
-- [ ] News cards render in 3-column grid on desktop
-- [ ] Partners carousel scrolls with prev/next arrows
-- [ ] Page is navigable by keyboard end-to-end
+Shipped. See [PRD #28](https://github.com/Moumokhtar/elm-frontend-task/issues/28) and slices #29–#35.
 
 ---
 

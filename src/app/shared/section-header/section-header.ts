@@ -11,6 +11,8 @@ import { Button } from 'primeng/button';
 })
 export class SectionHeader {
   title = input.required<string>();
+  /** When set, applied to the `<h2>` for `aria-labelledby` / in-page anchors. */
+  titleId = input<string>('');
   subtitle = input<string>('');
   actionLabel = input<string>('');
   actionRoute = input<string | readonly (string | number)[] | undefined>(undefined);

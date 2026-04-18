@@ -34,6 +34,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  min-height: 24px;
   padding: var(--padding-service-card-tag-y) var(--padding-service-card-tag-x);
   border-radius: var(--radius-service-card-tag);
   border-width: 1px;
@@ -73,8 +74,16 @@
   color: var(--color-service-card-tag-secondary-text);
 }
 
+/* Figma `2036:65719` third tag — neutral light */
+.service-card__tag--neutral {
+  background-color: var(--background-page-muted);
+  border-color: var(--color-border-neutral-secondary);
+  color: var(--color-text-display);
+}
+
 .service-card__tag--contrast {
   background-color: var(--color-service-card-tag-contrast-bg);
   border-color: var(--color-service-card-tag-contrast-border);
   color: var(--color-service-card-tag-contrast-text);
 }
+

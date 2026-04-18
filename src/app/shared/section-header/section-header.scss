@@ -18,18 +18,3 @@
   max-width: var(--layout-section-header-subtitle-max-width);
 }
 
-/* PrimeNG outline button — token values only (no Bootstrap equivalent for exact Figma control). */
-:host ::ng-deep .section-header__action-button.p-button {
-  width: auto;
-  max-width: 100%;
-  height: var(--size-section-header-action-height);
-  min-height: var(--size-section-header-action-height);
-  max-height: var(--size-section-header-action-height);
-  border-color: var(--color-neutral-300);
-  border-radius: var(--radius-sm);
-  padding-inline: var(--spacing-xl);
-
-  .p-button-label {
-    font-weight: 500;
-  }
-}

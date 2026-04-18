@@ -4,6 +4,7 @@ export type TagSeverity =
   | 'warn'
   | 'danger'
   | 'secondary'
+  | 'neutral'
   | 'contrast';
 
 export interface TagItem {

@@ -1,115 +1,289 @@
-<section class="page-placeholder mb-4">
-  <h1>الصفحة الرئيسية</h1>
-  <p lang="en">Home · placeholder</p>
+<!-- Main content only — shell provides navbar. Figma: Home Page – Desktop AR `2036:65608`. -->
+<section
+  class="home-page__hero position-relative overflow-hidden text-white"
+  data-testid="home-hero"
+  aria-label="القسم الرئيسي — عرض شرائح"
+>
+  <img
+    class="home-page__hero-bg position-absolute top-0 start-0 w-100 h-100 object-fit-cover"
+    [src]="heroBg"
+    alt=""
+    width="1920"
+    height="1080"
+    decoding="async"
+    fetchpriority="high"
+  />
+  <div
+    class="u-page-strip-x u-page-strip-y position-relative d-flex flex-column align-items-stretch justify-content-end gap-4 gap-lg-5"
+  >
+    <h1 class="visually-hidden">الصفحة الرئيسية</h1>
+    <p-carousel
+      class="home-page__hero-carousel w-100"
+      [value]="heroSlides"
+      [numVisible]="1"
+      [numScroll]="1"
+      [showNavigators]="false"
+      [showIndicators]="true"
+      [circular]="true"
+      role="region"
+      aria-roledescription="عرض شرائح"
+      [attr.aria-label]="'القسم الرئيسي — ' + heroSlides.length + ' شرائح'"
+    >
+      <ng-template let-slide #item>
+        <div
+          class="u-page-content-max home-page__hero-slide d-flex flex-column align-items-start w-100 mx-auto"
+          dir="rtl"
+          lang="ar"
+        >
+          <div class="d-flex flex-column align-items-start gap-4 w-100 u-page-content-max">
+            <div
+              class="u-max-w-hero-copy d-flex flex-column align-items-start text-start w-100 gap-4"
+            >
+              <p class="mb-0 home-page__hero-title" role="presentation">
+                {{ slide.title }}
+              </p>
+              <p class="mb-0 home-page__hero-body">{{ slide.body }}</p>
+            </div>
+            <button
+              type="button"
+              class="border-0 bg-white text-dark fw-medium rounded-1 d-inline-flex align-items-center justify-content-center px-3 shadow-none text-nowrap flex-shrink-0 lh-sm home-page__hero-cta-btn"
+              data-testid="home-hero-cta"
+            >
+              {{ slide.ctaLabel }}
+            </button>
+          </div>
+        </div>
+      </ng-template>
+    </p-carousel>
+  </div>
 </section>
 
-<!--
-  VISUAL QA ONLY — M3 SectionHeader (remove for M4 real composition):
-  Temporary strip so humans can compare typography, spacing, and RTL layout to Figma before the
-  Home Page milestone assembles real sections. Do not treat this as final page structure; delete
-  this entire block (or gate behind a dev flag) when M4 ships.
--->
 <section
-  class="home-page__strip home-page__strip--muted"
-  data-testid="home-visual-qa-section-header"
-  aria-label="معاينة مؤقتة لترويسة القسم"
+  class="home-page__about u-page-strip-x u-page-strip-y bg-white"
+  data-testid="home-about"
+  aria-label="قسم من نحن"
 >
-  <div class="home-page__strip-inner">
+  <div class="d-flex flex-column gap-4 w-100 mx-auto u-page-content-max">
+    <app-section-header
+      title="قسم من نحن"
+      [subtitle]="aboutSubtitle"
+      actionLabel="إجراء ثانوي"
+      data-testid="home-about-header"
+    />
+    <div class="row g-4 g-lg-4 justify-content-center" role="list">
+      @for (stat of stats; track stat.label + stat.iconClass; let i = $index) {
+        <div class="col-6 col-lg-3" role="listitem">
+          <div
+            class="d-flex flex-column align-items-center gap-4 p-3 bg-white border-0 shadow-none text-center w-100 rounded-4 mx-auto u-max-w-home-stat"
+            [attr.data-testid]="'home-stat-' + i"
+          >
+            <div
+              class="u-home-stat-icon d-flex align-items-center justify-content-center rounded-circle flex-shrink-0"
+              role="img"
+              [attr.aria-label]="stat.iconLabel"
+            >
+              <i [class]="stat.iconClass + ' fs-3 lh-1 u-text-brand'" aria-hidden="true"></i>
+            </div>
+            <div class="d-flex flex-column align-items-center gap-2">
+              <p class="mb-0 fs-1 lh-sm fw-normal text-nowrap u-text-primary-sa-flag u-ls-stat-value">
+                {{ stat.value }}
+              </p>
+              <p class="mb-0 fs-6 lh-base text-dark">{{ stat.label }}</p>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<section
+  class="u-page-strip-x u-page-strip-y u-bg-page-muted"
+  data-testid="home-services"
+  aria-label="قسم الخدمات"
+>
+  <div
+    class="d-flex flex-column align-items-stretch u-gap-section-block w-100 mx-auto u-page-content-max"
+  >
     <app-section-header
       title="قسم الخدمات"
-      subtitle="نص تجريبي لمعاينة التنسيق والمسافات مقارنةً بـ Figma. سيُستبدل بمحتوى الصفحة الرئيسية الفعلي في مرحلة M4."
+      [subtitle]="servicesSubtitle"
       actionLabel="عرض الكل"
       actionRoute="/service"
+      data-testid="home-services-header"
     />
-  </div>
-</section>
-
-<!--
-  VISUAL QA ONLY — M3 Breadcrumb (remove for M4 real composition):
-  Temporary strip to verify separators, RTL, and links against Figma. Not final home structure.
--->
-<section
-  class="home-page__strip bg-white"
-  data-testid="home-visual-qa-breadcrumb"
-  aria-label="معاينة مؤقتة لمسار التنقل"
->
-  <div class="home-page__strip-inner">
-    <app-breadcrumb
-      [items]="[
-        { label: 'الرئيسية', route: '/' },
-        { label: 'خدمة', route: '/service' },
-        { label: 'معاينة' },
-      ]"
-    />
-  </div>
-</section>
-
-<!--
-  VISUAL QA ONLY — M3 ServiceCard (remove for M4 real composition):
-  Sample card to compare with Figma service carousel item. Not final home structure.
--->
-<section
-  class="home-page__strip home-page__strip--muted"
-  data-testid="home-visual-qa-service-card"
-  aria-label="معاينة مؤقتة لبطاقة الخدمة"
->
-  <div class="home-page__strip-inner">
-    <div class="row g-4">
-      <div class="col-12 col-sm-auto">
-        <app-service-card
-          title="عنوان البطاقة"
-          description="نص إضافي لمحتوى البطاقة يظهر هنا بشكل مختصر لمعاينة التنسيق."
-          [tags]="[
-            { label: 'وسم', severity: 'success' },
-            { label: 'وسم', severity: 'info' },
-            { label: 'وسم', severity: 'secondary' },
-          ]"
-          primaryLabel="اجراء"
-          secondaryLabel="اجراء ثانوي"
-        />
+    <!-- Figma `2036:65719` — carousel block: horizontal padding 24px, 24px gap track ↔ controls -->
+    <div class="home-page__services-carousel-frame d-flex w-100 flex-column align-items-center gap-4 px-4">
+      <!-- LTR chrome: PrimeNG carousel maps arrows/indicator keys to physical LTR; slides stay RTL below. -->
+      <div class="home-page__services-carousel-ltr w-100" dir="ltr">
+        <p-carousel
+      class="home-page__services-carousel w-100"
+      [value]="services"
+      [numVisible]="3"
+      [numScroll]="1"
+      [responsiveOptions]="servicesCarouselResponsive"
+      [showNavigators]="true"
+      [showIndicators]="true"
+      [circular]="false"
+      [prevButtonProps]="{
+        ariaLabel: 'الخدمات السابقة',
+        text: true,
+        rounded: true,
+        severity: 'success',
+        styleClass: 'home-page__carousel-round-nav',
+      }"
+      [nextButtonProps]="{
+        ariaLabel: 'الخدمات التالية',
+        text: true,
+        rounded: true,
+        severity: 'success',
+        styleClass: 'home-page__carousel-round-nav',
+      }"
+      role="region"
+      aria-roledescription="عرض شرائح"
+      aria-label="قسم الخدمات — عرض أفقي"
+    >
+      <ng-template let-svc #item>
+        <div class="px-2" dir="rtl" lang="ar">
+          <app-service-card
+            [title]="svc.title"
+            [description]="svc.description"
+            [tags]="svc.tags"
+            [primaryLabel]="svc.primaryLabel"
+            [secondaryLabel]="svc.secondaryLabel"
+          />
+        </div>
+      </ng-template>
+        </p-carousel>
       </div>
     </div>
   </div>
 </section>
 
-<!--
-  VISUAL QA ONLY — M3 NewsCard (remove for M4 real composition):
-  Sample card for typography, image crop, and RTL against Figma. Not final home structure.
--->
-<section
-  class="home-page__strip bg-white"
-  data-testid="home-visual-qa-news-card"
-  aria-label="معاينة مؤقتة لبطاقة الخبر"
->
-  <div class="home-page__strip-inner">
-    <div class="row g-4">
-      <div class="col-12 col-md-6 col-xl-4">
-        <app-news-card
-          imageSrc="/images/news-card-placeholder.jpg"
-          imageAlt="صورة الغلاف — معاينة من Figma (2036:65728)"
-          imagePriority
-          title="عنوان بطاقة الأخبار في سطرين"
-          body="هنا يمكنك تضمين وصف موجز للعنوان في أربعة أسطر. هنا يمكنك تضمين وصف موجز للعنوان في أربعة أسطر."
-        />
+<section class="u-page-strip-x u-page-strip-y bg-white" data-testid="home-news" aria-label="قسم الأخبار والمقالات">
+  <!-- Figma `2036:65720`: 32px header block → cards; card row gap 16px (`spacing-xl`). -->
+  <div class="d-flex flex-column u-gap-section-block w-100 mx-auto u-page-content-max">
+    <app-section-header
+      title="قسم الاخبار والمقالات"
+      [subtitle]="newsSubtitle"
+      actionLabel="عرض الكل"
+      actionRoute="/service"
+      data-testid="home-news-header"
+    />
+    <div class="d-none d-lg-block">
+      <div class="row g-3">
+        @for (item of newsItems.slice(0, 3); track item.title; let idx = $index) {
+          <div class="col-lg-4">
+            <app-news-card
+              [imageSrc]="item.imageSrc"
+              [imageAlt]="item.imageAlt"
+              [title]="item.title"
+              [body]="item.body"
+              [imagePriority]="idx === 0"
+            />
+          </div>
+        }
+      </div>
+    </div>
+    <div class="d-lg-none">
+      <!-- LTR chrome: same as services — dots row + round primary arrows; slides stay RTL in template. -->
+      <div class="home-page__news-carousel-ltr w-100" dir="ltr">
+        <p-carousel
+          class="home-page__news-carousel w-100"
+          [value]="newsItems"
+          [numVisible]="1"
+          [numScroll]="1"
+          [showNavigators]="true"
+          [showIndicators]="true"
+          [circular]="false"
+          [prevButtonProps]="{
+            ariaLabel: 'الخبر السابق',
+            text: true,
+            rounded: true,
+            severity: 'success',
+            styleClass: 'home-page__carousel-round-nav',
+          }"
+          [nextButtonProps]="{
+            ariaLabel: 'الخبر التالي',
+            text: true,
+            rounded: true,
+            severity: 'success',
+            styleClass: 'home-page__carousel-round-nav',
+          }"
+          role="region"
+          aria-roledescription="عرض شرائح"
+          aria-label="الأخبار — عرض الجوال"
+        >
+          <ng-template let-article #item>
+            <div class="px-1" dir="rtl" lang="ar">
+              <app-news-card
+                [imageSrc]="article.imageSrc"
+                [imageAlt]="article.imageAlt"
+                [title]="article.title"
+                [body]="article.body"
+              />
+            </div>
+          </ng-template>
+        </p-carousel>
       </div>
     </div>
   </div>
 </section>
 
-<!--
-  VISUAL QA ONLY — Figma `2036:31121` full Feedback stack (remove for M4 real composition).
--->
-<section
-  class="home-page__strip home-page__strip--muted"
-  data-testid="home-visual-qa-feedback-block"
-  aria-label="معاينة كتلة التقييم والملاحظات"
->
-  <div class="home-page__strip-inner px-0">
-    <app-feedback-block
-      [showLastModifiedRow]="true"
-      [showServiceRatingRow]="true"
-      [seedYes]="1706"
-      [seedNo]="1137"
+<section class="u-page-strip-x u-page-strip-y bg-white" data-testid="home-partners" aria-labelledby="home-partners-title">
+  <!-- Figma `2036:65731`: title only (no CTA); 32px title → carousel like other sections. -->
+  <div class="d-flex flex-column u-gap-section-block w-100 mx-auto u-page-content-max">
+    <app-section-header
+      title="قسم الشركاء"
+      titleId="home-partners-title"
+      data-testid="home-partners-header"
     />
+    <p-carousel
+      class="home-page__partners-carousel w-100"
+      [value]="partners"
+      [numVisible]="5"
+      [numScroll]="1"
+      [responsiveOptions]="partnersCarouselResponsive"
+      [showNavigators]="true"
+      [showIndicators]="false"
+      [circular]="false"
+      [prevButtonProps]="{
+        ariaLabel: 'الشريك السابق',
+        text: true,
+        rounded: false,
+        severity: 'secondary',
+        styleClass: 'home-page__partners-nav-btn',
+      }"
+      [nextButtonProps]="{
+        ariaLabel: 'الشريك التالي',
+        text: true,
+        rounded: false,
+        severity: 'secondary',
+        styleClass: 'home-page__partners-nav-btn',
+      }"
+      role="region"
+      aria-roledescription="عرض شرائح"
+      aria-label="قسم الشركاء"
+    >
+      <ng-template let-partner #item>
+        <div class="px-2 d-flex justify-content-center">
+          <app-partner-logo
+            [logoSrc]="partner.logoSrc"
+            [logoAlt]="partner.logoAlt"
+            [label]="partner.label"
+          />
+        </div>
+      </ng-template>
+    </p-carousel>
   </div>
+</section>
+
+<section class="u-page-strip-x u-page-strip-y bg-white" data-testid="home-feedback" aria-label="معلومات التحديث">
+  <!-- Figma `2036:65757` — section shell matches other blocks; last-modified uses `u-page-content-max` inside `FeedbackBlock` (no second `u-page-strip-x`). -->
+  <app-feedback-block
+    [showLastModifiedRow]="true"
+    [showLastModifiedRowAlign]="'start'"
+    [showServiceRatingRow]="false"
+    [showHelpfulnessRow]="false"
+  />
 </section>

@@ -1,5 +1,8 @@
 @if (logoSrc()) {
-  <div class="border rounded-3 p-3 d-flex flex-column align-items-center gap-2 bg-white" data-testid="partner-logo">
+  <div
+    class="partner-logo__shell border shadow-none p-3 d-flex flex-column align-items-center gap-2 bg-white w-100"
+    data-testid="partner-logo"
+  >
     <div class="d-flex align-items-center justify-content-center partner-logo-container" data-testid="partner-logo-img">
       <img
         [src]="logoSrc()"
@@ -8,7 +11,7 @@
       />
     </div>
     @if (label()) {
-      <span class="small text-secondary text-center" data-testid="partner-logo-label">{{ label() }}</span>
+      <span class="partner-logo__label small text-center" data-testid="partner-logo-label">{{ label() }}</span>
     }
   </div>
 }

@@ -1,4 +1,6 @@
-<!-- Figma node 2036:65728 — https://www.figma.com/design/wh34oGmGLBesPFMgXM4BLS/Frontend-Task--RTL?node-id=2036-65728&m=dev -->
+<!--
+  Figma: section `2036:65720`, card `2036:65730` — https://www.figma.com/design/wh34oGmGLBesPFMgXM4BLS/Frontend-Task--RTL?node-id=2036-65730&m=dev
+-->
 <div
   class="card border shadow-none mw-100 bg-white rounded-4 news-card__shell d-flex flex-column gap-4 p-3 w-100"
   data-testid="news-card"
@@ -24,9 +26,10 @@
     <p-button
       type="button"
       label="قراءة المزيد"
+      severity="success"
       (onClick)="readMore.emit()"
       data-testid="news-card-read-more"
-      styleClass="flex-shrink-0"
+      styleClass="u-figma-primary-action flex-shrink-0"
     />
   </div>
 </div>

@@ -1,23 +1,234 @@
 :host {
   display: block;
   width: 100%;
+  direction: rtl;
 }
 
-/* Figma home frame 2036:65608 — full-width strip + 1280px inner (visual QA strips until M4). */
-.home-page__strip {
-  box-sizing: border-box;
+/* Hero shell — Figma `2036:65629` min height; strip padding uses `u-page-strip-*` in template */
+.home-page__hero {
+  min-height: 491px;
+}
+
+.home-page__hero-bg {
+  z-index: 0;
+  pointer-events: none;
+}
+
+.home-page__hero .u-page-strip-y {
+  min-height: 491px;
+  z-index: 1;
+}
+
+.home-page__hero-slide {
+  direction: rtl;
+}
+
+/* Figma type nodes `2036:65632` / `2036:65633` — no Bootstrap display scale matches 60/72 + 20/30 */
+.home-page__hero-title {
+  font-size: 3.75rem;
+  line-height: 4.5rem;
+  font-weight: 600;
+  letter-spacing: -1.2px;
+  color: #fff;
   width: 100%;
-  padding-block: var(--page-strip-padding-block);
-  padding-inline: clamp(var(--spacing-xl), 4vw, var(--page-strip-padding-inline));
 }
 
-.home-page__strip--muted {
-  background-color: var(--background-page-muted);
-}
-
-.home-page__strip-inner {
-  box-sizing: border-box;
+.home-page__hero-body {
+  font-size: 1.25rem;
+  line-height: 1.875rem;
+  font-weight: 400;
   width: 100%;
-  max-width: var(--layout-page-content-max-width);
-  margin-inline: auto;
+  color: #fff;
+}
+
+.home-page__hero-cta-btn {
+  height: 40px;
+  min-height: 40px;
+  border-width: 0 !important;
+  box-shadow: none !important;
+  cursor: pointer;
+}
+
+.home-page__hero-cta-btn:hover {
+  background-color: #f3f4f6 !important;
+}
+
+.home-page__hero-cta-btn:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.95);
+  outline-offset: 2px;
+}
+
+@media (max-width: 767.98px) {
+  .home-page__hero-title {
+    font-size: clamp(1.75rem, 7vw, 3.75rem);
+    line-height: 1.15;
+    letter-spacing: -0.04em;
+  }
+
+  .home-page__hero-body {
+    font-size: clamp(0.95rem, 3.5vw, 1.25rem);
+    line-height: 1.5;
+  }
+}
+
+/* PrimeNG carousels — DOM is inside child components; `:host ::ng-deep` only where utilities cannot reach */
+:host ::ng-deep p-carousel.home-page__hero-carousel {
+  .p-carousel-indicator-list {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-md);
+    padding: 12px;
+    border-radius: 9999px;
+    width: fit-content;
+    max-width: 100%;
+    margin-inline: auto;
+    margin-block: 0;
+    list-style: none;
+  }
+
+  .p-carousel-indicator-button {
+    width: 16px !important;
+    height: 16px !important;
+    min-width: 16px !important;
+    min-height: 16px !important;
+    padding: 0 !important;
+    border: none !important;
+    border-radius: 50% !important;
+    box-shadow: none !important;
+    background: #fff !important;
+  }
+
+  .p-carousel-indicator-active .p-carousel-indicator-button {
+    background: var(--button-background-primary-default) !important;
+  }
+}
+
+@media (min-width: 768px) {
+  :host ::ng-deep .home-page__about app-section-header .row > .col-md-auto {
+    margin-inline-start: 88px;
+  }
+}
+
+:host ::ng-deep .home-page__about .section-header__subtitle {
+  max-width: 964px;
+}
+
+/*
+ * Services + news mobile carousels — controls row: dots (start) + flexible gap + prev/next (end).
+ * Wrapper `dir="ltr"` so PrimeNG arrow/dot/keyboard behavior matches physical LTR (fixes RTL inversion on `html[dir=rtl]`).
+ * Grid is authored for LTR: dots column 1 (left), flexible middle, prev/next columns 3–4 (right).
+ */
+:host ::ng-deep .home-page__services-carousel-ltr p-carousel.home-page__services-carousel,
+:host ::ng-deep .home-page__news-carousel-ltr p-carousel.home-page__news-carousel {
+  .p-carousel-content-container {
+    display: grid;
+    grid-template-columns: auto auto minmax(0, 1fr) auto;
+    grid-template-rows: auto auto;
+    row-gap: var(--spacing-4xl);
+    column-gap: var(--spacing-3xl);
+    align-items: center;
+    width: 100%;
+  }
+
+  .p-carousel-content {
+    display: contents;
+  }
+
+  .p-carousel-viewport {
+    grid-column: 1 / -1;
+    grid-row: 1;
+    min-width: 0;
+  }
+
+  .p-carousel-indicator-list {
+    grid-column: 1;
+    grid-row: 2;
+    justify-self: start;
+    display: flex;
+    justify-content: flex-start;
+    gap: var(--spacing-md);
+    padding: var(--spacing-lg);
+    border-radius: 9999px;
+    width: fit-content;
+    max-width: 100%;
+    margin: 0;
+    list-style: none;
+  }
+
+  .p-carousel-prev-button {
+    grid-column: 3;
+    grid-row: 2;
+    justify-self: end;
+  }
+
+  .p-carousel-next-button {
+    grid-column: 4;
+    grid-row: 2;
+    justify-self: end;
+  }
+
+  .p-carousel-indicator-button {
+    width: 16px !important;
+    height: 16px !important;
+    min-width: 16px !important;
+    min-height: 16px !important;
+    padding: 0 !important;
+    border-radius: 50% !important;
+    border: none !important;
+    box-shadow: none !important;
+    background: var(--color-carousel-dot-inactive) !important;
+  }
+
+  .p-carousel-indicator-active .p-carousel-indicator-button {
+    background: var(--button-background-primary-default) !important;
+  }
+
+  .home-page__carousel-round-nav.p-button {
+    width: 48px;
+    height: 48px;
+    padding: 0;
+    border-radius: 50%;
+    background: var(--button-background-primary-default) !important;
+    color: #fff !important;
+    border: none !important;
+  }
+
+  /*
+   * Disabled: icon only, no fill. Carousel sets `p-disabled` on the `p-button` host; inner `button` keeps
+   * `.home-page__carousel-round-nav.p-button` (higher base specificity than `… button[disabled]`), so we must
+   * chain `p-button.p-carousel-*-button.p-disabled` and/or repeat the styleClass on the native button.
+   */
+  p-button.p-carousel-prev-button.p-disabled button,
+  p-button.p-carousel-next-button.p-disabled button,
+  .p-carousel-prev-button button.home-page__carousel-round-nav[disabled],
+  .p-carousel-next-button button.home-page__carousel-round-nav[disabled],
+  .p-carousel-prev-button button.home-page__carousel-round-nav[data-p-disabled='true'],
+  .p-carousel-next-button button.home-page__carousel-round-nav[data-p-disabled='true'] {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    color: var(--color-text-default) !important;
+    opacity: 1 !important;
+  }
+}
+
+/* News mobile — slide width peek; chrome (dots + round nav) shared with services block above. */
+:host ::ng-deep .home-page__news-carousel-ltr p-carousel.home-page__news-carousel .p-carousel-item {
+  flex: 0 0 88%;
+}
+
+/* Figma `2036:65731` — 40×40 neutral fill, `radius-sm` (not circular). */
+:host ::ng-deep p-carousel.home-page__partners-carousel .home-page__partners-nav-btn.p-button {
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  min-height: 40px;
+  max-width: 40px;
+  max-height: 40px;
+  padding: 0;
+  border-radius: var(--radius-sm) !important;
+  background: var(--button-background-neutral-default) !important;
+  color: var(--color-text-default) !important;
+  border: none !important;
+  box-shadow: none !important;
 }
