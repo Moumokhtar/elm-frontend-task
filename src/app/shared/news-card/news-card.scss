@@ -1,0 +1,26 @@
+/* Figma 2036:65728 — only values Bootstrap does not expose (exact border color, 250× media, 8px image radius, IBM Plex sizes). */
+
+.news-card__shell {
+  border-color: var(--color-neutral-300) !important;
+}
+
+.news-card__media {
+  height: 250px;
+}
+
+.news-card__media,
+.news-card__img {
+  border-radius: 8px;
+}
+
+.news-card__title {
+  font-size: var(--font-service-card-title-size);
+  line-height: var(--font-service-card-title-line-height);
+  color: var(--color-text-display);
+}
+
+.news-card__body {
+  font-size: var(--font-service-card-description-size);
+  line-height: var(--font-service-card-description-line-height);
+  color: var(--color-text-display);
+}

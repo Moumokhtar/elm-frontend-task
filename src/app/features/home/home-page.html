@@ -71,3 +71,27 @@
     </div>
   </div>
 </section>
+
+<!--
+  VISUAL QA ONLY — M3 NewsCard (remove for M4 real composition):
+  Sample card for typography, image crop, and RTL against Figma. Not final home structure.
+-->
+<section
+  class="home-page__strip bg-white"
+  data-testid="home-visual-qa-news-card"
+  aria-label="معاينة مؤقتة لبطاقة الخبر"
+>
+  <div class="home-page__strip-inner">
+    <div class="row g-4">
+      <div class="col-12 col-md-6 col-xl-4">
+        <app-news-card
+          imageSrc="/images/news-card-placeholder.jpg"
+          imageAlt="صورة الغلاف — معاينة من Figma (2036:65728)"
+          imagePriority
+          title="عنوان بطاقة الأخبار في سطرين"
+          body="هنا يمكنك تضمين وصف موجز للعنوان في أربعة أسطر. هنا يمكنك تضمين وصف موجز للعنوان في أربعة أسطر."
+        />
+      </div>
+    </div>
+  </div>
+</section>

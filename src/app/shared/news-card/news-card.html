@@ -1,0 +1,32 @@
+<!-- Figma node 2036:65728 — https://www.figma.com/design/wh34oGmGLBesPFMgXM4BLS/Frontend-Task--RTL?node-id=2036-65728&m=dev -->
+<div
+  class="card border shadow-none mw-100 bg-white rounded-4 news-card__shell d-flex flex-column gap-4 p-3 w-100"
+  data-testid="news-card"
+>
+  <div class="news-card__media position-relative w-100 overflow-hidden flex-shrink-0">
+    <img
+      [ngSrc]="imageSrc()"
+      [alt]="imageAlt()"
+      fill
+      [priority]="imagePriority()"
+      sizes="(max-width: 576px) 100vw, (max-width: 1200px) 50vw, 33vw"
+      class="news-card__img position-absolute top-0 start-0 w-100 h-100 object-fit-cover"
+      data-testid="news-card-img"
+    />
+  </div>
+
+  <div class="d-flex flex-column gap-2 w-100 text-start flex-shrink-0">
+    <h3 class="card-title mb-0 fw-bold news-card__title" data-testid="news-card-title">{{ title() }}</h3>
+    <p class="card-text mb-0 news-card__body" data-testid="news-card-body">{{ body() }}</p>
+  </div>
+
+  <div class="d-flex justify-content-start w-100 flex-shrink-0">
+    <p-button
+      type="button"
+      label="قراءة المزيد"
+      (onClick)="readMore.emit()"
+      data-testid="news-card-read-more"
+      styleClass="flex-shrink-0"
+    />
+  </div>
+</div>
