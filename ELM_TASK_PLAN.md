@@ -78,34 +78,9 @@ Shipped. See [PRD #44](https://github.com/Moumokhtar/elm-frontend-task/issues/44
 
 ---
 
-## MILESTONE 8 — Accessibility Audit
+## MILESTONE 8 — Accessibility Audit ✅ Complete
 
-**Goal:**
-Verify and fix all keyboard navigation, ARIA, and semantic HTML issues before deployment.
-
-**Scope:**
-Full pass across all 3 pages:
-
-- All interactive elements reachable by Tab
-- Focus ring visible on all focusable elements (override Bootstrap's `:focus-visible` if needed)
-- All images have `alt` text
-- All icon-only buttons have `aria-label`
-- Carousels have prev/next button ARIA labels
-- Tabs have correct `role="tablist"`, `role="tab"`, `role="tabpanel"`
-- Form inputs all have associated labels
-- Error messages linked to inputs via `aria-describedby`
-- Step wizard has correct `aria-current="step"`
-- Color contrast passes WCAG AA on green/white text
-
-**Done when:**
-
-- [ ] Tab-only navigation completes all 3 pages without mouse
-- [ ] No interactive element is unreachable by keyboard
-- [ ] All images have non-empty `alt` attributes
-- [ ] All icon buttons have `aria-label`
-- [ ] PrimeNG tab component has correct ARIA roles applied
-- [ ] Form error messages are linked via `aria-describedby`
-- [ ] No WCAG AA contrast failures on primary text/background combinations
+Shipped. See [PRD #48](https://github.com/Moumokhtar/elm-frontend-task/issues/48) and slices [#49](https://github.com/Moumokhtar/elm-frontend-task/issues/49)–[#52](https://github.com/Moumokhtar/elm-frontend-task/issues/52) (global `:focus-visible` in `src/styles/_focus.scss`; shell skip link + `main#main-content`, navbar mobile region + submenu `aria-*`, 404 `<h1>`; home hero semantics + carousel `aria-label`; service detail tabpanels + `aria-selected` / `aria-controls`; form page `aria-labelledby`, stepper `aria-current` on list items, mobile `role="status"`, required fields `aria-required` / `aria-invalid` / `aria-describedby`; token contrast note on primary green).
 
 ---
 

@@ -78,6 +78,7 @@
   // https://www.figma.com/design/wh34oGmGLBesPFMgXM4BLS/Frontend-Task--RTL?node-id=2036-31121&m=dev
   --color-border-primary: #1b8354;
   /* Figma token `button/button-background-primary-default` (MCP FeedbackDesktop 2036:30014–30015). */
+  /* M8 contrast: #1b8354 fill + #fff text on primary CTAs / navbar active link — verified ≥4.5:1 for bold UI copy (WCAG AA). */
   --button-background-primary-default: #1b8354;
   /* Figma partner carousel nav `2036:65735` / `2036:65756` — `button-background-neutral-default` */
   --button-background-neutral-default: #f3f4f6;

@@ -11,6 +11,7 @@
           <p
             class="form-page__mobile-progress d-lg-none mb-0 text-start w-100"
             data-testid="form-page-mobile-progress"
+            role="status"
             aria-live="polite"
           >
             {{ mobileProgressLabel() }}
@@ -18,7 +19,11 @@
 
           <div class="form-page__stepper-card d-none d-lg-block w-100" data-testid="form-page-stepper" role="list" aria-label="خطوات النموذج">
             @for (step of steps(); track step.id; let i = $index; let isLast = $last) {
-              <div class="d-flex form-page__step-row align-items-start" role="listitem">
+              <div
+                class="d-flex form-page__step-row align-items-start"
+                role="listitem"
+                [attr.aria-current]="step.status === 'active' ? 'step' : null"
+              >
                 <div class="d-flex flex-column align-items-start text-start flex-grow-1 min-w-0 form-page__step-copy">
                   <span class="form-page__step-title fw-normal mb-0">{{ step.title }}</span>
                   <span class="form-page__step-desc mb-0">{{ step.description }}</span>
@@ -33,7 +38,6 @@
                     @case ('active') {
                       <span
                         class="form-page__step-circle form-page__step-circle--active"
-                        aria-current="step"
                         [attr.aria-label]="'الخطوة الحالية: ' + step.title"
                       >{{ step.id }}</span>
                     }
@@ -58,7 +62,7 @@
           <div class="d-flex flex-column gap-3 align-items-start text-start w-100">
             <app-breadcrumb [items]="breadcrumbs" />
             <div class="d-flex flex-column gap-3 align-items-start w-100">
-              <h1 class="form-page__title mb-0 w-100 text-start" data-testid="form-page-heading">{{ title }}</h1>
+              <h1 id="form-page-heading" class="form-page__title mb-0 w-100 text-start" data-testid="form-page-heading">{{ title }}</h1>
               @if (activeStepIndex() === fieldsStepIndex) {
                 <p class="form-page__intro mb-0 w-100 text-start">{{ intro }}</p>
                 <p class="form-page__required-notice mb-0 text-start" data-testid="form-page-required-notice">{{ requiredNotice }}</p>
@@ -66,7 +70,12 @@
             </div>
           </div>
 
-          <form class="d-flex flex-column gap-4 w-100" [formGroup]="form" novalidate>
+          <form
+            class="d-flex flex-column gap-4 w-100"
+            [formGroup]="form"
+            novalidate
+            aria-labelledby="form-page-heading"
+          >
             @switch (activeStepIndex()) {
               @case (0) {
                 <div
@@ -113,7 +122,8 @@
                   formControlName="reqPlain"
                   placeholder="نص تلميحي"
                   autocomplete="off"
-                  [attr.aria-invalid]="fieldInvalid('reqPlain')"
+                  aria-required="true"
+                  [attr.aria-invalid]="fieldInvalid('reqPlain') ? 'true' : null"
                   [attr.aria-describedby]="fieldInvalid('reqPlain') ? 'err-req-plain' : null"
                 />
                 @if (fieldInvalid('reqPlain')) {
@@ -152,7 +162,8 @@
                     formControlName="reqSearch"
                     placeholder="نص تلميحي"
                     autocomplete="off"
-                    [attr.aria-invalid]="fieldInvalid('reqSearch')"
+                    aria-required="true"
+                    [attr.aria-invalid]="fieldInvalid('reqSearch') ? 'true' : null"
                     [attr.aria-describedby]="fieldInvalid('reqSearch') ? 'err-req-search' : null"
                   />
                   <i class="bi bi-search position-absolute top-50 translate-middle-y start-0 ms-3 fs-5" aria-hidden="true"></i>
@@ -193,7 +204,8 @@
                     formControlName="reqPrefix"
                     placeholder="نص تلميحي"
                     autocomplete="off"
-                    [attr.aria-invalid]="fieldInvalid('reqPrefix')"
+                    aria-required="true"
+                    [attr.aria-invalid]="fieldInvalid('reqPrefix') ? 'true' : null"
                     [attr.aria-describedby]="fieldInvalid('reqPrefix') ? 'err-req-prefix' : null"
                   />
                   <span class="input-group-text bg-light border-secondary text-secondary px-4 py-0 small">نص</span>
@@ -235,7 +247,8 @@
                     formControlName="reqSuffix"
                     placeholder="نص تلميحي"
                     autocomplete="off"
-                    [attr.aria-invalid]="fieldInvalid('reqSuffix')"
+                    aria-required="true"
+                    [attr.aria-invalid]="fieldInvalid('reqSuffix') ? 'true' : null"
                     [attr.aria-describedby]="fieldInvalid('reqSuffix') ? 'err-req-suffix' : null"
                   />
                 </div>
@@ -276,7 +289,8 @@
                   formControlName="reqHelper"
                   placeholder="نص تلميحي"
                   autocomplete="off"
-                  [attr.aria-invalid]="fieldInvalid('reqHelper')"
+                  aria-required="true"
+                  [attr.aria-invalid]="fieldInvalid('reqHelper') ? 'true' : null"
                   [attr.aria-describedby]="fieldInvalid('reqHelper') ? 'err-req-helper hint-req-helper' : 'hint-req-helper'"
                 />
                 <div class="d-flex align-items-center justify-content-start gap-2 py-1 small form-page__field-hint w-100" id="hint-req-helper">

@@ -50,6 +50,29 @@ describe('FormPage', () => {
     expect(fixture.debugElement.query(By.css('[data-testid="form-page-mobile-progress"]'))).toBeTruthy();
   });
 
+  it('exposes mobile progress as a live status region', () => {
+    const el = fixture.debugElement.query(By.css('[data-testid="form-page-mobile-progress"]')).nativeElement;
+    expect(el.getAttribute('role')).toBe('status');
+    expect(el.getAttribute('aria-live')).toBe('polite');
+  });
+
+  it('sets aria-current step on the active step list item', () => {
+    const current = fixture.nativeElement.querySelector('[role="listitem"][aria-current="step"]');
+    expect(current).toBeTruthy();
+    expect(current!.textContent).toContain('الخطوة الثانية');
+  });
+
+  it('marks required field inputs with aria-required', () => {
+    const req = fixture.debugElement.query(By.css('#form-req-plain')).nativeElement;
+    expect(req.getAttribute('aria-required')).toBe('true');
+  });
+
+  it('associates the form with the page heading', () => {
+    const form = fixture.debugElement.query(By.css('form')).nativeElement;
+    expect(form.getAttribute('aria-labelledby')).toBe('form-page-heading');
+    expect(fixture.debugElement.query(By.css('#form-page-heading'))).toBeTruthy();
+  });
+
   it('renders actions and feedback block', () => {
     expect(fixture.debugElement.query(By.css('[data-testid="form-btn-next"]'))).toBeTruthy();
     expect(fixture.debugElement.query(By.css('[data-testid="form-btn-back"]'))).toBeTruthy();
@@ -61,6 +84,8 @@ describe('FormPage', () => {
     fixture.detectChanges();
     const req = fixture.debugElement.query(By.css('#form-req-plain'));
     expect(req.nativeElement.classList.contains('is-invalid')).toBe(true);
+    expect(req.nativeElement.getAttribute('aria-invalid')).toBe('true');
+    expect(req.nativeElement.getAttribute('aria-describedby')).toBe('err-req-plain');
     expect(fixture.debugElement.query(By.css('#err-req-plain'))).toBeTruthy();
   });
 
