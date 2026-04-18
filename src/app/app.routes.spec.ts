@@ -2,9 +2,10 @@ import { TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
 import { RouterTestingHarness } from '@angular/router/testing';
 
-import { HomePage } from '@features/home/home-page';
-import { ServiceDetailPage } from '@features/service/service-detail-page';
 import { FormPage } from '@features/form/form-page';
+import { HomePage } from '@features/home/home-page';
+import { NotFoundPage } from '@features/not-found/not-found-page';
+import { ServiceDetailPage } from '@features/service/service-detail-page';
 import { routes } from './app.routes';
 
 if (typeof globalThis.ResizeObserver === 'undefined') {
@@ -48,5 +49,10 @@ describe('app routes', () => {
   it('renders FormPage at /form', async () => {
     const active = await harness.navigateByUrl('/form', FormPage);
     expect(active).toBeInstanceOf(FormPage);
+  });
+
+  it('renders NotFoundPage for unknown paths', async () => {
+    const active = await harness.navigateByUrl('/does-not-exist', NotFoundPage);
+    expect(active).toBeInstanceOf(NotFoundPage);
   });
 });
