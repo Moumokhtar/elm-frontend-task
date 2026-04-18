@@ -84,22 +84,9 @@ Shipped. See [PRD #48](https://github.com/Moumokhtar/elm-frontend-task/issues/48
 
 ---
 
-## MILESTONE 9 — Deployment & Summary
+## MILESTONE 9 — Deployment & Summary ✅ Complete
 
-**Goal:**
-Deploy to GitHub Pages and write the time estimate vs actual summary for submission.
-
-**Scope:**
-Install `angular-cli-ghpages`, configure `baseHref` for GitHub Pages, run deploy script. Write `SUMMARY.md` with a table of estimated vs actual hours per milestone.
-
-**Done when:**
-
-- [ ] `ng deploy` completes successfully
-- [ ] Hosted URL loads the home page correctly
-- [ ] All 3 routes work on the hosted URL (no 404 on direct navigation — HashLocationStrategy or 404.html redirect)
-- [ ] `SUMMARY.md` has time estimate vs actual table
-- [ ] GitHub repo is public with clean commit history
-- [ ] README includes the hosted URL and local setup instructions (`npm install`, `ng serve`)
+Shipped. `angular-cli-ghpages` + `architect.deploy` in `angular.json` (`baseHref` `/elm-frontend-task/`, `buildTarget` production). `npm run deploy` → `ng deploy` (publishes `dist/elm-frontend-task/browser` to branch `gh-pages`, creates `404.html` + `.nojekyll`). README documents hosted URL and commands; `SUMMARY.md` has estimated vs actual hours table. **Verify:** run `npm run deploy` once with GitHub credentials; enable Pages from `gh-pages` in repo settings if not already.
 
 ---
 

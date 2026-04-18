@@ -81,6 +81,13 @@
           "options": {
             "lintFilePatterns": ["src/**/*.ts", "src/**/*.html"]
           }
+        },
+        "deploy": {
+          "builder": "angular-cli-ghpages:deploy",
+          "options": {
+            "buildTarget": "elm-frontend-task:build:production",
+            "baseHref": "/elm-frontend-task/"
+          }
         }
       }
     }
