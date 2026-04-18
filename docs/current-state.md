@@ -1,13 +1,14 @@
 # Current State
 
-_Updated: 2026-04-17 after M2 complete._
+_Updated: 2026-04-18 after M3 complete._
 
 ## Status
 
 - **M0 — Project Bootstrap:** ✅ complete. PRD [#1](https://github.com/Moumokhtar/elm-frontend-task/issues/1) and all six slice issues closed.
 - **M1 — Shared Layout: Navbar:** ✅ complete. PRD [#8](https://github.com/Moumokhtar/elm-frontend-task/issues/8) and all five slice issues (#9–#13) closed. Navbar lives at `src/app/layout/navbar/navbar.ts` with desktop + mobile variants, PrimeNG dropdowns (items 4–7), inline mobile accordion, and routerLink on items 1/2/3 (`/`, `/service`, `/form`).
 - **M2 — Shared Layout: Footer:** ✅ complete. PRD [#14](https://github.com/Moumokhtar/elm-frontend-task/issues/14) and slice issues #15–#19 closed. Footer lives at `src/app/layout/footer/footer.ts`, mounted from `shell.html`, with four link columns, social + accessibility icon rows, bottom legal/links, and local assets under `public/images/footer-*`.
-- **Next up:** M3 — per `ELM_TASK_PLAN.md`.
+- **M3 — Shared UI Components:** ✅ complete. PRD [#20](https://github.com/Moumokhtar/elm-frontend-task/issues/20) and slices #21–#27 closed. Shared pieces under `src/app/shared/` include `FeedbackBlock` (Figma-aligned feedback stack; optional top rows), `ServiceCard`, `NewsCard`, `PartnerLogo`, `Breadcrumb`, `SectionHeader`, plus tokens and home visual QA wiring.
+- **Next up:** M4 — Home Page — per `ELM_TASK_PLAN.md`.
 
 ## Conventions the next agent must follow
 
@@ -82,8 +83,8 @@ import { HomePage } from '@features/home/home-page';
 cd elm-frontend-task
 npm install
 npm run lint       # expect: all pass
-npm test           # expect: 46/46 passing
-npm run build      # expect: success, ~858kB initial (154kB transfer)
+npm test           # expect: all tests passing
+npm run build      # expect: success
 ```
 
 If any of these fail on a fresh clone, stop and investigate — don't paper over it.

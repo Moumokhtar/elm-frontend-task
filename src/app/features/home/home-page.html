@@ -97,15 +97,19 @@
 </section>
 
 <!--
-  VISUAL QA ONLY — M3 PageFeedbackBar (remove for M4 real composition):
-  Matches Figma FeedbackDesktop row inside `2036:31121`. Not final home structure.
+  VISUAL QA ONLY — Figma `2036:31121` full Feedback stack (remove for M4 real composition).
 -->
 <section
   class="home-page__strip home-page__strip--muted"
-  data-testid="home-visual-qa-page-feedback-bar"
-  aria-label="معاينة شريط تقييم الصفحة"
+  data-testid="home-visual-qa-feedback-block"
+  aria-label="معاينة كتلة التقييم والملاحظات"
 >
   <div class="home-page__strip-inner px-0">
-    <app-page-feedback-bar [seedYes]="1706" [seedNo]="1137" />
+    <app-feedback-block
+      [showLastModifiedRow]="true"
+      [showServiceRatingRow]="true"
+      [seedYes]="1706"
+      [seedNo]="1137"
+    />
   </div>
 </section>

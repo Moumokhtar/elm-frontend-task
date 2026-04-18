@@ -1,0 +1,32 @@
+/* Single stack: explicit RTL + bidi isolation so flex/`text-*` match `html[dir=rtl]`. */
+:host {
+  direction: rtl;
+}
+
+.feedback-block {
+  direction: rtl;
+  unicode-bidi: isolate;
+}
+
+/* PrimeNG Aura `success` fill ≠ Figma `button/button-background-primary-default` (#1b8354). */
+:host ::ng-deep .feedback-block__primary-btn.p-button,
+:host ::ng-deep .feedback-block__figma-btn.p-button {
+  direction: rtl;
+  height: 40px;
+  min-height: 40px;
+  max-height: 40px;
+  padding-inline: var(--spacing-xl);
+  border-radius: var(--radius-sm);
+  background: var(--button-background-primary-default) !important;
+  border-color: var(--button-background-primary-default) !important;
+  color: #fff !important;
+}
+
+:host ::ng-deep .feedback-block__primary-btn.p-button .p-button-label,
+:host ::ng-deep .feedback-block__figma-btn.p-button .p-button-label {
+  font-weight: 500;
+}
+
+:host ::ng-deep .feedback-block__figma-btn.p-button:disabled {
+  opacity: 0.55;
+}

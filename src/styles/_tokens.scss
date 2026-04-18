@@ -69,8 +69,11 @@
   // Feedback / rating bars — Figma `2036:31121` (border-primary top stroke on white rows).
   // https://www.figma.com/design/wh34oGmGLBesPFMgXM4BLS/Frontend-Task--RTL?node-id=2036-31121&m=dev
   --color-border-primary: #1b8354;
+  /* Figma token `button/button-background-primary-default` (MCP FeedbackDesktop 2036:30014–30015). */
+  --button-background-primary-default: #1b8354;
   --layout-feedback-bar-min-height: 88px;
   --padding-feedback-bar-y: 24px;
+  --color-text-secondary-paragraph: #6c737f;
 
   // Backgrounds
   --background-menu: #ffffff;
@@ -90,4 +93,33 @@
   --font-section-header-subtitle-line-height: 1.5rem; /* 24px */
   --layout-section-header-subtitle-max-width: 720px;
   --size-section-header-action-height: 40px;
+}
+
+/*
+ * Layout / brand helpers where stock Bootstrap utilities do not match Figma
+ * (clamp padding, 2px brand top stroke, content max width). Prefer Bootstrap
+ * `d-flex`, `gap-*`, `py-*`, etc. in templates; use these only when needed.
+ */
+.u-page-strip-x {
+  padding-inline: clamp(var(--spacing-xl), 4vw, var(--page-strip-padding-inline));
+}
+
+.u-page-content-max {
+  max-width: var(--layout-page-content-max-width);
+}
+
+.u-brand-border-top-2 {
+  border-top: 2px solid var(--color-border-primary);
+}
+
+.u-feedback-bar-min-h {
+  min-height: var(--layout-feedback-bar-min-height);
+}
+
+.u-text-brand {
+  color: var(--button-background-primary-default);
+}
+
+.u-text-secondary-paragraph {
+  color: var(--color-text-secondary-paragraph);
 }

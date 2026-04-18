@@ -1,20 +1,71 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
-import { PageFeedbackBar } from './page-feedback-bar';
+import { FeedbackBlock } from './feedback-block';
 
-describe('PageFeedbackBar', () => {
-  let fixture: ComponentFixture<PageFeedbackBar>;
+describe('FeedbackBlock', () => {
+  let fixture: ComponentFixture<FeedbackBlock>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [PageFeedbackBar],
+      imports: [FeedbackBlock],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(PageFeedbackBar);
+    fixture = TestBed.createComponent(FeedbackBlock);
   });
 
-  it('renders question and both buttons', () => {
+  it('by default renders only the helpfulness row (required stack)', () => {
+    fixture.detectChanges();
+    expect(fixture.debugElement.query(By.css('[data-testid="feedback-block"]'))).toBeTruthy();
+    expect(fixture.debugElement.query(By.css('[data-testid="page-feedback-bar"]'))).toBeTruthy();
+    expect(fixture.debugElement.query(By.css('[data-testid="feedback-last-modified"]'))).toBeNull();
+    expect(fixture.debugElement.query(By.css('[data-testid="feedback-rate-service-btn"]'))).toBeNull();
+  });
+
+  it('sets dir and lang on the stack root for RTL', () => {
+    fixture.detectChanges();
+    const root = fixture.debugElement.query(By.css('[data-testid="feedback-block"]'))
+      ?.nativeElement as HTMLElement;
+    expect(root?.getAttribute('dir')).toBe('rtl');
+    expect(root?.getAttribute('lang')).toBe('ar');
+  });
+
+  it('optional last-modified row when showLastModifiedRow is true', () => {
+    fixture.componentRef.setInput('showLastModifiedRow', true);
+    fixture.detectChanges();
+    expect(fixture.debugElement.query(By.css('[data-testid="feedback-last-modified"]'))).toBeTruthy();
+    expect(fixture.nativeElement.textContent).toContain('تاريخ آخر تعديل');
+  });
+
+  it('optional service rating row when showServiceRatingRow is true', () => {
+    fixture.componentRef.setInput('showServiceRatingRow', true);
+    fixture.detectChanges();
+    expect(fixture.debugElement.query(By.css('[data-testid="feedback-rate-service-btn"]'))).toBeTruthy();
+    expect(fixture.nativeElement.textContent).toContain('قيم هذه الخدمة');
+  });
+
+  it('full Figma stack when both optional rows are enabled', () => {
+    fixture.componentRef.setInput('showLastModifiedRow', true);
+    fixture.componentRef.setInput('showServiceRatingRow', true);
+    fixture.detectChanges();
+    expect(fixture.debugElement.query(By.css('[data-testid="feedback-last-modified"]'))).toBeTruthy();
+    expect(fixture.debugElement.query(By.css('[data-testid="feedback-rate-service-btn"]'))).toBeTruthy();
+    expect(fixture.debugElement.query(By.css('[data-testid="page-feedback-bar"]'))).toBeTruthy();
+    const root = fixture.nativeElement as HTMLElement;
+    expect(root.textContent).toContain('تم تقييم هذه الخدمة بمتوسط');
+  });
+
+  it('forwards seed counts to the helpfulness stats line', () => {
+    fixture.componentRef.setInput('seedYes', 5);
+    fixture.componentRef.setInput('seedNo', 2);
+    fixture.detectChanges();
+    const count = fixture.debugElement.query(By.css('[data-testid="feedback-count"]'));
+    expect(count).toBeTruthy();
+    expect(count.nativeElement.textContent).toContain('7');
+    expect(count.nativeElement.textContent).toContain('تعليق');
+  });
+
+  it('renders question and both vote buttons', () => {
     fixture.detectChanges();
     const root = fixture.debugElement.query(By.css('[data-testid="page-feedback-bar"]'));
     expect(root).toBeTruthy();

@@ -46,45 +46,11 @@ Shipped. See [PRD #8](https://github.com/Moumokhtar/elm-frontend-task/issues/8) 
 
 Shipped. See [PRD #14](https://github.com/Moumokhtar/elm-frontend-task/issues/14) and slices #15–#19.
 
-**Goal:**
-Full footer matching Figma across desktop and mobile.
-
-**Scope:**
-Standalone `FooterComponent`. Four-column link grid (ملخص, روابط مهمة, الاتصال والدعم, تابعنا على): each column has a heading and list of links. Social icons row (X, LinkedIn, Instagram). Accessibility tools row (3 icon buttons). Bottom bar: copyright text, links (خريطة الموقع, RSS, تطبيق الجوال). Stacks to single column on mobile.
-
-**Done when:**
-
-- [x] Four columns render with correct headings and links
-- [x] Social icons render and are keyboard-focusable with ARIA labels
-- [x] Accessibility tool icons render as focusable buttons
-- [x] Bottom bar renders with copyright + links
-- [x] Footer stacks correctly on mobile
-- [x] All links are `<a>` tags with meaningful text (no "click here")
-
 ---
 
-## MILESTONE 3 — Shared UI Components
+## MILESTONE 3 — Shared UI Components ✅ Complete
 
-**Goal:**
-Build the reusable components used across multiple pages so later milestones just compose them.
-
-**Scope:**
-
-- `ServiceCardComponent` — checkmark icon, title, description, tag chips (وسم badges), primary + secondary action buttons
-- `NewsCardComponent` — image, two-line title, body text, "قراءة المزيد" button
-- `PartnerLogoComponent` — logo image + label, used inside partner carousel
-- `BreadcrumbComponent` — accepts array of `{label, route}`, renders with `>` separator (RTL reversed)
-- `SectionHeaderComponent` — accepts title, subtitle, optional action button (عرض الكل)
-- `PageFeedbackBarComponent` — "هل كانت هذه الصفحة مفيدة؟" + نعم/لا buttons + counter text
-
-**Done when:**
-
-- [ ] `ServiceCardComponent` renders all slots and both buttons are focusable
-- [ ] `NewsCardComponent` renders image + text + button correctly
-- [ ] `BreadcrumbComponent` emits correct aria-label and marks last item `aria-current="page"`
-- [ ] `SectionHeaderComponent` renders title, subtitle, optional button
-- [ ] `PageFeedbackBarComponent` renders and both buttons are keyboard accessible
-- [ ] All components are standalone and exported from a `shared` barrel
+Shipped. See [PRD #20](https://github.com/Moumokhtar/elm-frontend-task/issues/20) and slices #21–#27.
 
 ---
 
@@ -102,7 +68,7 @@ Five sections stacked vertically:
 4. **News (قسم الاخبار والمقالات)** — `SectionHeaderComponent`, 3-column Bootstrap grid of `NewsCardComponent`, collapses to 1-column on mobile with carousel
 5. **Partners (قسم الشركاء)** — PrimeNG Carousel of `PartnerLogoComponent` items, prev/next arrows
 
-All sections use `SectionHeaderComponent`. `PageFeedbackBarComponent` not on homepage. Last-updated date in footer area.
+All sections use `SectionHeaderComponent`. Optional `FeedbackBlock` visual QA strip on Home until full composition; remove for real M4 layout. Last-updated date in footer area.
 
 **Done when:**
 
@@ -131,7 +97,7 @@ Full service detail page with sidebar info panel, tabs, video placeholder, relat
 - "اتفاقية مستوى الخدمة" link with icon
 - PrimeNG `TabView` with 3 tabs: الخطوات | شروط الاستخدام | المستندات المطلوبة
 - الخطوات tab content: video placeholder (dark bg + play button icon) + numbered steps list
-- `PageFeedbackBarComponent` at bottom of main content
+- `FeedbackBlock` (helpfulness row) at bottom of main content
 - Rating row: star rating (PrimeNG Rating, readonly, 3.9) + review count + "قيم هذه الخدمة" button
 
 **Left sidebar:**
@@ -157,7 +123,7 @@ On mobile: sidebar moves below main content. Tabs remain functional.
 - [ ] Sidebar info rows all render with icons and values
 - [ ] Rating displays correctly (readonly stars + count)
 - [ ] Related services carousel works
-- [ ] `PageFeedbackBarComponent` renders at bottom
+- [ ] `FeedbackBlock` renders at bottom
 - [ ] Layout stacks correctly on mobile
 
 ---
@@ -191,7 +157,7 @@ Page title (حقول النص) + description paragraph.
 | 7   | Disabled input (full row, single column)     | Disabled input                  |
 
 Bottom: رجوع (back) + التالي (next, primary) buttons, right-aligned.
-`PageFeedbackBarComponent` above footer.
+`FeedbackBlock` (helpfulness row) above footer.
 
 On mobile: single column, same fields stacked.
 
@@ -212,7 +178,7 @@ On mobile: single column, same fields stacked.
 - [ ] Back button is visible; Next button is primary green
 - [ ] Form fields are all labelled (explicit `<label for>` or `aria-label`)
 - [ ] Tab key moves through all fields in logical order
-- [ ] `PageFeedbackBarComponent` renders
+- [ ] `FeedbackBlock` renders
 
 ---
 
